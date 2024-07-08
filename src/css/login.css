@@ -1,0 +1,147 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:300"); /* Google Fonts에서 Roboto 폰트 로드 */
+
+/* 로그인 페이지 전체를 감싸는 컨테이너 */
+.login-page {
+  width: 360px;
+  padding: 8% 0 0;
+  margin: auto;
+}
+
+/* 폼 컨테이너 스타일 */
+.form {
+  position: relative;
+  z-index: 1;
+  background: #ffffff; /* 흰색 배경 */
+  max-width: 360px;
+  margin: 0 auto 100px; /* 위 0, 좌우 자동, 아래 100px 마진 */
+  padding: 45px; /* 내부 패딩 */
+  text-align: center; /* 텍스트 가운데 정렬 */
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24); /* 그림자 효과 */
+}
+
+/* 폼 내부 입력 필드 스타일 */
+.form input {
+  font-family: "Roboto", sans-serif;
+  outline: 0; /* 아웃라인 제거 */
+  background: #f2f2f2; /* 연한 회색 배경 */
+  width: 100%; /* 너비 100% */
+  border: 0; /* 테두리 없음 */
+  margin: 0 0 15px; /* 아래 마진 15px */
+  padding: 15px; /* 내부 패딩 */
+  box-sizing: border-box;
+  font-size: 14px; /* 폰트 크기 */
+}
+
+/* 폼 내부 버튼 스타일 */
+.form button {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase; /* 대문자로 변환 */
+  outline: 0; /* 아웃라인 제거 */
+  background: #b3b3b3; /* 버튼 배경색 */
+  width: 100%; /* 너비 100% */
+  border: 0; /* 테두리 없음 */
+  padding: 15px; /* 내부 패딩 */
+  color: #ffffff; /* 글자색 흰색 */
+  font-size: 14px; /* 폰트 크기 */
+  -webkit-transition: all 0.3s ease; /* 전환 효과 */
+  transition: all 0.3s ease;
+  cursor: pointer; /* 커서 포인터로 변경 */
+}
+
+/* 버튼 호버, 클릭, 포커스 시 배경색 유지 */
+.form button:hover,
+.form button:active,
+.form button:focus {
+  background: #9c9b9b;
+}
+
+/* 폼 내부 메시지 스타일 */
+.form .message {
+  margin: 15px 0 0; /* 위 마진 15px */
+  color: #b3b3b3; /* 글자색 회색 */
+  font-size: 12px; /* 폰트 크기 */
+}
+
+/* 메시지 내부 링크 버튼 스타일 */
+.form .message .link-button {
+  background: none; /* 배경 없음 */
+  border: none; /* 테두리 없음 */
+  color: #717171;
+  text-decoration: none; /* 밑줄 없음 */
+  cursor: pointer; /* 커서 포인터로 변경 */
+  font-size: 12px; /* 폰트 크기 */
+}
+
+/* 링크 버튼 호버 시 밑줄 추가 */
+.form .message .link-button:hover {
+  text-decoration: underline;
+}
+
+/* 컨테이너 스타일 */
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 300px;
+  margin: 0 auto; /* 좌우 자동 마진 */
+}
+
+/* 플로트 클리어링을 위한 가상 요소 */
+.container:before,
+.container:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+/* 정보 섹션 스타일 */
+.container .info {
+  margin: 50px auto; /* 위아래 50px, 좌우 자동 마진 */
+  text-align: center; /* 텍스트 가운데 정렬 */
+}
+
+/* 정보 섹션 제목 스타일 */
+.container .info h1 {
+  margin: 0 0 15px; /* 아래 마진 15px */
+  padding: 0;
+  font-size: 36px; /* 폰트 크기 */
+  font-weight: 300; /* 폰트 두께 */
+  color: #1a1a1a; /* 글자색 진한 회색 */
+}
+
+/* 정보 섹션 텍스트 스타일 */
+.container .info span {
+  color: #4d4d4d; /* 글자색 회색 */
+  font-size: 12px; /* 폰트 크기 */
+}
+
+/* 정보 섹션 링크 스타일 */
+.container .info span a {
+  color: #000000; /* 글자색 검은색 */
+  text-decoration: none; /* 밑줄 없음 */
+}
+
+/* 정보 섹션 아이콘 색상 */
+.container .info span .fa {
+  color: #ef3b3a; /* 아이콘 색상 빨간색 */
+}
+
+/* 본문 스타일 */
+body {
+  background: #ffffff; /* 배경 흰색 */
+  font-family: "Roboto", sans-serif; /* 폰트 패밀리 설정 */
+  -webkit-font-smoothing: antialiased; /* 안티앨리어싱 적용 */
+  -moz-osx-font-smoothing: grayscale; /* 안티앨리어싱 적용 */
+}
+
+/* 알림 메시지 스타일 */
+.notice {
+  color: red; /* 글자색 빨간색 */
+  font-size: 12px; /* 폰트 크기 */
+  margin-top: -10px; /* 위쪽 간격 조정 */
+  margin-bottom: 10px; /* 아래쪽 간격 조정 */
+}
+
+/* 숨김 클래스 */
+.hidden {
+  display: none; /* 화면에서 숨김 */
+}

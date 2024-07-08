@@ -1,0 +1,70 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-center {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.nav-item {
+  text-align: center;
+}
+
+.custom-padding {
+  padding-left: 20px;
+}
+
+/* 로그아웃 버튼 스타일 */
+.logout-button {
+  padding: 10px;
+  background-color: #93979c !important;
+  color: white !important; /* 텍스트 색상 변경 */
+  border: none !important; /* 기본 테두리 제거 */
+  cursor: pointer;
+}
+
+.logout-button:hover {
+  background-color: #70767b !important; /* 호버 시 배경색 변경 */
+}
+
+/* 사이드바 스타일 */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -250px;
+  width: 250px;
+  height: 100%;
+  background-color: #f8f9fa;
+  transition: left 0.3s ease;
+  padding-top: 60px; /* Navbar 높이만큼 패딩 추가 */
+  z-index: 1000; /* Navbar 위에 표시 */
+}
+
+.sidebar.show {
+  left: 0;
+}
+
+.navbar-shift {
+  margin-left: 250px;
+  transition: margin-left 0.3s ease;
+}
+
+/* 뒤로가기 버튼 스타일 */
+.nav-link.btn {
+  color: #fdfdfe;
+  text-align: center;
+  padding: 10px;
+}
+
+.nav-link.btn:hover {
+  text-decoration: underline;
+}

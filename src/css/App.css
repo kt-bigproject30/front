@@ -36,3 +36,13 @@
     transform: rotate(360deg);
   }
 }
+/* App.css */
+.main-content {
+  padding: 20px;
+  transition: margin-left 0.3s ease-in-out;
+}
+
+/* 사이드바가 열릴 때 main-content를 오른쪽으로 이동 */
+.content-shift {
+  margin-left: 250px;
+}
