@@ -9,6 +9,7 @@ import {
 import "../src/css/App.css";
 import Login from "../src/component/login.jsx";
 import Navbar from "../src/component/navbar.jsx";
+import Summary from "../src/component/summary.jsx";
 import DraftAI from "../src/component/draftai.jsx";
 import Home from "../src/component/home.jsx";
 import Board from "../src/component/board.jsx";
@@ -45,6 +46,7 @@ const AppContent = () => {
             path="/login"
             element={<Login setIsLoggedIn={setIsLoggedIn} />}
           />
+          <Route path="/summary" element={<Summary />} />
           <Route path="/draftai" element={<DraftAI />} />
           <Route path="/home" element={<Home />} /> {/* Home 라우트 추가 */}
           <Route path="/board" element={<Board boards={boards} />} />{" "}
