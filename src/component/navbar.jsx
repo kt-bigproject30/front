@@ -24,11 +24,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav
-        className={`navbar navbar-expand-lg navbar-light bg-light ${
-          isSidebarOpen ? "navbar-shift" : ""
-        }`}
-      >
+      <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <button
           className="navbar-toggler sidebar-toggler"
           type="button"
@@ -69,30 +65,32 @@ const Navbar = () => {
         </div>
       </nav>
 
-      <div className={`sidebar ${isSidebarOpen ? "show" : ""}`}>
-        <ul className="navbar-nav">
-          <li className="nav-item">
-            <button className="nav-link btn btn-link" onClick={handleBack}>
-              뒤로가기
-            </button>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/home" onClick={toggleSidebar}>
-              Home
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/draftai" onClick={toggleSidebar}>
-              DraftAI
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/board" onClick={toggleSidebar}>
-              Board
-            </Link>
-          </li>
-        </ul>
-      </div>
+      {isSidebarOpen && (
+        <div className="sidebar show">
+          <ul className="navbar-nav">
+            <li className="nav-item">
+              <button className="nav-link btn btn-link" onClick={handleBack}>
+                뒤로가기
+              </button>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/home" onClick={toggleSidebar}>
+                Home
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/draftai" onClick={toggleSidebar}>
+                DraftAI
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/board" onClick={toggleSidebar}>
+                Board
+              </Link>
+            </li>
+          </ul>
+        </div>
+      )}
     </>
   );
 };

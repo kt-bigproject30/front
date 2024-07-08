@@ -1,11 +1,12 @@
 import React from "react";
-import "../css/home.css"; // 필요한 경우 CSS 파일 import
+import "../css/home.css";
+import jasingamImage from "../img/jasingam.jpg";
 
 const Home = () => {
   return (
     <div className="home-container">
       <h1>Jasingam</h1>
-      <img src="../img/jasingam.jpg" alt="Jasingam" className="start-image" />
+      <img src={jasingamImage} alt="Jasingam" className="start-image" />
     </div>
   );
 };

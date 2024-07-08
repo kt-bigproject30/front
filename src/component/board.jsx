@@ -6,13 +6,6 @@ const Board = ({ boards, handleDelete }) => {
   return (
     <div className="board-container">
       <h2>게시판 목록</h2>
-
-      <div className="board-controls">
-        <Link to="/board/new" className="btn">
-          새 글 작성
-        </Link>
-      </div>
-
       {boards.length > 0 ? (
         <ul className="list-group">
           <li className="list-group-header">
@@ -29,6 +22,12 @@ const Board = ({ boards, handleDelete }) => {
               <span>{board.date}</span>
             </li>
           ))}
+
+          <div className="board-controls">
+            <Link to="/board/new" className="btn">
+              새 글 작성
+            </Link>
+          </div>
         </ul>
       ) : (
         <p>게시글이 없습니다.</p>

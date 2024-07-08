@@ -13,9 +13,7 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    // 여기에 로그인 로직을 추가하세요.
-    // 로그인 성공 시 start 페이지로 이동.
-    navigate("/start");
+    navigate("/home");
   };
 
   return (

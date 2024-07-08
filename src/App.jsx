@@ -3,6 +3,7 @@ import {
   BrowserRouter as Router,
   Route,
   Routes,
+  Navigate,
   useLocation,
 } from "react-router-dom";
 import "../src/css/App.css";
@@ -21,6 +22,7 @@ const AppContent = () => {
   const shouldShowNavbar = location.pathname !== "/login";
   const [boards, setBoards] = useState([]); // boards 상태 초기화
   const [isSidebarOpen, setSidebarOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태 추가
 
   const toggleSidebar = () => {
     setSidebarOpen(!isSidebarOpen);
@@ -33,7 +35,16 @@ const AppContent = () => {
       )}
       <div className={`main-content ${isSidebarOpen ? "content-shift" : ""}`}>
         <Routes>
-          <Route path="/login" element={<Login />} />
+          <Route
+            path="/"
+            element={
+              isLoggedIn ? <Navigate to="/home" /> : <Navigate to="/login" />
+            }
+          />
+          <Route
+            path="/login"
+            element={<Login setIsLoggedIn={setIsLoggedIn} />}
+          />
           <Route path="/draftai" element={<DraftAI />} />
           <Route path="/home" element={<Home />} /> {/* Home 라우트 추가 */}
           <Route path="/board" element={<Board boards={boards} />} />{" "}
