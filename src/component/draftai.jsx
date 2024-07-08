@@ -29,43 +29,28 @@ const App = () => {
   return (
     <div className="container">
       <div className="left-column">
-        <h2>text input</h2>
-        <div className="input-group">
-          <input
-            type="text"
-            id="textInput"
-            placeholder="텍스트를 입력하세요"
-            value={textInput}
-            onChange={(e) => setTextInput(e.target.value)}
-          />
-          <input
-            type="file"
-            id="fileInput"
-            accept=".txt,.doc,.docx,.pdf"
-            style={{ display: "none" }}
-            onChange={handleFileSelect}
-          />
-          <button onClick={() => document.getElementById("fileInput").click()}>
-            파일 업로드
-          </button>
-          <button onClick={handleButtonClick}>텍스트 요약</button>
+        <h2>model select</h2>
+        <div className="summary-text">
+          <textarea
+            name="message"
+            id="message"
+            // className="form-control"
+            rows="5"
+            placeholder="요약된 내용"
+            required
+          ></textarea>
         </div>
-        <h2>text output</h2>
-        <div className="input-group">
-          <div id="textOutput" className="output-text">
-            {textOutput}
-          </div>
-          <button onClick={handleButtonClick}>이미지 생성</button>
-        </div>
-      </div>
-      <div className="right-column">
-        <h2>image output</h2>
         <div className="group-model">
           <div id="modelselect1" className="select-model"></div>
           <div id="modelselect2" className="select-model"></div>
           <div id="modelselect3" className="select-model"></div>
           <div id="modelselect4" className="select-model"></div>
         </div>
+      </div>
+
+      <div className="right-column">
+        <h2>image output</h2>
+        
         <div className="output-group">
           <div id="imageOutput1" className="output-image">
             {imageOutput && <img src={imageOutput} alt="출력 이미지" />}
@@ -74,6 +59,17 @@ const App = () => {
           <div id="imageOutput3" className="output-image"></div>
           <div id="imageOutput4" className="output-image"></div>
         </div>
+        <h2>image download</h2>
+        <div className="group-img">
+          <div id="imgselect1" className="select-img"></div>
+          <div id="imgselect2" className="select-img"></div>
+          <div id="imgselect3" className="select-img"></div>
+          <div id="imgselect4" className="select-img"></div>
+        </div>
+        <button id="downloadButton" onClick={() => document.getElementById("fileInput").click()}>
+            이미지 다운로드
+        </button>
+        <button id = "uploadButton"onClick={handleButtonClick}>게시판 등록</button>
       </div>
     </div>
   );
