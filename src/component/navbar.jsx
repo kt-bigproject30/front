@@ -33,7 +33,7 @@ const Navbar = () => {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <Link className="navbar-brand custom-padding" to="/">
+        <Link className="navbar-brand custom-padding" to="/home">
           Jasingam
         </Link>
         <div className="navbar-center">

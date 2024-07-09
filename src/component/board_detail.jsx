@@ -1,30 +1,61 @@
-import React from "react";
-import { Link, useParams } from "react-router-dom";
-import "../css/board.css"; // CSS 파일 import
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate, Link } from "react-router-dom";
+import "../css/board_detail.css";
 
-const BoardDetail = ({ boards }) => {
+const BoardDetail = ({ boards, setBoards }) => {
   const { id } = useParams();
-  const board = boards.find((b) => b.id === parseInt(id));
+  const navigate = useNavigate();
+  const [post, setPost] = useState(null);
 
-  if (!board) {
-    return <div className="board-container">게시글을 찾을 수 없습니다.</div>;
+  useEffect(() => {
+    const foundPost = boards.find((post) => post.id === parseInt(id));
+    setPost(foundPost);
+  }, [id, boards]);
+
+  if (!post) {
+    return <div>Loading...</div>;
   }
 
+  const handleDelete = () => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this post?"
+    );
+    if (confirmDelete) {
+      const updatedBoards = boards.filter((post) => post.id !== parseInt(id));
+      setBoards(updatedBoards);
+      navigate("/board");
+    }
+  };
+
   return (
-    <div className="board-container">
-      <h2 className="board-title">{board.title}</h2>
-      <hr className="divider" />
-      <div className="board-content-container">
-        <p className="board-content">{board.content}</p>
+    <div className="board-detail">
+      <h2 className="post-title">{post.title}</h2>
+      <div className="post-info">
+        <span className="post-author">{post.userName}</span>
+        <span className="post-date">{post.date}</span>
       </div>
-      <hr className="divider" />
-      <div className="board-detail-controls">
-        <Link to={`/board/edit/${board.id}`} className="btn btn-secondary">
+      <div className="post-tags">
+        {post.tags.map((tag) => (
+          <span key={tag} className="tag">
+            {tag}
+          </span>
+        ))}
+      </div>
+      <div className="post-summary">{post.summary}</div>
+      {post.image && <img src={post.image} alt="Post" className="post-image" />}
+      <div className="buttons">
+        <Link to={`/board/edit/${post.id}`} className="btn btn-primary">
           수정
         </Link>
-        <Link to="/board" className="btn btn-primary">
+        <button
+          onClick={() => navigate("/board")}
+          className="btn btn-secondary"
+        >
           목록
-        </Link>
+        </button>
+        <button onClick={handleDelete} className="btn btn-danger">
+          삭제
+        </button>
       </div>
     </div>
   );

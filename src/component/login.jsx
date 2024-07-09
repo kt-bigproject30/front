@@ -13,6 +13,8 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
+    // 서버 연결 부분은 주석 처리 또는 제거
+    // 로그인 성공 시 홈으로 이동 (테스트용)
     navigate("/home");
   };
 
@@ -22,8 +24,8 @@ const Login = () => {
         <div className="login-page">
           <div className="form">
             <form className="login-form" onSubmit={handleLogin}>
-              <input type="text" placeholder="ID" />
-              <input type="password" placeholder="password" />
+              <input type="text" placeholder="ID" name="id" />
+              <input type="password" placeholder="password" name="password" />
               <button type="submit">로그인</button>
               <p className="message">
                 아직 회원이 아니신가요?{" "}
