@@ -5,6 +5,7 @@ import DraftAI from "./draftai"; // draftai.jsx 파일을 임포트합니다.
 
 
 const App = () => {
+  const navigate = useNavigate();
   const [textInput, setTextInput] = useState("");
   const [textOutput, setTextOutput] = useState("");
   const [imageOutput, setImageOutput] = useState("");
@@ -45,11 +46,10 @@ const App = () => {
         <h2>text input</h2>
         <div className="summary-text">
           <textarea
-            name="message"
-            id="message"
-            // className="form-control"
+            value={textInput}
+            onChange={(e) => setTextInput(e.target.value)}
             rows="20"
-            placeholder="요약할 내용을 입력"
+            placeholder="요약할 내용을 입력하세요"
             required
           ></textarea>
         </div>
