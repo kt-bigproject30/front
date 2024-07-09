@@ -77,7 +77,7 @@ const BoardWrite = ({ boards, setBoards }) => {
             className="input-summary"
             value={summary}
             onChange={(e) => setSummary(e.target.value)}
-            placeholder="본문에 #을 이용하여 태그를 사용해보세요! (최대 30개)"
+            placeholder="요약문을 입력하세요"
           ></textarea>
         </div>
         <div className="form-group">

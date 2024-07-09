@@ -13,13 +13,11 @@ const BoardDetail = ({ boards, setBoards }) => {
   }, [id, boards]);
 
   if (!post) {
-    return <div>Loading...</div>;
+    return <div>로딩중...</div>;
   }
 
   const handleDelete = () => {
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete this post?"
-    );
+    const confirmDelete = window.confirm("정말 지우시겠습니까?");
     if (confirmDelete) {
       const updatedBoards = boards.filter((post) => post.id !== parseInt(id));
       setBoards(updatedBoards);
