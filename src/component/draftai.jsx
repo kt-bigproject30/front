@@ -25,6 +25,11 @@ const App = () => {
     const imageUrl = "https://via.placeholder.com/400x300"; // 여기에 실제 이미지 URL을 설정하세요
     setImageOutput(imageUrl);
   };
+  
+  const moveButtonClick = () => {
+    
+    window.location.href = '/board/new';
+  };
 
   return (
     <div className="container">
@@ -69,7 +74,7 @@ const App = () => {
         <button id="downloadButton" onClick={() => document.getElementById("fileInput").click()}>
             이미지 다운로드
         </button>
-        <button id = "uploadButton"onClick={handleButtonClick}>게시판 등록</button>
+        <button id = "uploadButton"onClick={moveButtonClick}>게시판 등록</button>
       </div>
     </div>
   );
