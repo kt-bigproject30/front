@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import "../css/summary.css";
+import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
+import DraftAI from "./draftai"; // draftai.jsx 파일을 임포트합니다.
+
 
 const App = () => {
   const [textInput, setTextInput] = useState("");
@@ -24,6 +27,16 @@ const App = () => {
     // 이미지 출력 (예: 임의의 이미지 URL 사용)
     const imageUrl = "https://via.placeholder.com/400x300"; // 여기에 실제 이미지 URL을 설정하세요
     setImageOutput(imageUrl);
+  };
+
+
+  const moveButtonClick = () => {
+    // summary-text 클래스의 내용을 가져옵니다.
+    const summaryText = document.querySelector('.summary-text').innerText;
+
+    // 세션 스토리지에 내용을 저장합니다.
+    sessionStorage.setItem('summaryText', summaryText);
+    window.location.href = './draftai';
   };
 
   return (
@@ -64,10 +77,14 @@ const App = () => {
             required
           ></textarea>
         </div>
-        <button id = "moveButton" onClick={handleButtonClick}>DraftAI</button>
+        <button
+          id= "moveButton" onClick={moveButtonClick}
+        >DraftAI</button>
+        
       </div>
     </div>
   );
+  
 };
 
 export default App;
