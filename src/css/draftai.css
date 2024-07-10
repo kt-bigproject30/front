@@ -255,7 +255,7 @@ a {
   margin-bottom: 10px; /* Add bottom margin */
   font-size: 1.0em; /* Set font size */
   text-align: center; /* Center-align text */
-  width: 30%; /* Make the anchor elements take full width */
+  width: 50%; /* Make the anchor elements take full width */
   border-radius: 25px;
   
 }
