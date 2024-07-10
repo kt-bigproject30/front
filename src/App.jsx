@@ -22,7 +22,6 @@ import Mypage from "../src/component/mypage.jsx";
 const AppContent = () => {
   const location = useLocation();
   const shouldShowNavbar = location.pathname !== "/login";
-  const [boards, setBoards] = useState([]); // boards 상태 초기화
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태 추가
 
@@ -51,22 +50,13 @@ const AppContent = () => {
           <Route path="/draftai" element={<DraftAI />} />
           <Route path="/home" element={<Home />} /> {/* Home 라우트 추가 */}
           <Route path="/mypage" element={<Mypage />} />
-          <Route path="/board" element={<BoardList boards={boards} />} />{" "}
+          <Route path="/board" element={<BoardList />} />{" "}
           {/* BoardList 라우트 추가 */}
-          <Route
-            path="/board/new"
-            element={<BoardWrite boards={boards} setBoards={setBoards} />}
-          />{" "}
+          <Route path="/board/new" element={<BoardWrite />} />{" "}
           {/* BoardWrite 라우트 추가 */}
-          <Route
-            path="/board/edit/:id"
-            element={<BoardWrite boards={boards} setBoards={setBoards} />}
-          />{" "}
+          <Route path="/board/edit/:id" element={<BoardWrite />} />{" "}
           {/* BoardWrite 라우트 추가 */}
-          <Route
-            path="/board/:id"
-            element={<BoardDetail boards={boards} setBoards={setBoards} />}
-          />{" "}
+          <Route path="/board/:id" element={<BoardDetail />} />{" "}
           {/* BoardDetail 라우트 추가 */}
         </Routes>
       </div>

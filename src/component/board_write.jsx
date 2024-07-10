@@ -1,19 +1,34 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import "../css/board_write.css"; // CSS 파일을 불러옵니다.
+import api from "../api";
+import "../css/board_write.css";
 
 const BoardWrite = ({ boards, setBoards }) => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const isEdit = Boolean(id); // id가 있으면 수정 모드로 설정
+  const isEdit = Boolean(id);
   const [title, setTitle] = useState("");
   const [summary, setSummary] = useState("");
   const [tags, setTags] = useState("");
   const [image, setImage] = useState(null);
   const [summaryOutput, setSummaryOutput] = useState("");
 
+  const fetchPost = useCallback(async () => {
+    try {
+      const response = await api.get(`/post/${id}`);
+      const post = response.data;
+      setTitle(post.title);
+      setSummary(post.summary);
+      setTags(post.tags ? post.tags.join(", ") : "");
+      setImage(post.imageUrl);
+    } catch (error) {
+      console.error("Failed to fetch post:", error);
+    }
+  }, [id]);
+
   useEffect(() => {
     if (isEdit) {
+      fetchPost();
       const foundPost = boards.find((post) => post.id === parseInt(id));
       if (foundPost) {
         setTitle(foundPost.title);
@@ -22,7 +37,7 @@ const BoardWrite = ({ boards, setBoards }) => {
         setImage(foundPost.image);
       }
     }
-  }, [id, isEdit, boards]);
+  }, [fetchPost, isEdit, id, boards]);
 
   useEffect(() => {
     // JSON 파일에서 데이터를 가져오는 함수
@@ -44,34 +59,37 @@ const BoardWrite = ({ boards, setBoards }) => {
     setImage(URL.createObjectURL(file)); // 선택한 이미지를 미리 보기 위해 URL 생성
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (isEdit) {
-      const updatedBoards = boards.map((post) =>
-        post.id === parseInt(id)
-          ? {
-              ...post,
-              title,
-              summary,
-              tags: tags.split(",").map((tag) => tag.trim()),
-              image,
-            }
-          : post
-      );
-      setBoards(updatedBoards);
-    } else {
-      const newPost = {
-        id: boards.length + 1,
-        title,
-        userName: "CurrentUser", // 실제 로그인된 사용자 이름으로 변경 필요
-        date: new Date().toLocaleDateString(),
-        tags: tags.split(",").map((tag) => tag.trim()),
-        summary,
-        image,
-      };
-      setBoards([...boards, newPost]);
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("summary", summary);
+    formData.append(
+      "tags",
+      tags.split(",").map((tag) => tag.trim())
+    );
+    if (image) {
+      formData.append("image", image);
     }
-    navigate("/board");
+
+    try {
+      if (isEdit) {
+        await api.put(`/post/${id}`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+      } else {
+        await api.post("/post", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+      }
+      navigate("/board");
+    } catch (error) {
+      console.error("Failed to save post:", error);
+    }
   };
 
   return (
@@ -91,8 +109,7 @@ const BoardWrite = ({ boards, setBoards }) => {
           <textarea
             id="summary"
             className="input-summary"
-            // value={summary}
-            value={summaryOutput}
+            value={isEdit ? summary : summaryOutput}
             onChange={(e) => setSummary(e.target.value)}
             placeholder="요약문을 입력하세요"
           ></textarea>
@@ -108,7 +125,9 @@ const BoardWrite = ({ boards, setBoards }) => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="image" className="label-image"></label>
+          <label htmlFor="image" className="label-image">
+            사진
+          </label>
           <input
             type="file"
             id="image"
