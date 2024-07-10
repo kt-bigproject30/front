@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.7.2",
     "bootstrap": "^5.3.3",
+    "eslint-plugin-react-hooks": "^5.1.0-rc-c3cdbec0a7-20240708",
     "jquery": "^3.7.1",
     "popper.js": "^1.16.1",
     "react": "^18.3.1",
@@ -22,6 +23,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "proxy": "http://dev.jasingam.site:8080",
   "eslintConfig": {
     "extends": [
       "react-app",

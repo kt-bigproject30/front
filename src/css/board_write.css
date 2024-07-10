@@ -1,76 +1,50 @@
 .board-write {
-  max-width: 800px;
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  background-color: #f9f9f9;
 }
 
 .board-write-form {
+  width: 100%;
+  max-width: 600px;
   display: flex;
   flex-direction: column;
 }
 
 .form-group {
-  margin-bottom: 1em;
-}
-
-.input-title {
+  margin-bottom: 15px;
   width: 100%;
-  padding: 15px;
-  font-size: 24px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  box-sizing: border-box;
 }
 
-.input-summary {
-  width: 100%;
-  padding: 15px;
-  font-size: 16px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  height: 200px;
-  box-sizing: border-box;
-  resize: none;
-}
-
+.input-title,
+.input-contents,
 .input-tags {
   width: 100%;
   padding: 10px;
   font-size: 16px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.input-contents {
+  height: 200px; /* 내용 적는 칸의 높이를 조정합니다 */
+  resize: vertical; /* 사용자가 수직 방향으로 크기를 조정할 수 있습니다 */
 }
 
 .label-image {
-  font-size: 16px;
-  margin-bottom: 5px;
-}
-
-.input-image {
   display: block;
-  margin-top: 5px;
-}
-
-.preview-image {
-  margin-top: 10px;
-  max-width: 100%;
-  height: auto;
-  border-radius: 5px;
+  margin-bottom: 5px;
+  font-size: 16px;
 }
 
 .btn-submit {
   padding: 10px 20px;
-  font-size: 18px;
-  color: #fff;
+  font-size: 16px;
   background-color: #007bff;
+  color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
   cursor: pointer;
 }
 

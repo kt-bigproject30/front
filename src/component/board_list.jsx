@@ -1,45 +1,58 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Pagination from "./pagination.jsx";
+import api from "../api";
 import "../css/board_list.css";
 
-const BoardList = ({ boards }) => {
+const BoardList = () => {
+  const [boards, setBoards] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchBy, setSearchBy] = useState("title");
   const postsPerPage = 10;
   const navigate = useNavigate();
 
-  // 검색어에 따라 게시글 필터링
+  useEffect(() => {
+    fetchBoards();
+  }, []);
+
+  const fetchBoards = async () => {
+    try {
+      const response = await api.get("/post");
+      setBoards(response.data);
+    } catch (error) {
+      console.error("Failed to fetch boards:", error);
+    }
+  };
+
   const filteredBoards = boards.filter((post) => {
     if (searchBy === "title") {
       return post.title.toLowerCase().includes(searchTerm.toLowerCase());
     } else if (searchBy === "tag") {
-      return post.tags.some((tag) =>
-        tag.toLowerCase().includes(searchTerm.toLowerCase())
+      return (
+        post.tags &&
+        post.tags.some((tag) =>
+          tag.toLowerCase().includes(searchTerm.toLowerCase())
+        )
       );
     }
     return true;
   });
 
-  // 현재 페이지에 해당하는 게시글 가져오기
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = filteredBoards.slice(indexOfFirstPost, indexOfLastPost);
 
-  // 페이지 변경 핸들러
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
-  // 태그 클릭 핸들러
   const handleTagClick = (tag) => {
     setSearchTerm(tag);
     setSearchBy("tag");
     setCurrentPage(1);
   };
 
-  // 검색 조건 초기화 핸들러
   const handleResetSearch = () => {
     setSearchTerm("");
     setSearchBy("title");
@@ -83,21 +96,26 @@ const BoardList = ({ boards }) => {
               <Link to={`/board/${post.id}`}>{post.title}</Link>
             </h2>
             <div className="post-info">
-              <span className="post-author">{post.userName}</span>
-              <span className="post-date">{post.date}</span>
+              <span className="post-author">{post.userName || "Unknown"}</span>
+              <span className="post-date">{post.date || "No date"}</span>
             </div>
           </div>
           <div className="post-tags">
-            {post.tags.map((tag) => (
-              <span
-                key={tag}
-                className="tag"
-                onClick={() => handleTagClick(tag)}
-              >
-                {tag}
-              </span>
-            ))}
+            {post.tags &&
+              post.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="tag"
+                  onClick={() => handleTagClick(tag)}
+                >
+                  {tag}
+                </span>
+              ))}
           </div>
+          {post.summary && <div className="post-summary">{post.summary}</div>}
+          {post.imageUrl && (
+            <img src={post.imageUrl} alt="Post" className="post-image" />
+          )}
         </div>
       ))}
       <Pagination
