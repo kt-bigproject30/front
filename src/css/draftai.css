@@ -167,7 +167,8 @@ a {
   padding: 10px;
   min-height: 300px;
   display: flex; /* 이미지를 중앙 정렬하기 위해 추가 */
-  justify-content: center;
+  flex-direction: column;
+  justify-content: end;
   align-items: center;
   flex: 1;
   background-image: url('../img/cartoon.png');
@@ -182,7 +183,8 @@ a {
   padding: 10px;
   min-height: 300px;
   display: flex; /* 이미지를 중앙 정렬하기 위해 추가 */
-  justify-content: center;
+  flex-direction: column;
+  justify-content: end;
   align-items: center;
   flex: 1;
   background-image: url('../img/fairytale.png');
@@ -197,7 +199,8 @@ a {
   padding: 10px;
   min-height: 300px;
   display: flex; /* 이미지를 중앙 정렬하기 위해 추가 */
-  justify-content: center;
+  flex-direction: column;
+  justify-content: end;
   align-items: center;
   flex: 1;
   background-image: url('../img/anime.png');
@@ -212,13 +215,34 @@ a {
   padding: 10px;
   min-height: 300px;
   display: flex; /* 이미지를 중앙 정렬하기 위해 추가 */
-  justify-content: center;
+  flex-direction: column;
+  justify-content: end;
   align-items: center;
   flex: 1;
   background-image: url('../img/pixel.png');
   background-size: 100% 100%; /* Scale the background image to fit the container */
   background-position: center; /* Center the background image */
   background-repeat: no-repeat; /* Prevent the background image from repeating */
+}
+
+/* #modelselect1:hover {
+  color: #fff;
+  background-image: none;
+  background-color: #6372ff;
+} */
+
+.cartoon-model:hover,
+.fairytale-model:hover,
+.anime-model:hover,
+.pixel-model:hover
+ {background-color: #5ca9fb;}
+
+ .cartoon-model:active,
+ .fairytale-model:active,
+ .anime-model:active,
+ .pixel-model:active {
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
 }
 
 .cartoon-model h2,
@@ -233,6 +257,7 @@ a {
   text-align: center; /* Center-align text */
   width: 30%; /* Make the anchor elements take full width */
   border-radius: 25px;
+  
 }
 
 .select-img {
