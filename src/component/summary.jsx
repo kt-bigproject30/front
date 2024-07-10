@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-route
 import DraftAI from "./draftai"; // draftai.jsx 파일을 임포트합니다.
 
 
-const App = () => {
+const Summary = () => {
   const navigate = useNavigate();
   const [textInput, setTextInput] = useState("");
   const [textOutput, setTextOutput] = useState("");
@@ -22,7 +22,7 @@ const App = () => {
     reader.readAsText(file); // 파일을 텍스트로 읽어옴
   };
 
-  const handleButtonClick = () => {
+  const sendButtonClick = () => {
     setTextOutput(textInput);
 
     // 이미지 출력 (예: 임의의 이미지 URL 사용)
@@ -63,7 +63,7 @@ const App = () => {
           <button id = "uploadButton" onClick={() => document.getElementById("fileInput").click()}>
             파일 업로드
           </button>
-          <button id = "sendButton" onClick={handleButtonClick}>텍스트 요약</button>
+          <button id = "sendButton" onClick={sendButtonClick}>텍스트 요약</button>
       </div>
       <div className="right-column">
         <h2>text output</h2>
@@ -87,4 +87,4 @@ const App = () => {
   
 };
 
-export default App;
+export default Summary;

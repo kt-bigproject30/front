@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../css/draftai.css";
 
-const App = () => {
+const DraftAI = () => {
   const [textInput, setTextInput] = useState("");
   const [textOutput, setTextOutput] = useState("");
   const [imageOutput, setImageOutput] = useState("");
@@ -80,4 +80,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default DraftAI;
