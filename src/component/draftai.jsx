@@ -6,17 +6,17 @@ const App = () => {
   const [textOutput, setTextOutput] = useState("");
   const [imageOutput, setImageOutput] = useState("");
 
-  const handleFileSelect = (event) => {
-    const file = event.target.files[0];
-    const reader = new FileReader();
+  // const handleFileSelect = (event) => {
+  //   const file = event.target.files[0];
+  //   const reader = new FileReader();
 
-    reader.onload = function (e) {
-      const fileContent = e.target.result;
-      setTextInput(fileContent); // 파일 내용을 텍스트 입력란에 설정
-    };
+  //   reader.onload = function (e) {
+  //     const fileContent = e.target.result;
+  //     setTextInput(fileContent); // 파일 내용을 텍스트 입력란에 설정
+  //   };
 
-    reader.readAsText(file); // 파일을 텍스트로 읽어옴
-  };
+  //   reader.readAsText(file); // 파일을 텍스트로 읽어옴
+  // };
 
   const handleButtonClick = () => {
     setTextOutput(textInput);
@@ -35,7 +35,7 @@ const App = () => {
     <div className="container">
       <div className="left-column">
         <h2>model select</h2>
-        <div className="summary-text">
+        <div id="draft-summary" className="summary-text">
           <textarea
             name="message"
             id="message"
