@@ -8,7 +8,7 @@ const App = () => {
   const navigate = useNavigate();
   const [textInput, setTextInput] = useState("");
   const [textOutput, setTextOutput] = useState("");
-  const [imageOutput, setImageOutput] = useState("");
+  // const [imageOutput, setImageOutput] = useState("");
 
   const handleFileSelect = (event) => {
     const file = event.target.files[0];
@@ -26,8 +26,8 @@ const App = () => {
     setTextOutput(textInput);
 
     // 이미지 출력 (예: 임의의 이미지 URL 사용)
-    const imageUrl = "https://via.placeholder.com/400x300"; // 여기에 실제 이미지 URL을 설정하세요
-    setImageOutput(imageUrl);
+    // const imageUrl = "https://via.placeholder.com/400x300"; // 여기에 실제 이미지 URL을 설정하세요
+    // setImageOutput(imageUrl);
   };
 
 
@@ -67,7 +67,7 @@ const App = () => {
       </div>
       <div className="right-column">
         <h2>text output</h2>
-        <div className="summary-text">
+        <div id = "summary-summary" className="summary-text">
           <textarea
             name="message"
             id="message"
