@@ -12,8 +12,9 @@ const Signup = ({ toggleForm }) => {
     birthdate: "",
     email: "",
     phone: "",
-    password: "",
   });
+
+  const [customDomain, setCustomDomain] = useState(false); // 사용자 정의 도메인 입력 여부 상태
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,9 +24,31 @@ const Signup = ({ toggleForm }) => {
     });
   };
 
+  const handleDomainChange = (e) => {
+    const { value } = e.target;
+    if (value === "custom") {
+      setCustomDomain(true);
+      setFormData({ ...formData, emailDomain: "" });
+    } else {
+      setCustomDomain(false);
+      setFormData({ ...formData, emailDomain: value });
+    }
+  };
+
   const handleSignup = () => {
+    if (formData.password !== formData.pwdConfirm) {
+      alert("비밀번호가 일치하지 않습니다.");
+      return;
+    }
+
+    const email = `${formData.emailLocal}@${formData.emailDomain}`;
+    setFormData({
+      ...formData,
+      email,
+    });
+
     // 회원가입 로직을 처리합니다.
-    console.log("회원가입 정보:", formData);
+    console.log("회원가입 정보:", { ...formData, email });
     alert("회원가입이 완료되었습니다!");
     toggleForm(); // 회원가입 후 로그인 폼으로 돌아가기
   };
@@ -35,7 +58,7 @@ const Signup = ({ toggleForm }) => {
       <div className="form">
         <form className="register-form">
           <div className="profileId">
-            <label htmlFor="id">아이디</label>
+            <label htmlFor="id">회원가입</label>
             <input
               type="text"
               placeholder="6자~20자"
@@ -48,6 +71,20 @@ const Signup = ({ toggleForm }) => {
               영문 소문자, 숫자를 포함한 6~20자를 입력하세요.
             </div>
           </div>
+          <input
+            type="password"
+            name="password"
+            placeholder="비밀번호"
+            value={formData.password}
+            onChange={handleChange}
+          />
+          <input
+            type="password"
+            name="pwdConfirm"
+            placeholder="비밀번호 확인"
+            value={formData.pwdConfirm}
+            onChange={handleChange}
+          />
           <input
             type="text"
             name="name"
@@ -62,13 +99,37 @@ const Signup = ({ toggleForm }) => {
             value={formData.birthdate}
             onChange={handleChange}
           />
-          <input
-            type="email"
-            name="email"
-            placeholder="이메일 주소"
-            value={formData.email}
-            onChange={handleChange}
-          />
+          <div className="email">
+            <input
+              type="text"
+              name="emailLocal"
+              placeholder="이메일"
+              value={formData.emailLocal}
+              onChange={handleChange}
+            />
+            @
+            {customDomain ? (
+              <input
+                type="text"
+                name="emailDomain"
+                placeholder="도메인 입력"
+                value={formData.emailDomain}
+                onChange={handleChange}
+              />
+            ) : (
+              <select
+                name="emailDomain"
+                value={formData.emailDomain}
+                onChange={handleDomainChange}
+              >
+                <option value="">이메일 선택</option>
+                <option value="naver.com">naver.com</option>
+                <option value="daum.net">daum.net</option>
+                <option value="kakao.com">kakao.com</option>
+                <option value="custom">직접 입력</option>
+              </select>
+            )}
+          </div>
           <input
             type="text"
             name="phone"
@@ -76,13 +137,7 @@ const Signup = ({ toggleForm }) => {
             value={formData.phone}
             onChange={handleChange}
           />
-          <input
-            type="password"
-            name="password"
-            placeholder="비밀번호"
-            value={formData.password}
-            onChange={handleChange}
-          />
+
           <button type="button" onClick={handleSignup}>
             회원가입
           </button>

@@ -145,3 +145,25 @@ body {
 .hidden {
   display: none; /* 화면에서 숨김 */
 }
+
+/* 이메일 입력 필드와 도메인 선택 박스를 나란히 배치 */
+.email {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.email input[type="text"],
+.email select {
+  width: calc(
+    50% - 10px
+  ); /* 각 입력 필드의 너비를 50%에서 10px 뺀 값으로 설정 */
+}
+
+.email input[type="text"] {
+  margin-right: 5px; /* 오른쪽 마진 */
+}
+
+.email select {
+  margin-left: 5px; /* 왼쪽 마진 */
+}
