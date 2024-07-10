@@ -58,6 +58,11 @@ const Navbar = () => {
                 Board
               </Link>
             </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/mypage">
+                Mypage
+              </Link>
+            </li>
           </ul>
         </div>
         <div className="navbar-right ml-auto">
@@ -96,6 +101,11 @@ const Navbar = () => {
             <li className="nav-item">
               <Link className="nav-link" to="/board" onClick={toggleSidebar}>
                 Board
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/mypage" onClick={toggleSidebar}>
+                Mypage
               </Link>
             </li>
           </ul>

@@ -17,6 +17,7 @@ import BoardWrite from "../src/component/board_write.jsx";
 import BoardDetail from "../src/component/board_detail.jsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import Mypage from "../src/component/mypage.jsx";
 
 const AppContent = () => {
   const location = useLocation();
@@ -49,6 +50,7 @@ const AppContent = () => {
           <Route path="/summary" element={<Summary />} />
           <Route path="/draftai" element={<DraftAI />} />
           <Route path="/home" element={<Home />} /> {/* Home 라우트 추가 */}
+          <Route path="/mypage" element={<Mypage />} />
           <Route path="/board" element={<BoardList boards={boards} />} />{" "}
           {/* BoardList 라우트 추가 */}
           <Route
