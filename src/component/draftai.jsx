@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../css/draftai.css";
 
 const DraftAI = () => {
   const [textInput, setTextInput] = useState("");
   const [textOutput, setTextOutput] = useState("");
   const [imageOutput, setImageOutput] = useState("");
-
+  const [summaryOutput, setSummaryOutput] = useState("");
   // const handleFileSelect = (event) => {
   //   const file = event.target.files[0];
   //   const reader = new FileReader();
@@ -17,6 +17,21 @@ const DraftAI = () => {
 
   //   reader.readAsText(file); // 파일을 텍스트로 읽어옴
   // };
+
+  useEffect(() => {
+    // JSON 파일에서 데이터를 가져오는 함수
+    const fetchSummaryOutput = async () => {
+      try {
+        const response = await fetch("/summaryData.json");
+        const data = await response.json();
+        setSummaryOutput(data.summaryOutput);
+      } catch (error) {
+        console.error("Error fetching summary output:", error);
+      }
+    };
+
+    fetchSummaryOutput();
+  }, []);
 
   const handleButtonClick = () => {
     setTextOutput(textInput);
@@ -37,6 +52,7 @@ const DraftAI = () => {
         <h2>model select</h2>
         <div id="draft-summary" className="summary-text">
           <textarea
+            value={summaryOutput}
             name="message"
             id="message"
             // className="form-control"
@@ -46,10 +62,10 @@ const DraftAI = () => {
           ></textarea>
         </div>
         <div className="group-model">
-          <div id="modelselect1" className="select-model"></div>
-          <div id="modelselect2" className="select-model"></div>
-          <div id="modelselect3" className="select-model"></div>
-          <div id="modelselect4" className="select-model"></div>
+          <button id="modelselect1" className="cartoon-model"><h2>cartoon</h2></button>
+          <button id="modelselect2" className="fairytale-model"><h2>fairytale</h2></button>
+          <button id="modelselect3" className="anime-model"><h2>anime</h2></button>
+          <button id="modelselect4" className="pixel-model"><h2>pixel</h2></button>
         </div>
       </div>
 
@@ -64,13 +80,13 @@ const DraftAI = () => {
           <div id="imageOutput3" className="output-image"></div>
           <div id="imageOutput4" className="output-image"></div>
         </div>
-        <h2>image download</h2>
+        {/* <h2>image download</h2>
         <div className="group-img">
           <div id="imgselect1" className="select-img"></div>
           <div id="imgselect2" className="select-img"></div>
           <div id="imgselect3" className="select-img"></div>
           <div id="imgselect4" className="select-img"></div>
-        </div>
+        </div> */}
         <button id="downloadButton" onClick={() => document.getElementById("fileInput").click()}>
             이미지 다운로드
         </button>

@@ -149,7 +149,7 @@ a {
 .output-image {
   border: 1px solid #ddd;
   padding: 10px;
-  min-height: 250px;
+  min-height: 300px;
   display: flex; /* 이미지를 중앙 정렬하기 위해 추가 */
   justify-content: center;
   align-items: center;
@@ -161,14 +161,78 @@ a {
   height: auto;
 }
 
-.select-model {
+.cartoon-model {
   border: 1px solid lightgray;
+  border-radius: 10px;
   padding: 10px;
   min-height: 300px;
   display: flex; /* 이미지를 중앙 정렬하기 위해 추가 */
   justify-content: center;
   align-items: center;
   flex: 1;
+  background-image: url('../img/cartoon.png');
+  background-size: 100% 100%; /* Scale the background image to fit the container */
+  background-position: center; /* Center the background image */
+  background-repeat: no-repeat; /* Prevent the background image from repeating */
+}
+
+.fairytale-model {
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  padding: 10px;
+  min-height: 300px;
+  display: flex; /* 이미지를 중앙 정렬하기 위해 추가 */
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  background-image: url('../img/fairytale.png');
+  background-size: 100% 100%; /* Scale the background image to fit the container */
+  background-position: center; /* Center the background image */
+  background-repeat: no-repeat; /* Prevent the background image from repeating */
+}
+
+.anime-model {
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  padding: 10px;
+  min-height: 300px;
+  display: flex; /* 이미지를 중앙 정렬하기 위해 추가 */
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  background-image: url('../img/anime.png');
+  background-size: 100% 100%; /* Scale the background image to fit the container */
+  background-position: center; /* Center the background image */
+  background-repeat: no-repeat; /* Prevent the background image from repeating */
+}
+
+.pixel-model {
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  padding: 10px;
+  min-height: 300px;
+  display: flex; /* 이미지를 중앙 정렬하기 위해 추가 */
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  background-image: url('../img/pixel.png');
+  background-size: 100% 100%; /* Scale the background image to fit the container */
+  background-position: center; /* Center the background image */
+  background-repeat: no-repeat; /* Prevent the background image from repeating */
+}
+
+.cartoon-model h2,
+.fairytale-model h2,
+.anime-model h2,
+.pixel-model h2 {
+  background-color: lightcyan; /* Set background color to white */
+  display: inline-block; /* Ensures the anchor elements are treated as block-level elements */
+  padding: 5px; /* Add padding inside the anchor elements */
+  margin-bottom: 10px; /* Add bottom margin */
+  font-size: 1.0em; /* Set font size */
+  text-align: center; /* Center-align text */
+  width: 30%; /* Make the anchor elements take full width */
+  border-radius: 25px;
 }
 
 .select-img {

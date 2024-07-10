@@ -10,6 +10,7 @@ const BoardWrite = ({ boards, setBoards }) => {
   const [summary, setSummary] = useState("");
   const [tags, setTags] = useState("");
   const [image, setImage] = useState(null);
+  const [summaryOutput, setSummaryOutput] = useState("");
 
   useEffect(() => {
     if (isEdit) {
@@ -22,6 +23,21 @@ const BoardWrite = ({ boards, setBoards }) => {
       }
     }
   }, [id, isEdit, boards]);
+
+  useEffect(() => {
+    // JSON 파일에서 데이터를 가져오는 함수
+    const fetchSummaryOutput = async () => {
+      try {
+        const response = await fetch("/summaryData.json");
+        const data = await response.json();
+        setSummaryOutput(data.summaryOutput);
+      } catch (error) {
+        console.error("Error fetching summary output:", error);
+      }
+    };
+
+    fetchSummaryOutput();
+  }, []);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -75,7 +91,8 @@ const BoardWrite = ({ boards, setBoards }) => {
           <textarea
             id="summary"
             className="input-summary"
-            value={summary}
+            // value={summary}
+            value={summaryOutput}
             onChange={(e) => setSummary(e.target.value)}
             placeholder="요약문을 입력하세요"
           ></textarea>
