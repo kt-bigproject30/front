@@ -10,7 +10,8 @@ const BoardWrite = ({ boards, setBoards }) => {
   const [title, setTitle] = useState("");
   const [summary, setSummary] = useState("");
   const [tags, setTags] = useState("");
-  const [image, setImage] = useState(null);
+  const [imageFile, setImageFile] = useState(null); // 이미지 파일을 저장할 상태 변수
+  const [imagePreview, setImagePreview] = useState(null); // 이미지 미리보기를 위한 상태 변수
   const [summaryOutput, setSummaryOutput] = useState("");
 
   const fetchPost = useCallback(async () => {
@@ -20,7 +21,7 @@ const BoardWrite = ({ boards, setBoards }) => {
       setTitle(post.title);
       setSummary(post.summary);
       setTags(post.tags ? post.tags.join(", ") : "");
-      setImage(post.imageUrl);
+      setImagePreview(post.imageUrl); // 이미지 URL을 미리보기로 설정
     } catch (error) {
       console.error("Failed to fetch post:", error);
     }
@@ -34,13 +35,12 @@ const BoardWrite = ({ boards, setBoards }) => {
         setTitle(foundPost.title);
         setSummary(foundPost.summary);
         setTags(foundPost.tags.join(", "));
-        setImage(foundPost.image);
+        setImagePreview(foundPost.image); // 이미지 미리보기로 설정
       }
     }
   }, [fetchPost, isEdit, id, boards]);
 
   useEffect(() => {
-    // JSON 파일에서 데이터를 가져오는 함수
     const fetchSummaryOutput = async () => {
       try {
         const response = await fetch("/summaryData.json");
@@ -56,7 +56,8 @@ const BoardWrite = ({ boards, setBoards }) => {
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
-    setImage(URL.createObjectURL(file)); // 선택한 이미지를 미리 보기 위해 URL 생성
+    setImageFile(file); // 이미지 파일을 상태로 설정
+    setImagePreview(URL.createObjectURL(file)); // 선택한 이미지를 미리 보기 위해 URL 생성
   };
 
   const handleSubmit = async (e) => {
@@ -64,12 +65,9 @@ const BoardWrite = ({ boards, setBoards }) => {
     const formData = new FormData();
     formData.append("title", title);
     formData.append("summary", summary);
-    formData.append(
-      "tags",
-      tags.split(",").map((tag) => tag.trim())
-    );
-    if (image) {
-      formData.append("image", image);
+    formData.append("tags", tags);
+    if (imageFile) {
+      formData.append("image", imageFile); // 파일 객체를 FormData에 추가
     }
 
     try {
@@ -134,8 +132,8 @@ const BoardWrite = ({ boards, setBoards }) => {
             accept="image/*"
             onChange={handleImageChange}
           />
-          {image && (
-            <img src={image} alt="Selected" className="preview-image" />
+          {imagePreview && (
+            <img src={imagePreview} alt="Selected" className="preview-image" />
           )}
         </div>
         <div className="form-group">

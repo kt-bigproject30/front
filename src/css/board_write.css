@@ -19,7 +19,8 @@
 
 .input-title,
 .input-contents,
-.input-tags {
+.input-tags,
+.input-summary {
   width: 100%;
   padding: 10px;
   font-size: 16px;
