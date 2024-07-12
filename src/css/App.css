@@ -1,5 +1,8 @@
 .App {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .App-logo {
@@ -36,8 +39,9 @@
     transform: rotate(360deg);
   }
 }
-/* App.css */
+
 .main-content {
+  flex: 1;
   padding: 20px;
   transition: margin-left 0.3s ease-in-out;
 }
@@ -45,4 +49,29 @@
 /* 사이드바가 열릴 때 main-content를 오른쪽으로 이동 */
 .content-shift {
   margin-left: 250px;
+}
+
+.footer {
+  background-color: #f8f9fa;
+  padding: 20px 0;
+  text-align: center;
+  border-top: 1px solid #ddd;
+  width: 100%;
+  position: relative;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer-link {
+  color: #007bff;
+  text-decoration: none;
+  margin-top: 5px;
+}
+
+.footer-link:hover {
+  text-decoration: underline;
 }

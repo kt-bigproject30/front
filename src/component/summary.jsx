@@ -3,7 +3,6 @@
 // import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
 // import DraftAI from "./draftai"; // draftai.jsx 파일을 임포트합니다.
 
-
 // const Summary = () => {
 //   const navigate = useNavigate();
 //   const [textInput, setTextInput] = useState("");
@@ -40,7 +39,6 @@
 //   const sendButtonClick = () => {
 //     setTextOutput(summaryOutput);
 //   };
-
 
 //   const moveButtonClick = () => {
 //     // summary-text 클래스의 내용을 가져옵니다.
@@ -93,17 +91,23 @@
 //         <button
 //           id= "moveButton" onClick={moveButtonClick}
 //         >DraftAI</button>
-        
+
 //       </div>
 //     </div>
 //   );
-  
+
 // };
 
 // export default Summary;
 import React, { useState, useEffect } from "react";
 import "../css/summary.css";
-import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
+import Footer from "./footer"; // 푸터 컴포넌트 임포트
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useNavigate,
+} from "react-router-dom";
 import DraftAI from "./draftai"; // draftai.jsx 파일을 임포트합니다.
 
 const Summary = () => {
@@ -145,11 +149,11 @@ const Summary = () => {
 
   const moveButtonClick = () => {
     // summary-text 클래스의 내용을 가져옵니다.
-    const summaryText = document.querySelector('.summary-text').innerText;
+    const summaryText = document.querySelector(".summary-text").innerText;
 
     // 세션 스토리지에 내용을 저장합니다.
-    sessionStorage.setItem('summaryText', summaryText);
-    window.location.href = './draftai';
+    sessionStorage.setItem("summaryText", summaryText);
+    window.location.href = "./draftai";
   };
 
   return (
@@ -181,10 +185,15 @@ const Summary = () => {
           style={{ display: "none" }}
           onChange={handleFileSelect}
         />
-        <button id="uploadButton" onClick={() => document.getElementById("fileInput").click()}>
+        <button
+          id="uploadButton"
+          onClick={() => document.getElementById("fileInput").click()}
+        >
           파일 업로드
         </button>
-        <button id="sendButton" onClick={sendButtonClick}>텍스트 요약</button>
+        <button id="sendButton" onClick={sendButtonClick}>
+          텍스트 요약
+        </button>
       </div>
       <div className="right-column">
         <h2>text output</h2>
@@ -199,7 +208,9 @@ const Summary = () => {
             required
           ></textarea>
         </div>
-        <button id="moveButton" onClick={moveButtonClick}>DraftAI</button>
+        <button id="moveButton" onClick={moveButtonClick}>
+          DraftAI
+        </button>
       </div>
     </div>
   );

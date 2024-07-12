@@ -18,10 +18,6 @@ const Navbar = () => {
     setSidebarOpen(!isSidebarOpen);
   };
 
-  const handleBack = () => {
-    navigate(-1); // 뒤로 가기
-  };
-
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -33,10 +29,12 @@ const Navbar = () => {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <Link className="navbar-brand custom-padding" to="/home">
-          자신감
-        </Link>
         <div className="navbar-center">
+          <Link className="navbar-brand custom-padding" to="/home">
+            자신감
+          </Link>
+        </div>
+        <div className="navbar-center navbar-menu">
           <ul className="navbar-nav">
             <li className="nav-item">
               <Link className="nav-link" to="/home">
@@ -77,12 +75,14 @@ const Navbar = () => {
 
       {isSidebarOpen && (
         <div className="sidebar show">
+          <button
+            className="close-sidebar-button btn btn-link"
+            onClick={toggleSidebar}
+            aria-label="Close sidebar"
+          >
+            &times;
+          </button>
           <ul className="navbar-nav">
-            <li className="nav-item">
-              <button className="nav-link btn btn-link" onClick={handleBack}>
-                뒤로가기
-              </button>
-            </li>
             <li className="nav-item">
               <Link className="nav-link" to="/home" onClick={toggleSidebar}>
                 Home
@@ -107,6 +107,11 @@ const Navbar = () => {
               <Link className="nav-link" to="/mypage" onClick={toggleSidebar}>
                 Mypage
               </Link>
+            </li>
+            <li className="nav-item sidebar-logout">
+              <button className="nav-link btn btn-link" onClick={handleLogout}>
+                Logout
+              </button>
             </li>
           </ul>
         </div>
