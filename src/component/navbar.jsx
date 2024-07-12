@@ -29,11 +29,9 @@ const Navbar = () => {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="navbar-center">
-          <Link className="navbar-brand custom-padding" to="/home">
-            자신감
-          </Link>
-        </div>
+        <Link className="navbar-brand custom-padding" to="/home">
+          자신감
+        </Link>
         <div className="navbar-center navbar-menu">
           <ul className="navbar-nav">
             <li className="nav-item">
