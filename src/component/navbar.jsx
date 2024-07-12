@@ -34,7 +34,7 @@ const Navbar = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
         <Link className="navbar-brand custom-padding" to="/home">
-          Jasingam
+          자신감
         </Link>
         <div className="navbar-center">
           <ul className="navbar-nav">

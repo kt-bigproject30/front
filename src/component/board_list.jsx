@@ -1,21 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Pagination from "./pagination.jsx";
-import api from "../api";
-import "../css/board_list.css";
+import Pagination from "./pagination.jsx"; // 페이지네이션 컴포넌트
+import api from "../api"; // API 모듈
+import "../css/board_list.css"; // CSS 파일
 
+// 게시판 목록 컴포넌트
 const BoardList = () => {
-  const [boards, setBoards] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [searchBy, setSearchBy] = useState("title");
-  const postsPerPage = 10;
-  const navigate = useNavigate();
+  const [boards, setBoards] = useState([]); // 게시물 목록 상태 변수
+  const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 상태 변수
+  const [searchTerm, setSearchTerm] = useState(""); // 검색어 상태 변수
+  const [searchBy, setSearchBy] = useState("title"); // 검색 기준 상태 변수 (제목 또는 태그)
+  const postsPerPage = 10; // 페이지당 게시물 수
+  const navigate = useNavigate(); // 페이지 이동을 위한 훅
 
+  // 컴포넌트가 마운트될 때 게시물 데이터를 가져옴
   useEffect(() => {
     fetchBoards();
   }, []);
 
+  // 게시물 데이터를 API로부터 가져오는 함수
   const fetchBoards = async () => {
     try {
       const response = await api.get("/post");
@@ -25,6 +28,7 @@ const BoardList = () => {
     }
   };
 
+  // 검색어 및 검색 기준에 따라 게시물을 필터링하는 함수
   const filteredBoards = boards.filter((post) => {
     if (searchBy === "title") {
       return post.title.toLowerCase().includes(searchTerm.toLowerCase());
@@ -39,26 +43,24 @@ const BoardList = () => {
     return true;
   });
 
+  // 현재 페이지에 표시할 게시물의 인덱스 계산
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = filteredBoards.slice(indexOfFirstPost, indexOfLastPost);
 
+  // 페이지 변경 시 호출되는 함수
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
+  // 태그 클릭 시 해당 태그로 검색 설정하는 함수
   const handleTagClick = (tag) => {
     setSearchTerm(tag);
     setSearchBy("tag");
     setCurrentPage(1);
   };
 
-  const handleResetSearch = () => {
-    setSearchTerm("");
-    setSearchBy("title");
-    setCurrentPage(1);
-  };
-
+  // 전체 페이지 수 계산
   const totalPages = Math.ceil(filteredBoards.length / postsPerPage);
 
   return (
@@ -85,9 +87,6 @@ const BoardList = () => {
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder={`검색: ${searchBy === "title" ? "제목" : "태그"}`}
         />
-        <button onClick={handleResetSearch} className="btn btn-secondary">
-          초기화
-        </button>
       </div>
       {currentPosts.map((post) => (
         <div key={post.id} className="post">

@@ -3,17 +3,19 @@ import { useNavigate, useParams } from "react-router-dom";
 import api from "../api";
 import "../css/board_write.css";
 
+// 게시물 작성 및 수정 컴포넌트
 const BoardWrite = ({ boards, setBoards }) => {
-  const { id } = useParams();
-  const navigate = useNavigate();
-  const isEdit = Boolean(id);
-  const [title, setTitle] = useState("");
-  const [summary, setSummary] = useState("");
-  const [tags, setTags] = useState("");
-  const [imageFile, setImageFile] = useState(null); // 이미지 파일을 저장할 상태 변수
-  const [imagePreview, setImagePreview] = useState(null); // 이미지 미리보기를 위한 상태 변수
-  const [summaryOutput, setSummaryOutput] = useState("");
+  const { id } = useParams(); // URL에서 id 파라미터를 가져옴
+  const navigate = useNavigate(); // 페이지 이동을 위한 훅
+  const isEdit = Boolean(id); // id가 존재하면 수정 모드, 그렇지 않으면 작성 모드
+  const [title, setTitle] = useState(""); // 제목 상태 변수
+  const [summary, setSummary] = useState(""); // 요약문 상태 변수
+  const [tags, setTags] = useState(""); // 태그 상태 변수
+  const [imageFile, setImageFile] = useState(null); // 이미지 파일 상태 변수
+  const [imagePreview, setImagePreview] = useState(null); // 이미지 미리보기 상태 변수
+  const [summaryOutput, setSummaryOutput] = useState(""); // 요약문 데이터를 위한 상태 변수
 
+  // 게시물 데이터를 가져오는 함수
   const fetchPost = useCallback(async () => {
     try {
       const response = await api.get(`/post/${id}`);
@@ -27,9 +29,10 @@ const BoardWrite = ({ boards, setBoards }) => {
     }
   }, [id]);
 
+  // 컴포넌트가 마운트되거나 isEdit 또는 id가 변경될 때 실행되는 useEffect
   useEffect(() => {
     if (isEdit) {
-      fetchPost();
+      fetchPost(); // 게시물 데이터를 가져옴
       const foundPost = boards.find((post) => post.id === parseInt(id));
       if (foundPost) {
         setTitle(foundPost.title);
@@ -40,6 +43,7 @@ const BoardWrite = ({ boards, setBoards }) => {
     }
   }, [fetchPost, isEdit, id, boards]);
 
+  // 요약문 데이터를 가져오는 useEffect
   useEffect(() => {
     const fetchSummaryOutput = async () => {
       try {
@@ -54,12 +58,14 @@ const BoardWrite = ({ boards, setBoards }) => {
     fetchSummaryOutput();
   }, []);
 
+  // 이미지 파일이 변경되었을 때 호출되는 함수
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     setImageFile(file); // 이미지 파일을 상태로 설정
     setImagePreview(URL.createObjectURL(file)); // 선택한 이미지를 미리 보기 위해 URL 생성
   };
 
+  // 폼 제출 시 호출되는 함수
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -84,7 +90,7 @@ const BoardWrite = ({ boards, setBoards }) => {
           },
         });
       }
-      navigate("/board");
+      navigate("/board"); // 게시판 페이지로 이동
     } catch (error) {
       console.error("Failed to save post:", error);
     }

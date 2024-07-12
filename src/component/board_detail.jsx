@@ -3,11 +3,13 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import api from "../api";
 import "../css/board_detail.css";
 
+// 게시물 상세보기 컴포넌트
 const BoardDetail = ({ setBoards }) => {
-  const { id } = useParams();
-  const navigate = useNavigate();
-  const [post, setPost] = useState(null);
+  const { id } = useParams(); // URL에서 id 파라미터를 가져옴
+  const navigate = useNavigate(); // 페이지 이동을 위한 훅
+  const [post, setPost] = useState(null); // 게시물 상태 변수
 
+  // 게시물 데이터를 가져오는 함수
   const fetchPost = useCallback(async () => {
     try {
       const response = await api.get(`/post/${id}`);
@@ -17,31 +19,35 @@ const BoardDetail = ({ setBoards }) => {
     }
   }, [id]);
 
+  // 컴포넌트가 마운트될 때 또는 fetchPost 함수가 변경될 때 실행되는 useEffect
   useEffect(() => {
     fetchPost();
   }, [fetchPost]);
 
+  // 게시물을 삭제하는 함수
   const handleDelete = async () => {
     const confirmDelete = window.confirm(
       "정말로 이 게시글을 삭제하시겠습니까?"
     );
     if (confirmDelete) {
       try {
-        await api.delete(`/boards/${id}`);
+        await api.delete(`/post/${id}`); // 삭제 엔드포인트도 /post로 설정
         setBoards((prevBoards) =>
           prevBoards.filter((post) => post.id !== parseInt(id))
         );
-        navigate("/board");
+        navigate("/board"); // 게시판 페이지로 이동
       } catch (error) {
         console.error("Failed to delete post:", error);
       }
     }
   };
 
+  // 게시물 데이터를 아직 가져오지 못한 경우 로딩 메시지 표시
   if (!post) {
     return <div>Loading...</div>;
   }
 
+  // 게시물 상세보기 UI 렌더링
   return (
     <div className="board-detail">
       <h2 className="post-title">{post.title}</h2>
