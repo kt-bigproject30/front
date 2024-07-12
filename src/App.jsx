@@ -6,18 +6,20 @@ import {
   Navigate,
   useLocation,
 } from "react-router-dom";
-import "../src/css/App.css";
-import Login from "../src/component/login.jsx";
-import Navbar from "../src/component/navbar.jsx";
-import Summary from "../src/component/summary.jsx";
-import DraftAI from "../src/component/draftai.jsx";
-import Home from "../src/component/home.jsx";
-import BoardList from "../src/component/board_list.jsx";
-import BoardWrite from "../src/component/board_write.jsx";
-import BoardDetail from "../src/component/board_detail.jsx";
+import "./css/App.css";
+import Login from "./component/login.jsx";
+import Navbar from "./component/navbar.jsx";
+import Summary from "./component/summary.jsx";
+import DraftAI from "./component/draftai.jsx";
+import Home from "./component/home.jsx";
+import BoardList from "./component/board_list.jsx";
+import BoardWrite from "./component/board_write.jsx";
+import BoardDetail from "./component/board_detail.jsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
-import Mypage from "../src/component/mypage.jsx";
+import Mypage from "./component/mypage.jsx";
+import Footer from "./component/footer.jsx";
+import Policy from "./component/policy.jsx";
 
 const AppContent = () => {
   const location = useLocation();
@@ -58,8 +60,11 @@ const AppContent = () => {
           {/* BoardWrite 라우트 추가 */}
           <Route path="/board/:id" element={<BoardDetail />} />{" "}
           {/* BoardDetail 라우트 추가 */}
+          <Route path="/policy" element={<Policy />} />{" "}
+          {/* 개인정보처리방침 라우트 추가 */}
         </Routes>
       </div>
+      <Footer /> {/* 푸터 컴포넌트 추가 */}
     </div>
   );
 };

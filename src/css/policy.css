@@ -1,0 +1,23 @@
+.policy-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  line-height: 1.6;
+  font-size: 14px; /* 폰트 크기를 줄여서 조정 */
+  font-family: "LINESeedKR-Bd", sans-serif; /* 원하는 폰트 패밀리 추가 */
+}
+
+.policy-content h1 {
+  margin-bottom: 20px;
+  font-size: 24px; /* 제목의 폰트 크기를 조정 */
+}
+
+.policy-content h2 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 18px; /* 소제목의 폰트 크기를 조정 */
+}
+
+.policy-content p {
+  margin-bottom: 10px;
+}

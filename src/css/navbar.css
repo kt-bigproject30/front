@@ -1,4 +1,4 @@
-/* 폰트 페이스 정의 */
+/* 네비게이션 바 스타일 */
 @font-face {
   font-family: "LINESeedKR-Bd";
   src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2")
@@ -16,7 +16,6 @@ body,
   font-family: "LINESeedKR-Bd", sans-serif !important;
 }
 
-/* 네비게이션 바 스타일 */
 .navbar {
   background-color: white !important;
   display: flex;
@@ -26,47 +25,41 @@ body,
   top: 0;
   width: 100%;
   z-index: 1000;
-  height: 60px; /* 네비게이션 바 높이 설정 */
-  font-size: calc(
-    16px + (100vw - 1000px) / 200
-  ); /* 기본 폰트 크기 설정 및 뷰포트 크기에 따라 조정 */
+  height: 60px;
+  border-bottom: 1px solid #ddd; /* 아래쪽에 얇은 실선 추가 */
 }
 
 body {
   padding-top: 60px; /* 네비게이션 바 높이만큼 패딩 추가 */
 }
 
-/* 네비게이션 바 중앙 섹션 스타일 */
+.navbar-toggler {
+  display: none;
+}
+
 .navbar-center {
   flex-grow: 1;
   display: flex;
   justify-content: center;
 }
 
-/* 네비게이션 바 오른쪽 섹션 스타일 */
 .navbar-right {
   display: flex;
   align-items: center;
 }
 
-/* 네비게이션 아이템 스타일 */
 .nav-item {
   text-align: center;
 }
 
-/* 네비게이션 바 브랜드 스타일 */
 .navbar-brand {
-  font-size: calc(
-    28px + (100vw - 1000px) / 200
-  ); /* 기본 폰트 크기 설정 및 뷰포트 크기에 따라 조정 */
+  font-size: 28px;
 }
 
-/* 사용자 정의 패딩 클래스 */
 .custom-padding {
-  padding-left: 50px;
+  padding-left: 20px;
 }
 
-/* 로그아웃 버튼 스타일 */
 .logout-button {
   padding: 10px;
   background-color: #93979c !important;
@@ -74,17 +67,12 @@ body {
   border: none !important;
   cursor: pointer;
   margin-right: 20px;
-  font-size: calc(
-    16px + (100vw - 1000px) / 200
-  ); /* 기본 폰트 크기 설정 및 뷰포트 크기에 따라 조정 */
 }
 
-/* 로그아웃 버튼 호버 스타일 */
 .logout-button:hover {
   background-color: #70767b !important;
 }
 
-/* 사이드바 스타일 */
 .sidebar {
   display: none;
   position: fixed;
@@ -97,19 +85,14 @@ body {
   transform: translateX(-100%);
   padding-top: 60px;
   z-index: 1000;
-  font-size: calc(
-    16px + (100vw - 1000px) / 200
-  ); /* 기본 폰트 크기 설정 및 뷰포트 크기에 따라 조정 */
 }
 
-/* 사이드바가 표시될 때 */
 .sidebar.show {
   transform: translateX(0);
 }
 
-/* 화면 크기가 991px 이하일 때 적용되는 미디어 쿼리 */
 @media (max-width: 991px) {
-  .navbar-center {
+  .navbar-center.navbar-menu {
     display: none;
   }
 
@@ -117,34 +100,54 @@ body {
     display: block;
   }
 
-  .navbar-shift {
-    margin-left: 250px;
+  .navbar-center {
+    display: flex;
+    justify-content: center;
+  }
+
+  .navbar-right {
+    display: none;
   }
 
   .sidebar {
     display: block;
   }
 
+  .navbar-shift {
+    margin-left: 250px;
+  }
+
   .navbar-brand {
-    font-size: calc(
-      24px + (100vw - 1000px) / 200
-    ); /* 작은 화면에서의 폰트 크기 조정 */
+    font-size: 24px;
   }
 }
 
-/* 뒤로가기 버튼 스타일 */
 .nav-link.btn {
   color: #fdfdfe;
   text-align: center;
   background-color: #787b7e !important;
   border: none !important;
   padding: 10px;
-  font-size: calc(
-    16px + (100vw - 1000px) / 200
-  ); /* 기본 폰트 크기 설정 및 뷰포트 크기에 따라 조정 */
 }
 
-/* 뒤로가기 버튼 호버 스타일 */
 .nav-link.btn:hover {
   text-decoration: underline;
+}
+
+.sidebar-logout {
+  position: absolute;
+  bottom: 20px;
+  left: 10px; /* 10px 띄움 */
+  width: calc(100% - 20px); /* 좌우 10px씩 여백 */
+}
+
+.close-sidebar-button {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 24px;
+  background: none;
+  color: #70767b !important;
+  border: none;
+  cursor: pointer;
 }
