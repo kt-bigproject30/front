@@ -82,13 +82,68 @@
   gap: 20px;
 }
 
-.side-box {
+.notice-box {
   width: 300px;
-  background-color: #f0f0f0;
-  border: 1px solid #ccc;
+  background-color: white;
+  border: 10px solid #ccc;
   border-radius: 8px;
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);
+  background-image: url('../img/notice.png');
+  background-size: 70% 70%; /* Scale the background image to fit the container */
+  background-position: center 10%; /* Center the background image */
+  background-repeat: no-repeat; /* Prevent the background image from repeating */
+  opacity: 0.7;
+  font-size: 3.0vw;
+  flex-direction: column;
+  justify-content: end;
+}
+
+
+
+.use-box {
+  width: 300px;
+  background-color: white;
+  border: 10px solid #ccc;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);
+  background-image: url('../img/ai.jpg');
+  background-size: 60% 60%; /* Scale the background image to fit the container */
+  background-position: center 20%; /* Center the background image */
+  background-repeat: no-repeat; /* Prevent the background image from repeating */
+  opacity: 0.7;
+  font-size: 3.0vw;
+  flex-direction: column;
+  justify-content: end;
+}
+
+/* 작은 화면 */
+@media (max-width: 600px) {
+  .content {
+    flex-direction: column; /* Change flex direction to column for smaller screens */
+  }
+
+  .notice-box, .use-box {
+    font-size: 4vw; /* Adjust font size for smaller screens */
+  }
+
+  .arrow-button {
+    width: 30px;
+    height: 15px;
+    font-size: 18px;
+  }
+
+  .circle-button {
+    width: 25px;
+    height: 15px;
+  }
+
+  .side-content {
+    gap: 10px;
+  }
 }

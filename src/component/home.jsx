@@ -69,16 +69,16 @@ const Home = () => {
         </div>
         <div className="side-content">
           <div
-            className="side-box"
+            className="notice-box"
             style={{ height: imageHeight / 2 }}
           >
             공지사항
           </div>
           <button
-            className="side-box" onClick={moveButtonClick}
+            className="use-box" onClick={moveButtonClick}
             style={{ height: imageHeight / 2 }}
           >
-            사용 방법
+            사용방법
           </button>
         </div>
       </div>

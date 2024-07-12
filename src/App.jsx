@@ -19,6 +19,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import Mypage from "../src/component/mypage.jsx";
 
+import Usepage from "../src/component/usepage.jsx";
+
+
 const AppContent = () => {
   const location = useLocation();
   const shouldShowNavbar = location.pathname !== "/login";
@@ -58,6 +61,9 @@ const AppContent = () => {
           {/* BoardWrite 라우트 추가 */}
           <Route path="/board/:id" element={<BoardDetail />} />{" "}
           {/* BoardDetail 라우트 추가 */}
+
+          <Route path="/usepage" element={<Usepage />} />{" "}
+          {/* Usepage 라우트 추가 */}
         </Routes>
       </div>
     </div>

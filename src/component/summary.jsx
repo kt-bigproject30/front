@@ -156,6 +156,15 @@ const Summary = () => {
     <div className="container">
       <div className="left-column">
         <h2>text input</h2>
+        <div className="title-text">
+          <textarea
+            // value={textInput}
+            // onChange={(e) => setTextInput(e.target.value)}
+            rows="1"
+            placeholder="제목을 입력하세요"
+            required
+          ></textarea>
+        </div>
         <div className="summary-text">
           <textarea
             value={textInput}
