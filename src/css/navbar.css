@@ -54,6 +54,7 @@ body {
 
 .navbar-brand {
   font-size: 28px;
+  margin-left: 20px; /* 왼쪽에 위치하도록 조정 */
 }
 
 .custom-padding {
@@ -100,9 +101,10 @@ body {
     display: block;
   }
 
-  .navbar-center {
-    display: flex;
-    justify-content: center;
+  .navbar-brand {
+    margin-left: auto; /* 중앙으로 이동 */
+    margin-right: auto;
+    font-size: 24px;
   }
 
   .navbar-right {
@@ -115,10 +117,6 @@ body {
 
   .navbar-shift {
     margin-left: 250px;
-  }
-
-  .navbar-brand {
-    font-size: 24px;
   }
 }
 
