@@ -28,11 +28,7 @@ html {
   margin-top: 20px;
 }
 
-/* .image-wrapper {
-  position: relative;
-  display: inline-block;
-  width: 100vw; /* 브라우저의 전체 너비를 차지 */
-}
+
 
 .start-image {
   max-width: 100%;
@@ -148,24 +144,7 @@ html {
   justify-content: end;
 }
 
-/* .use-box {
-  width: 300px;
-  background-color: white;
-  border: 10px solid #ccc;
-  border-radius: 8px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);
-  background-image: url('../img/ai.jpg');
-  background-size: 60% 60%; /* Scale the background image to fit the container */
-  background-position: center 20%; /* Center the background image */
-  background-repeat: no-repeat; /* Prevent the background image from repeating */
-  opacity: 0.7;
-  font-size: 3vw;
-  flex-direction: column;
-  justify-content: end;
-} */
+
 
 
 

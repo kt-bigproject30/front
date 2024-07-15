@@ -74,7 +74,6 @@ const Home = () => {
           >
             공지사항
           </div>
-          z
         </div>
       </div>
     </div>
