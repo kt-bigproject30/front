@@ -1,85 +1,3 @@
-// import React, { useState, useEffect } from "react";
-// import "../css/draftai.css";
-
-// const DraftAI = () => {
-//   const [textInput, setTextInput] = useState("");
-//   const [textOutput, setTextOutput] = useState("");
-//   const [imageOutput, setImageOutput] = useState("");
-//   const [summaryOutput, setSummaryOutput] = useState("");
- 
-
-//   useEffect(() => {
-//     // JSON 파일에서 데이터를 가져오는 함수
-//     const fetchSummaryOutput = async () => {
-//       try {
-//         const response = await fetch("/summaryData.json");
-//         const data = await response.json();
-//         setSummaryOutput(data.summaryOutput);
-//       } catch (error) {
-//         console.error("Error fetching summary output:", error);
-//       }
-//     };
-
-//     fetchSummaryOutput();
-//   }, []);
-
-//   const handleButtonClick = () => {
-//     setTextOutput(textInput);
-
-//     // 이미지 출력 (예: 임의의 이미지 URL 사용)
-//     const imageUrl = "https://via.placeholder.com/400x300"; // 여기에 실제 이미지 URL을 설정하세요
-//     setImageOutput(imageUrl);
-//   };
-  
-//   const moveButtonClick = () => {
-    
-//     window.location.href = '/board/new';
-//   };
-
-//   return (
-//     <div className="container">
-//       <div className="left-column">
-//         <h2>model select</h2>
-//         <div id="draft-summary" className="summary-text">
-//           <textarea
-//             value={summaryOutput}
-//             name="message"
-//             id="message"
-//             // className="form-control"
-//             rows="5"
-//             placeholder="요약된 내용"
-//             required
-//           ></textarea>
-//         </div>
-//         <div className="group-model">
-//           <button id="modelselect1" className="cartoon-model"><h2>cartoon</h2></button>
-//           <button id="modelselect2" className="fairytale-model"><h2>fairytale</h2></button>
-//           <button id="modelselect3" className="anime-model"><h2>anime</h2></button>
-//           <button id="modelselect4" className="pixel-model"><h2>pixel</h2></button>
-//         </div>
-//       </div>
-
-//       <div className="right-column">
-//         <h2>image output</h2>
-        
-//         <div className="output-group">
-//           <div id="imageOutput1" className="output-image"></div>
-//           <div id="imageOutput2" className="output-image"></div>
-//           <div id="imageOutput3" className="output-image"></div>
-//           <div id="imageOutput4" className="output-image"></div>
-//         </div>
-        
-//         <button id="downloadButton" onClick={() => document.getElementById("fileInput").click()}>
-//             이미지 다운로드
-//         </button>
-//         <button id = "uploadButton"onClick={moveButtonClick}>게시판 등록</button>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default DraftAI;
-
 import React, { useState, useEffect } from "react";
 import "../css/draftai.css";
 
@@ -108,17 +26,38 @@ const DraftAI = () => {
     fetchSummaryOutput();
   }, []);
 
-  const handleButtonClick = () => {
-    setTextOutput(textInput);
+  // const modButtonClick = () => {
+  //   setTextOutput(textInput);
 
-    const newImageOutputs = [
-      "https://via.placeholder.com/400x300",
-      "https://via.placeholder.com/400x300",
-      "https://via.placeholder.com/400x300",
-      "https://via.placeholder.com/400x300"
-    ];
-    setImageOutputs(newImageOutputs);
+  //   const newImageOutputs = [
+  //     "url('../imgai/result1.png')",
+  //     "url('../imgai/result1.png')",
+  //     "url('../imgai/result1.png')",
+  //     "url('../imgai/result1.png')"
+  //   ];
+  //   setImageOutputs(newImageOutputs);
+  // };
+
+  const modelButtonClick = () => {
+    const imageOutput1 = document.querySelector('#imageOutput1');
+    const imageOutput2 = document.querySelector('#imageOutput2');
+    const imageOutput3 = document.querySelector('#imageOutput3');
+    const imageOutput4 = document.querySelector('#imageOutput4');
+    
+    if (imageOutput1) {
+      imageOutput1.style.backgroundImage = "url('imgai/result1.png')";
+    }
+    if (imageOutput2) {
+      imageOutput2.style.backgroundImage = "url('imgai/result2.png')";
+    }
+    if (imageOutput3) {
+      imageOutput3.style.backgroundImage = "url('imgai/result3.png')";
+    }
+    if (imageOutput4) {
+      imageOutput4.style.backgroundImage = "url('imgai/result4.png')";
+    }
   };
+
 
   const handleDownloadClick = () => {
     try {
@@ -198,7 +137,7 @@ const DraftAI = () => {
           ></textarea>
         </div>
         <div className="group-model">
-          <button id="modelselect1" className="cartoon-model">
+          <button id="modelselect1" className="cartoon-model" onClick={modelButtonClick}>
             <h2>Cartoon</h2>
           </button>
           <button id="modelselect2" className="fairytale-model">
