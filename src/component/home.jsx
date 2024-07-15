@@ -107,12 +107,12 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className="side-content">
+      {/* <div className="side-content">
         <div className="notice-box">
-          {/* 추가 내용을 여기에 삽입하세요 */}
+          
           무언가 추가할 것?
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
