@@ -4,9 +4,9 @@ import "../css/login.css";
 
 const Signup = ({ toggleForm }) => {
   const [formData, setFormData] = useState({
-    id: "",
+    username: "",
     password: "",
-    pwdConfirm: "",
+    passwordCheck: "",
     name: "",
     emailLocal: "",
     emailDomain: "",
@@ -50,11 +50,11 @@ const Signup = ({ toggleForm }) => {
     });
 
     try {
-      const response = await api.post("/signup", {
+      const response = await api.post("/jwt-login/join", {
         ...formData,
         email,
       });
-      if (response.status === 201) {
+      if (response.status === 200) {
         alert("회원가입이 완료되었습니다!");
         toggleForm(); // 회원가입 후 로그인 폼으로 돌아가기
       } else {

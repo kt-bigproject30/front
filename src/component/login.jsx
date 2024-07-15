@@ -6,7 +6,7 @@ import "../css/login.css";
 
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
-  const [id, setId] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -18,10 +18,12 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await api.post(" /login", {
-        id,
+      console.log("Sending login request with:", { username, password }); // 디버깅용 로그
+      const response = await api.post("/login", {
+        username,
         password,
       });
+      console.log("Response received:", response); // 디버깅용 로그
       if (response.status === 200) {
         // 로그인 성공 시 홈으로 이동
         navigate("/home");
@@ -30,7 +32,12 @@ const Login = () => {
         setError(response.data.message || "로그인에 실패했습니다.");
       }
     } catch (error) {
-      setError("서버와의 연결에 실패했습니다.");
+      console.error("Error occurred during login request:", error); // 디버깅용 로그
+      if (error.response && error.response.status === 403) {
+        setError("잘못된 자격 증명입니다.");
+      } else {
+        setError("서버와의 연결에 실패했습니다.");
+      }
     }
   };
 
@@ -43,9 +50,9 @@ const Login = () => {
               <input
                 type="text"
                 placeholder="ID"
-                name="id"
-                value={id}
-                onChange={(e) => setId(e.target.value)}
+                name="username" // name을 "username"으로 설정
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
               />
               <input
                 type="password"
