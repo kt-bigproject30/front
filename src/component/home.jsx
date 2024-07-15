@@ -51,14 +51,12 @@ const Home = () => {
 
   const handlePageClick = () => {
     if (activeButton === 2) {
-      window.location.href = './usepage';
+      window.location.href = "./usepage";
     }
     if (activeButton === 3) {
-      window.location.href = './board';
+      window.location.href = "./board";
     }
   };
-
-  
 
   return (
     <div className="home-container">
@@ -92,7 +90,9 @@ const Home = () => {
             {[...Array(images.length)].map((_, index) => (
               <button
                 key={index}
-                className={`circle-button ${activeButton === index + 1 ? "active" : ""}`}
+                className={`circle-button ${
+                  activeButton === index + 1 ? "active" : ""
+                }`}
                 onClick={() => handleButtonClick(index + 1)}
                 aria-label={`Image ${index + 1}`}
               ></button>

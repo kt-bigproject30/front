@@ -33,10 +33,11 @@ body,
   z-index: 1000;
   border-bottom: 1px solid #ddd; /* 아래쪽에 얇은 실선 추가 */
   padding: 10px 20px; /* 상하 좌우 패딩 */
+  height: 80px !important; /* 네비게이션 바의 높이 설정 */
 }
 
 body {
-  padding-top: 60px; /* 네비게이션 바 높이만큼 패딩 추가 */
+  padding-top: 80px !important; /* 네비게이션 바 높이만큼 패딩 추가 */
 }
 
 .navbar-toggler {

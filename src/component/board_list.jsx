@@ -79,6 +79,7 @@ const BoardList = () => {
         >
           <option value="title">제목</option>
           <option value="tag">태그</option>
+          <option value="notice">공지</option>
         </select>
         <input
           type="text"

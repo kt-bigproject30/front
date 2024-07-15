@@ -8,14 +8,10 @@ const Signup = ({ toggleForm }) => {
     password: "",
     passwordCheck: "",
     name: "",
-    emailLocal: "",
-    emailDomain: "",
-    birthdate: "",
-    email: "",
-    phone: "",
+    // birthdate: "",
+    // phone: "",
   });
 
-  const [customDomain, setCustomDomain] = useState(false); // 사용자 정의 도메인 입력 여부 상태
   const [error, setError] = useState(""); // 에러 메시지 상태
 
   const handleChange = (e) => {
@@ -26,34 +22,17 @@ const Signup = ({ toggleForm }) => {
     });
   };
 
-  const handleDomainChange = (e) => {
-    const { value } = e.target;
-    if (value === "custom") {
-      setCustomDomain(true);
-      setFormData({ ...formData, emailDomain: "" });
-    } else {
-      setCustomDomain(false);
-      setFormData({ ...formData, emailDomain: value });
-    }
-  };
-
   const handleSignup = async () => {
-    if (formData.password !== formData.pwdConfirm) {
+    if (formData.password !== formData.passwordCheck) {
       alert("비밀번호가 일치하지 않습니다.");
       return;
     }
 
-    const email = `${formData.emailLocal}@${formData.emailDomain}`;
-    setFormData({
-      ...formData,
-      email,
-    });
-
     try {
       const response = await api.post("/jwt-login/join", {
         ...formData,
-        email,
       });
+
       if (response.status === 200) {
         alert("회원가입이 완료되었습니다!");
         toggleForm(); // 회원가입 후 로그인 폼으로 돌아가기
@@ -61,7 +40,16 @@ const Signup = ({ toggleForm }) => {
         setError(response.data.message || "회원가입에 실패했습니다.");
       }
     } catch (error) {
-      setError("서버와의 연결에 실패했습니다.");
+      if (error.response) {
+        // 서버에서 응답을 받았으나 상태 코드가 2xx 범위를 벗어나는 경우
+        setError(error.response.data.message || "회원가입에 실패했습니다.");
+      } else if (error.request) {
+        // 요청이 만들어졌으나 서버로부터 응답을 받지 못한 경우
+        setError("서버와의 연결에 실패했습니다.");
+      } else {
+        // 오류를 발생시킨 요청 설정 문제
+        setError("회원가입 과정에서 오류가 발생했습니다.");
+      }
     }
   };
 
@@ -70,13 +58,13 @@ const Signup = ({ toggleForm }) => {
       <div className="form">
         <form className="register-form" onSubmit={(e) => e.preventDefault()}>
           <div className="profileId">
-            <label htmlFor="id">회원가입</label>
+            <label htmlFor="username">회원가입</label>
             <input
               type="text"
               placeholder="6자~20자"
-              id="id"
-              name="id"
-              value={formData.id}
+              id="username"
+              name="username"
+              value={formData.username}
               onChange={handleChange}
             />
             <div className="notice hidden">
@@ -92,9 +80,9 @@ const Signup = ({ toggleForm }) => {
           />
           <input
             type="password"
-            name="pwdConfirm"
+            name="passwordCheck"
             placeholder="비밀번호 확인"
-            value={formData.pwdConfirm}
+            value={formData.passwordCheck}
             onChange={handleChange}
           />
           <input
@@ -104,51 +92,21 @@ const Signup = ({ toggleForm }) => {
             value={formData.name}
             onChange={handleChange}
           />
-          <input
+          {/* 생년월일, 핸드폰 번호 입력 필드를 주석처리해도 초기값을 설정해줘서 오류를 방지합니다. */}
+          {/* <input
             type="date"
             name="birthdate"
             placeholder="생년월일"
             value={formData.birthdate}
             onChange={handleChange}
-          />
-          <div className="email">
-            <input
-              type="text"
-              name="emailLocal"
-              placeholder="이메일"
-              value={formData.emailLocal}
-              onChange={handleChange}
-            />
-            @
-            {customDomain ? (
-              <input
-                type="text"
-                name="emailDomain"
-                placeholder="도메인 입력"
-                value={formData.emailDomain}
-                onChange={handleChange}
-              />
-            ) : (
-              <select
-                name="emailDomain"
-                value={formData.emailDomain}
-                onChange={handleDomainChange}
-              >
-                <option value="">이메일 선택</option>
-                <option value="naver.com">naver.com</option>
-                <option value="daum.net">daum.net</option>
-                <option value="kakao.com">kakao.com</option>
-                <option value="custom">직접 입력</option>
-              </select>
-            )}
-          </div>
-          <input
+          /> */}
+          {/* <input
             type="text"
             name="phone"
             placeholder="핸드폰 번호"
             value={formData.phone}
             onChange={handleChange}
-          />
+          /> */}
 
           <button type="button" onClick={handleSignup}>
             회원가입
