@@ -1,16 +1,19 @@
-/* .home-container {
-  text-align: center;
-  padding: 20px;
+/* home.css */
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #ffeb60; /* 원하는 배경색으로 변경 */
 }
 
-.start-image {
-  max-width: 100%;
-  height: auto;
-  margin-top: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-} */
-
+.home-page {
+  width: 100%;
+  min-height: 100vh;
+  background-color: inherit; /* 배경색 상속 */
+}
 
 .home-container {
   text-align: center;
@@ -28,8 +31,7 @@
 .image-wrapper {
   position: relative;
   display: inline-block;
-
-  
+  width: 100vw; /* 브라우저의 전체 너비를 차지 */
 }
 
 .start-image {
@@ -93,17 +95,15 @@
   justify-content: center;
   align-items: center;
   box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);
-  background-image: url('../img/notice.png');
+  background-image: url("../img/notice.png");
   background-size: 70% 70%; /* Scale the background image to fit the container */
   background-position: center 10%; /* Center the background image */
   background-repeat: no-repeat; /* Prevent the background image from repeating */
   opacity: 0.7;
-  font-size: 3.0vw;
+  font-size: 3vw;
   flex-direction: column;
   justify-content: end;
 }
-
-
 
 .use-box {
   width: 300px;
@@ -114,12 +114,12 @@
   justify-content: center;
   align-items: center;
   box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);
-  background-image: url('../img/ai.jpg');
+  background-image: url("../img/ai.jpg");
   background-size: 60% 60%; /* Scale the background image to fit the container */
   background-position: center 20%; /* Center the background image */
   background-repeat: no-repeat; /* Prevent the background image from repeating */
   opacity: 0.7;
-  font-size: 3.0vw;
+  font-size: 3vw;
   flex-direction: column;
   justify-content: end;
 }
@@ -131,7 +131,8 @@
     align-items: center;
   }
 
-  .notice-box, .use-box {
+  .notice-box,
+  .use-box {
     font-size: 4vw; /* Adjust font size for smaller screens */
   }
 
@@ -154,7 +155,8 @@
     gap: 10px;
   }
 
-  .notice-box, .use-box {
+  .notice-box,
+  .use-box {
     width: 45%;
     height: auto; /* 컨텐츠에 따라 높이 자동 조정 */
   }

@@ -23,7 +23,6 @@ import Policy from "./component/policy.jsx";
 
 import Usepage from "../src/component/usepage.jsx";
 
-
 const AppContent = () => {
   const location = useLocation();
   const shouldShowNavbar = location.pathname !== "/login";
@@ -53,23 +52,17 @@ const AppContent = () => {
           />
           <Route path="/summary" element={<Summary />} />
           <Route path="/draftai" element={<DraftAI />} />
-          <Route path="/home" element={<Home />} /> {/* Home 라우트 추가 */}
+          <Route path="/home" element={<Home />} />
           <Route path="/mypage" element={<Mypage />} />
           <Route path="/board" element={<BoardList />} />{" "}
-          {/* BoardList 라우트 추가 */}
           <Route path="/board/new" element={<BoardWrite />} />{" "}
-          {/* BoardWrite 라우트 추가 */}
           <Route path="/board/edit/:id" element={<BoardWrite />} />{" "}
-          {/* BoardWrite 라우트 추가 */}
           <Route path="/board/:id" element={<BoardDetail />} />{" "}
-          {/* BoardDetail 라우트 추가 */}
           <Route path="/usepage" element={<Usepage />} />{" "}
-          {/* 개인정보처리방침 라우트 추가 */}
           <Route path="/policy" element={<Policy />} />{" "}
-          {/* 개인정보처리방침 라우트 추가 */}
         </Routes>
       </div>
-      <Footer /> {/* 푸터 컴포넌트 추가 */}
+      <Footer />
     </div>
   );
 };

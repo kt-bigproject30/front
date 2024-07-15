@@ -14,7 +14,7 @@ const Mypage = () => {
 
   const fetchUserInfo = async () => {
     try {
-      const response = await api.get("/user/me"); // 사용자 정보 API
+      const response = await api.get("/user/info"); // 사용자 정보 API
       setUserInfo(response.data);
     } catch (error) {
       console.error("Failed to fetch user info:", error);
