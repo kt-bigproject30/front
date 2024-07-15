@@ -131,8 +131,6 @@ a {
   background-color: #6372ff;
 }
 
-
-
 .input-group {
   display: flex;
   flex-direction: column;
@@ -144,7 +142,6 @@ a {
   grid-template-columns: repeat(2, 1fr);
   gap: 10px;
 }
-
 
 .input-group h2,
 .output-group h2 {
@@ -200,4 +197,9 @@ a {
     margin-bottom: 0;
     height: auto;
   }
+}
+
+body,
+html {
+  background-color: #fff;
 }

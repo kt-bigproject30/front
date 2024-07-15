@@ -25,8 +25,8 @@ body,
   top: 0;
   width: 100%;
   z-index: 1000;
-  height: 60px;
   border-bottom: 1px solid #ddd; /* 아래쪽에 얇은 실선 추가 */
+  padding: 10px 20px; /* 상하 좌우 패딩 */
 }
 
 body {
@@ -53,7 +53,7 @@ body {
 }
 
 .navbar-brand {
-  font-size: 28px;
+  font-size: 35px;
   margin-left: 20px; /* 왼쪽에 위치하도록 조정 */
 }
 
@@ -102,7 +102,7 @@ body {
   }
 
   .navbar-brand {
-    margin-left: auto; /* 중앙으로 이동 */
+    margin-left: auto;
     margin-right: auto;
     font-size: 24px;
   }
@@ -117,6 +117,10 @@ body {
 
   .navbar-shift {
     margin-left: 250px;
+  }
+
+  .navbar-brand {
+    font-size: 33px;
   }
 }
 

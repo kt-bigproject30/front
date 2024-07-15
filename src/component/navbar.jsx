@@ -30,7 +30,7 @@ const Navbar = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
         <Link className="navbar-brand custom-padding" to="/home">
-          자신감
+          밀리의 서재
         </Link>
         <div className="navbar-center navbar-menu">
           <ul className="navbar-nav">
