@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import api from "../api"; // API 모듈 가져오기
 import "../css/login.css";
 
 const Signup = ({ toggleForm }) => {
@@ -15,6 +16,7 @@ const Signup = ({ toggleForm }) => {
   });
 
   const [customDomain, setCustomDomain] = useState(false); // 사용자 정의 도메인 입력 여부 상태
+  const [error, setError] = useState(""); // 에러 메시지 상태
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -35,7 +37,7 @@ const Signup = ({ toggleForm }) => {
     }
   };
 
-  const handleSignup = () => {
+  const handleSignup = async () => {
     if (formData.password !== formData.pwdConfirm) {
       alert("비밀번호가 일치하지 않습니다.");
       return;
@@ -47,16 +49,26 @@ const Signup = ({ toggleForm }) => {
       email,
     });
 
-    // 회원가입 로직을 처리합니다.
-    console.log("회원가입 정보:", { ...formData, email });
-    alert("회원가입이 완료되었습니다!");
-    toggleForm(); // 회원가입 후 로그인 폼으로 돌아가기
+    try {
+      const response = await api.post("/signup", {
+        ...formData,
+        email,
+      });
+      if (response.status === 201) {
+        alert("회원가입이 완료되었습니다!");
+        toggleForm(); // 회원가입 후 로그인 폼으로 돌아가기
+      } else {
+        setError(response.data.message || "회원가입에 실패했습니다.");
+      }
+    } catch (error) {
+      setError("서버와의 연결에 실패했습니다.");
+    }
   };
 
   return (
     <div className="login-page">
       <div className="form">
-        <form className="register-form">
+        <form className="register-form" onSubmit={(e) => e.preventDefault()}>
           <div className="profileId">
             <label htmlFor="id">회원가입</label>
             <input
@@ -141,6 +153,7 @@ const Signup = ({ toggleForm }) => {
           <button type="button" onClick={handleSignup}>
             회원가입
           </button>
+          {error && <p className="error-message">{error}</p>}
           <p className="message">
             이미 회원이신가요?{" "}
             <button type="button" onClick={toggleForm} className="link-button">

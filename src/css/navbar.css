@@ -7,6 +7,12 @@
   font-style: normal;
 }
 
+.logo-image {
+  height: 40px; /* 원하는 높이로 설정 */
+  width: auto; /* 자동으로 너비 조정 */
+  padding: 0px; /* 원하는 패딩 추가 */
+}
+
 /* 기본 폰트 적용 */
 body,
 .navbar,

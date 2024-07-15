@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "../css/navbar.css";
+import logo from "../img/mille_logo.png";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -30,7 +31,7 @@ const Navbar = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
         <Link className="navbar-brand custom-padding" to="/home">
-          밀리의 서재
+          <img src={logo} alt="밀리의 서재" className="logo-image" />
         </Link>
         <div className="navbar-center navbar-menu">
           <ul className="navbar-nav">
