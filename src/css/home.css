@@ -28,6 +28,8 @@
 .image-wrapper {
   position: relative;
   display: inline-block;
+
+  
 }
 
 .start-image {
@@ -123,9 +125,10 @@
 }
 
 /* 작은 화면 */
-@media (max-width: 600px) {
+@media (max-width: 1000px) {
   .content {
     flex-direction: column; /* Change flex direction to column for smaller screens */
+    align-items: center;
   }
 
   .notice-box, .use-box {
@@ -144,6 +147,15 @@
   }
 
   .side-content {
+    flex-direction: row;
+    justify-content: space-around;
+    margin-left: 0;
+    width: 100%;
     gap: 10px;
+  }
+
+  .notice-box, .use-box {
+    width: 45%;
+    height: auto; /* 컨텐츠에 따라 높이 자동 조정 */
   }
 }
