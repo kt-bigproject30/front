@@ -19,7 +19,7 @@ const Login = () => {
     e.preventDefault();
     try {
       console.log("Sending login request with:", { username, password }); // 디버깅용 로그
-      const response = await api.post("/login", {
+      const response = await api.post("/jwt-login/login", {
         username,
         password,
       });
