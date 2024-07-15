@@ -101,7 +101,6 @@
 // export default Summary;
 import React, { useState, useEffect } from "react";
 import "../css/summary.css";
-import Footer from "./footer"; // 푸터 컴포넌트 임포트
 import {
   BrowserRouter as Router,
   Route,

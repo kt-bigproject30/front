@@ -33,7 +33,7 @@ html {
   display: inline-block;
   width: 100vw;
   height: auto;
-  aspect-ratio: 10 / 6; /* jasingam.jpg의 비율로 설정, 필요에 따라 조정 */
+  /* jasingam.jpg의 비율로 설정, 필요에 따라 조정 */
   overflow: hidden;
 
   border-radius: 8px;
