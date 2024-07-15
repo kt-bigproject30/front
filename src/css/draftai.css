@@ -108,6 +108,36 @@ a {
   background-image: none;
   background-color: #6372ff;
 }
+
+#imageOutput1 {
+  color: #fff;
+  background-image: url('../imgai/result1.png');
+  background-size: 100% 100%; /* Scale the background image to fit the container */
+  background-position: center; /* Center the background image */
+  background-repeat: no-repeat; /* Prevent the background image from repeating */
+}
+#imageOutput2 {
+  color: #fff;
+  background-image: url('../imgai/result2.png');
+  background-size: 100% 100%; /* Scale the background image to fit the container */
+  background-position: center; /* Center the background image */
+  background-repeat: no-repeat; /* Prevent the background image from repeating */
+}
+#imageOutput3 {
+  color: #fff;
+  background-image: url('../imgai/result3.png');
+  background-size: 100% 100%; /* Scale the background image to fit the container */
+  background-position: center; /* Center the background image */
+  background-repeat: no-repeat; /* Prevent the background image from repeating */
+}
+#imageOutput4 {
+  color: #fff;
+  background-image: url('../imgai/result4.png');
+  background-size: 100% 100%; /* Scale the background image to fit the container */
+  background-position: center; /* Center the background image */
+  background-repeat: no-repeat; /* Prevent the background image from repeating */
+}
+
 .input-group {
   display: flex;
   flex-direction: column;

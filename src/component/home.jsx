@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import "../css/home.css";
-import jasingamImage from "../img/jasingam.jpg";
+import mainImage from "../img/main.png";
 import useImage from "../img/use.jpg";
 import noticeImage from "../img/notice.png";
 import event1Image from "../img/event1.png";
 import event2Image from "../img/event2.png";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 
-const images = [jasingamImage, useImage, noticeImage, event1Image, event2Image];
+const images = [mainImage, useImage, noticeImage, event1Image, event2Image];
 
 const Home = () => {
   const imageRef = useRef(null);
@@ -54,7 +54,7 @@ const Home = () => {
       window.location.href = './usepage';
     }
     if (activeButton === 3) {
-      window.location.href = './notice';
+      window.location.href = './board';
     }
   };
 
@@ -62,7 +62,7 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      <h1>Jasingam</h1>
+      {/* <h1>Jasingam</h1> */}
       <div className="content">
         <div className="image-wrapper">
           <TransitionGroup component={null}>
