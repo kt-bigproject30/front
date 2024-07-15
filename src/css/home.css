@@ -61,7 +61,8 @@ html {
 }
 
 .arrow-button {
-  background-color: #ccc;
+  color: white;
+  background-color: #8d98fc;
   border: none;
   border-radius: 25%;
   width: 25px;
@@ -75,7 +76,7 @@ html {
 }
 
 .circle-button {
-  background-color: #ccc;
+  background-color: #8d98fc;
   border: none;
   border-radius: 25%;
   width: 25px;
@@ -85,7 +86,7 @@ html {
 }
 
 .circle-button.active {
-  background-color: #333;
+  background-color: #6372ff;
 }
 
 .slide-enter {
@@ -151,7 +152,7 @@ html {
     /* width: 30px;
     height: 15px;
     font-size: 18px; */
-
+    color: white;
     display: flex;
     align-items: center;
     justify-content: center;

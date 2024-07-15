@@ -20,7 +20,7 @@ a {
   margin: 80px auto 20px; /* 네비게이션 바 아래 공간 설정 */
   padding: 20px;
   border: 1px solid #ddd; /* 컨테이너를 감싸는 선 */
-  background-color: lightblue;
+  background-color: #ffeb60;
   border-radius: 15px;
 }
 .left-column,
@@ -73,7 +73,7 @@ a {
   cursor: pointer;
   font-size: 1em;
 
-  background-image: linear-gradient(to right, #5ca9fb 0%, #6372ff 100%);
+  background-image: linear-gradient(to right, #ffeb60 0%, #ffaa00 100%);
   padding: 14px 34px;
   letter-spacing: 1px;
   font-weight: 500;
@@ -96,7 +96,7 @@ a {
   cursor: pointer;
   font-size: 1em;
 
-  background-image: linear-gradient(to right, #5ca9fb 0%, #6372ff 100%);
+  background-image: linear-gradient(to right, #ffeb60 0%, #ffaa00 100%);
 
   letter-spacing: 1px;
   font-weight: 500;
@@ -118,7 +118,7 @@ a {
   cursor: pointer;
   font-size: 1em;
 
-  background-image: linear-gradient(to right, #5ca9fb 0%, #6372ff 100%);
+  background-image: linear-gradient(to right, #ffeb60 0%, #ffaa00 100%);
 
   letter-spacing: 1px;
   font-weight: 500;

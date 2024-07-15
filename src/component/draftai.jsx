@@ -30,7 +30,7 @@ const DraftAI = () => {
   //   setTextOutput(textInput);
 
   //   const newImageOutputs = [
-  //     "url('../imgai/result1.png')",
+  //     "https://via.placeholder.com/400x300",
   //     "url('../imgai/result1.png')",
   //     "url('../imgai/result1.png')",
   //     "url('../imgai/result1.png')"
@@ -45,6 +45,8 @@ const DraftAI = () => {
     const imageOutput4 = document.querySelector('#imageOutput4');
     
     if (imageOutput1) {
+      // imageOutput1.style.backgroundImage = "url('https://via.placeholder.com/400x300')";
+      imageOutput1.style.backgroundImage = "url('https://via.placeholder.com/400x300')";
       imageOutput1.style.backgroundImage = "url('imgai/result1.png')";
     }
     if (imageOutput2) {
