@@ -1,20 +1,3 @@
-/* home.css */
-
-body,
-html {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #ffeb60; /* 원하는 배경색으로 변경 */
-}
-
-.home-page {
-  width: 100%;
-  min-height: 100vh;
-  background-color: inherit; /* 배경색 상속 */
-}
-
 .home-container {
   text-align: center;
   padding: 20px;
@@ -29,22 +12,14 @@ html {
 }
 
 
-
-.start-image {
-  max-width: 100%;
-  height: auto;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-} */
-
 .image-wrapper {
   position: relative;
   display: inline-block;
-  width:50%;
+  width:100vw;
   height: auto;
   aspect-ratio: 10 / 6; /* jasingam.jpg의 비율로 설정, 필요에 따라 조정 */
   overflow: hidden;
-  border: 3px solid black;
+  
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
@@ -134,15 +109,11 @@ html {
   justify-content: center;
   align-items: center;
   box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);
-  background-image: url('../img/notice.png');
-  background-size: 70% 70%; /* Scale the background image to fit the container */
-  background-position: center 10%; /* Center the background image */
-  background-repeat: no-repeat; /* Prevent the background image from repeating */
+  
   opacity: 0.7;
   font-size: 3.0vw;
-  flex-direction: column;
-  justify-content: end;
 }
+
 
 
 
@@ -156,7 +127,7 @@ html {
     align-items: center;
   }
 
-  .notice-box, .use-box {
+  .notice-box {
     font-size: 4vw; /* Adjust font size for smaller screens */
   }
 
@@ -179,8 +150,8 @@ html {
     gap: 10px;
   }
 
-  .notice-box, .use-box {
-    width: 45%;
+  .notice-box {
+    width: 100%;
     height: auto; /* 컨텐츠에 따라 높이 자동 조정 */
   }
 }
