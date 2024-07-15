@@ -25,7 +25,7 @@
   margin-top: 20px;
 }
 
-.image-wrapper {
+/* .image-wrapper {
   position: relative;
   display: inline-block;
 
@@ -37,7 +37,32 @@
   height: auto;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+} */
+
+.image-wrapper {
+  position: relative;
+  display: inline-block;
+  width:50%;
+  height: auto;
+  aspect-ratio: 10 / 6; /* jasingam.jpg의 비율로 설정, 필요에 따라 조정 */
+  overflow: hidden;
+  border: 3px solid black;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
+
+.start-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 이미지가 컨테이너에 맞게 잘리도록 설정 */
+  display: block;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.5s ease-in-out;
+}
+
+
+
 
 .controls {
   position: absolute;
@@ -77,6 +102,23 @@
   background-color: #333;
 }
 
+
+.slide-enter {
+  transform: translateX(100%);
+}
+
+.slide-enter-active {
+  transform: translateX(0%);
+}
+
+.slide-exit {
+  transform: translateX(0%);
+}
+
+.slide-exit-active {
+  transform: translateX(-100%);
+}
+
 .side-content {
   display: flex;
   flex-direction: column;
@@ -85,27 +127,28 @@
 }
 
 .notice-box {
-  width: 300px;
+  width: 100%;
+  height: 100%;
   background-color: white;
-  border: 10px solid #ccc;
+  border: 2px solid #ccc;
   border-radius: 8px;
   display: flex;
   justify-content: center;
   align-items: center;
   box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);
-  background-image: url('../img/notice.png');
-  background-size: 70% 70%; /* Scale the background image to fit the container */
-  background-position: center 10%; /* Center the background image */
-  background-repeat: no-repeat; /* Prevent the background image from repeating */
+  /*background-image: url('../img/notice.png');
+  /*background-size: 70% 70%; /* Scale the background image to fit the container */
+  /*background-position: center 10%; /* Center the background image */
+  /*background-repeat: no-repeat; /* Prevent the background image from repeating */
   opacity: 0.7;
   font-size: 3.0vw;
-  flex-direction: column;
-  justify-content: end;
+  /* flex-direction: column;
+  justify-content: end; */
 }
 
 
 
-.use-box {
+/* .use-box {
   width: 300px;
   background-color: white;
   border: 10px solid #ccc;
@@ -115,14 +158,17 @@
   align-items: center;
   box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);
   background-image: url('../img/ai.jpg');
-  background-size: 60% 60%; /* Scale the background image to fit the container */
-  background-position: center 20%; /* Center the background image */
-  background-repeat: no-repeat; /* Prevent the background image from repeating */
+  background-size: 60% 60%; 
+  background-position: center 20%; 
+  background-repeat: no-repeat; 
   opacity: 0.7;
   font-size: 3.0vw;
   flex-direction: column;
   justify-content: end;
-}
+} */
+
+
+
 
 /* 작은 화면 */
 @media (max-width: 1000px) {
@@ -131,7 +177,7 @@
     align-items: center;
   }
 
-  .notice-box, .use-box {
+  .notice-box {
     font-size: 4vw; /* Adjust font size for smaller screens */
   }
 
@@ -154,8 +200,8 @@
     gap: 10px;
   }
 
-  .notice-box, .use-box {
-    width: 45%;
+  .notice-box {
+    width: 50%;
     height: auto; /* 컨텐츠에 따라 높이 자동 조정 */
   }
 }
