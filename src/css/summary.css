@@ -160,10 +160,23 @@ a {
 
 /* 폼 스타일 */
 .title-text {
-  margin-bottom: 0px;
+  margin-bottom: 5px;
 }
 
 .title-text textarea {
+  width: 100%;
+  padding: 10px; /* 입력 필드 패딩 추가 */
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  resize: vertical;
+  min-height: 10px; /* 텍스트 영역 최소 높이 설정 */
+}
+
+.tag-text {
+  margin-bottom: 5px;
+}
+
+.tag-text textarea {
   width: 100%;
   padding: 10px; /* 입력 필드 패딩 추가 */
   border: 1px solid #ddd;
