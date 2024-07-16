@@ -1,5 +1,5 @@
 body {
-  margin: 0px;
+  margin: 1px;
   min-height: 100vh;
 }
 body .hidden {
@@ -88,7 +88,7 @@ a {
 }
 
 #sendButton {
-  height: 50px; /* 전송 버튼 높이를 30px로 설정 */
+  height: 50px;
   padding: 0 15px;
   /* background-color: #007bff; */
   color: #fff;
@@ -97,7 +97,7 @@ a {
   font-size: 1em;
 
   background-image: linear-gradient(to right, #ffeb60 0%, #ffaa00 100%);
-
+  padding: 14px 34px;
   letter-spacing: 1px;
   font-weight: 500;
   border-radius: 25px;
@@ -119,7 +119,7 @@ a {
   font-size: 1em;
 
   background-image: linear-gradient(to right, #ffeb60 0%, #ffaa00 100%);
-
+  padding: 14px 34px;
   letter-spacing: 1px;
   font-weight: 500;
   border-radius: 25px;
@@ -155,7 +155,7 @@ a {
   padding: 10px;
   min-height: 350px;
   flex: 1; /* 출력 칸이 유연하게 늘어날 수 있도록 설정 */
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 /* 폼 스타일 */
@@ -188,15 +188,17 @@ a {
 /* 폼 스타일 */
 .summary-text {
   margin-bottom: 5px;
+  height:100%;
 }
 
 .summary-text textarea {
   width: 100%;
+  height:100%;
   padding: 10px; /* 입력 필드 패딩 추가 */
   border: 1px solid #ddd;
   border-radius: 4px;
   resize: vertical;
-  min-height: 150px; /* 텍스트 영역 최소 높이 설정 */
+  min-height: 150px; /*텍스트 영역 최소 높이 설정 */
 }
 
 @media (min-width: 768px) {

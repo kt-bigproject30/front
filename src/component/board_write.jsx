@@ -14,7 +14,8 @@ const BoardWrite = ({ boards, setBoards }) => {
   const [imageFile, setImageFile] = useState(null); // 이미지 파일 상태 변수
   const [imagePreview, setImagePreview] = useState(null); // 이미지 미리보기 상태 변수
   const [summaryOutput, setSummaryOutput] = useState(""); // 요약문 데이터를 위한 상태 변수
-
+  const [titleOutput, setTitleOutput] = useState(""); // 제목 데이터를 위한 상태 변수
+  const [tagOutput, setTagOutput] = useState(""); // 태그 데이터를 위한 상태 변수
   // 게시물 데이터를 가져오는 함수
   const fetchPost = useCallback(async () => {
     try {
@@ -56,6 +57,36 @@ const BoardWrite = ({ boards, setBoards }) => {
     };
 
     fetchSummaryOutput();
+  }, []);
+
+  // 제목 데이터를 가져오는 useEffect
+  useEffect(() => {
+    const fetchTitleOutput = async () => {
+      try {
+        const response = await fetch("/summaryData.json");
+        const data = await response.json();
+        setTitleOutput(data.titleOutput);
+      } catch (error) {
+        console.error("Error fetching title output:", error);
+      }
+    };
+
+    fetchTitleOutput();
+  }, []);
+
+  // 태그 데이터를 가져오는 useEffect
+  useEffect(() => {
+    const fetchTagOutput = async () => {
+      try {
+        const response = await fetch("/summaryData.json");
+        const data = await response.json();
+        setTagOutput(data.tagOutput);
+      } catch (error) {
+        console.error("Error fetching tag output:", error);
+      }
+    };
+
+    fetchTagOutput();
   }, []);
 
   // 이미지 파일이 변경되었을 때 호출되는 함수
@@ -104,7 +135,8 @@ const BoardWrite = ({ boards, setBoards }) => {
             type="text"
             id="title"
             className="input-title"
-            value={title}
+            // value={title}
+            value={isEdit ? title : titleOutput}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="제목"
           />
@@ -123,7 +155,8 @@ const BoardWrite = ({ boards, setBoards }) => {
             type="text"
             id="tags"
             className="input-tags"
-            value={tags}
+            // value={tags}
+            value={isEdit ? tags : tagOutput}
             onChange={(e) => setTags(e.target.value)}
             placeholder="태그 (콤마로 구분)"
           />
