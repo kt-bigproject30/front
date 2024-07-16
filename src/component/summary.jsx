@@ -170,8 +170,7 @@ const Summary = () => {
         </div>
         <div className="tag-text">
           <textarea
-            // value={textInput}
-            // onChange={(e) => setTextInput(e.target.value)}
+            
             rows="1"
             placeholder="태그를 입력하세요"
             required
