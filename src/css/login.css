@@ -167,3 +167,13 @@ body {
 .email select {
   margin-left: 5px; /* 왼쪽 마진 */
 }
+
+/* login.css */
+.error-message {
+  color: red;
+  display: none;
+}
+
+.error-message.visible {
+  display: block;
+}

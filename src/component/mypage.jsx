@@ -1,30 +1,27 @@
 import React, { useState, useEffect } from "react";
 import "../css/mypage.css";
-import "../img/user.png";
 import api from "../api"; // API 모듈
 
 const Mypage = () => {
-  const [userInfo, setUserInfo] = useState({});
   const [userPosts, setUserPosts] = useState([]);
 
   useEffect(() => {
-    fetchUserInfo();
     fetchUserPosts();
   }, []);
 
-  const fetchUserInfo = async () => {
-    try {
-      const response = await api.get("/user/info"); // 사용자 정보 API
-      setUserInfo(response.data);
-    } catch (error) {
-      console.error("Failed to fetch user info:", error);
-    }
-  };
-
   const fetchUserPosts = async () => {
     try {
-      const response = await api.get("/user/posts");
-      setUserPosts(response.data);
+      const response = await api.get("/user/post");
+      const posts = response.data.map((post) => ({
+        id: post.id,
+        title: post.title,
+        summary: post.contents, // contents를 summary로 변경
+        image: post.image,
+        username: post.username,
+        create_dt: post.create_dt,
+        category: post.category,
+      }));
+      setUserPosts(posts);
     } catch (error) {
       console.error("Failed to fetch user posts:", error);
     }
@@ -33,28 +30,23 @@ const Mypage = () => {
   return (
     <div className="mypage-container">
       <h1>마이 페이지</h1>
-      <div className="user-info">
-        <img
-          src="../img/user.png"
-          alt="User Profile"
-          className="profile-image"
-        />
-        <div className="user-details">
-          <p>
-            <strong>이름:</strong> {userInfo.name}
-          </p>
-          <p>
-            <strong>이메일:</strong> {userInfo.email}
-          </p>
-        </div>
-      </div>
       <div className="user-posts">
         <h2>내가 작성한 글</h2>
         {userPosts.length > 0 ? (
           userPosts.map((post) => (
             <div key={post.id} className="post">
               <h3>{post.title}</h3>
+              <img src={post.image} alt={post.title} className="post-image" />
               <p>{post.summary}</p>
+              <p>
+                <strong>작성자:</strong> {post.username}
+              </p>
+              <p>
+                <strong>작성일:</strong> {post.create_dt}
+              </p>
+              <p>
+                <strong>카테고리:</strong> {post.category}
+              </p>
             </div>
           ))
         ) : (

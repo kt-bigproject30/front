@@ -11,7 +11,7 @@ const images = [mainImage, useImage, noticeImage, event1Image, event2Image];
 
 const Home = () => {
   const imageRef = useRef(null);
-  const [imageHeight, setImageHeight] = useState(0);
+  const [, setImageHeight] = useState(0);
   const [activeButton, setActiveButton] = useState(1); // 기본 활성 버튼을 1로 설정
   const [currentImage, setCurrentImage] = useState(images[0]); // 초기 이미지를 설정
   const [direction, setDirection] = useState("next");
