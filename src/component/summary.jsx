@@ -46,7 +46,7 @@ const Summary = () => {
   };
 
   return (
-    <div className="container">
+    <div className="container" style={{ marginTop: "20px" }}>
       <div className="left-column">
         <h2>Text Input</h2>
         <div className="title-text">

@@ -95,7 +95,7 @@ const DraftAI = () => {
   };
 
   return (
-    <div className="container">
+    <div className="container" style={{ marginTop: "20px" }}>
       <div className="left-column">
         <h2>Model Select</h2>
         <div id="draft-summary" className="summary-text">
