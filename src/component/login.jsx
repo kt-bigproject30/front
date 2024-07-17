@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Signup from "../component/signup.jsx";
 import api from "../api"; // API 모듈 가져오기
 import "../css/login.css";
@@ -26,16 +26,16 @@ const Login = () => {
       console.log("Response received:", response); // 디버깅용 로그
 
       if (response.status === 200) {
-        const token = response; // 응답에서 토큰 추출
-        console.log("Response data:", response); // 디버깅용 로그
+        const token = response.data; // 응답에서 토큰 추출 (수정 필요)
+        console.log("Response data:", response.data); // 디버깅용 로그
 
-        if (token) {
-          console.log("Token received:", token); // 디버깅용 로그
-
-          navigate("/home");
-        } else {
-          setError("토큰을 받지 못했습니다. 서버 응답을 확인하세요.");
-        }
+        console.log("Token received:", token); // 디버깅용 로그
+        localStorage.setItem("authToken", token); // 토큰을 세션 스토리지에 저장 (수정 필요)
+        console.log(
+          "Token stored in localStorage:",
+          localStorage.getItem("authToken")
+        ); // 저장된 토큰 확인 로그
+        navigate("/home");
       } else {
         // 로그인 실패 시 에러 메시지 표시
         setError(response.data.message || "로그인에 실패했습니다.");
@@ -83,9 +83,6 @@ const Login = () => {
                 </button>
               </p>
             </form>
-          </div>
-          <div>
-            <Link to="/home">Go to Home</Link>
           </div>
         </div>
       ) : (

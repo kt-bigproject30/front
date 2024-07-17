@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../css/summary.css";
 import api from "../api";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +8,11 @@ const Summary = () => {
   const [textInput, setTextInput] = useState("");
   const [textOutput, setTextOutput] = useState("");
   const [, setSummaryOutput] = useState("");
+
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
+    console.log("Token from localStorage:", token); // 전체 토큰을 콘솔에 출력
+  }, []);
 
   const handleFileSelect = (event) => {
     const file = event.target.files[0];
@@ -36,9 +41,10 @@ const Summary = () => {
         }
       );
 
-      const data = response.data;
-      setSummaryOutput(data.summaryOutput);
-      setTextOutput(data.summaryOutput);
+      const data = response.data.summary; // 응답 데이터에서 summaryOutput을 추출
+      console.log(data);
+      setSummaryOutput(data);
+      setTextOutput(data);
     } catch (error) {
       console.error("Error fetching summary output:", error);
     }
@@ -46,7 +52,7 @@ const Summary = () => {
 
   const moveButtonClick = () => {
     const summaryText = document.querySelector(".summary-text").innerText;
-    sessionStorage.setItem("summaryText", summaryText);
+    localStorage.setItem("summaryText", summaryText);
     navigate("/draftai");
   };
 
