@@ -2,14 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../css/draftai.css";
 
 const DraftAI = () => {
-  const [textInput, setTextInput] = useState("");
-  const [textOutput, setTextOutput] = useState("");
-  const [imageOutputs, setImageOutputs] = useState([
-    "",
-    "",
-    "",
-    ""
-  ]);
+  const [imageOutputs] = useState(["", "", "", ""]);
   const [summaryOutput, setSummaryOutput] = useState("");
 
   useEffect(() => {
@@ -26,27 +19,13 @@ const DraftAI = () => {
     fetchSummaryOutput();
   }, []);
 
-  // const modButtonClick = () => {
-  //   setTextOutput(textInput);
-
-  //   const newImageOutputs = [
-  //     "https://via.placeholder.com/400x300",
-  //     "url('../imgai/result1.png')",
-  //     "url('../imgai/result1.png')",
-  //     "url('../imgai/result1.png')"
-  //   ];
-  //   setImageOutputs(newImageOutputs);
-  // };
-
   const modelButtonClick = () => {
-    const imageOutput1 = document.querySelector('#imageOutput1');
-    const imageOutput2 = document.querySelector('#imageOutput2');
-    const imageOutput3 = document.querySelector('#imageOutput3');
-    const imageOutput4 = document.querySelector('#imageOutput4');
-    
+    const imageOutput1 = document.querySelector("#imageOutput1");
+    const imageOutput2 = document.querySelector("#imageOutput2");
+    const imageOutput3 = document.querySelector("#imageOutput3");
+    const imageOutput4 = document.querySelector("#imageOutput4");
+
     if (imageOutput1) {
-      // imageOutput1.style.backgroundImage = "url('https://via.placeholder.com/400x300')";
-      imageOutput1.style.backgroundImage = "url('https://via.placeholder.com/400x300')";
       imageOutput1.style.backgroundImage = "url('imgai/result1.png')";
     }
     if (imageOutput2) {
@@ -60,65 +39,56 @@ const DraftAI = () => {
     }
   };
 
-
   const handleDownloadClick = () => {
-    try {
-      // Function to convert background image to data URL
-      const convertBackgroundImageToDataURL = async (selector) => {
-        const element = document.querySelector(selector);
-        if (!element) return null;
-  
-        const { backgroundImage, width, height } = window.getComputedStyle(element);
-        const url = backgroundImage.slice(4, -1).replace(/["']/g, "");
-        
-        const img = new Image();
-        img.crossOrigin = "Anonymous";
-        img.src = url;
-  
-        return new Promise((resolve, reject) => {
-          img.onload = function() {
-            const canvas = document.createElement("canvas");
-            canvas.width = parseInt(width, 10);
-            canvas.height = parseInt(height, 10);
-            const ctx = canvas.getContext("2d");
-            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-            resolve(canvas.toDataURL("image/png"));
-          };
-          img.onerror = reject;
+    const convertBackgroundImageToDataURL = async (selector) => {
+      const element = document.querySelector(selector);
+      if (!element) return null;
+
+      const { backgroundImage, width, height } =
+        window.getComputedStyle(element);
+      const url = backgroundImage.slice(4, -1).replace(/["']/g, "");
+
+      const img = new Image();
+      img.crossOrigin = "Anonymous";
+      img.src = url;
+
+      return new Promise((resolve, reject) => {
+        img.onload = () => {
+          const canvas = document.createElement("canvas");
+          canvas.width = parseInt(width, 10);
+          canvas.height = parseInt(height, 10);
+          const ctx = canvas.getContext("2d");
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+          resolve(canvas.toDataURL("image/png"));
+        };
+        img.onerror = reject;
+      });
+    };
+
+    const promises = [
+      convertBackgroundImageToDataURL("#imageOutput1"),
+      convertBackgroundImageToDataURL("#imageOutput2"),
+      convertBackgroundImageToDataURL("#imageOutput3"),
+      convertBackgroundImageToDataURL("#imageOutput4"),
+    ];
+
+    Promise.all(promises)
+      .then((dataURLs) => {
+        dataURLs.forEach((dataURL, index) => {
+          if (dataURL) {
+            const link = document.createElement("a");
+            link.href = dataURL;
+            link.download = `imageOutput${index + 1}.png`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+          }
         });
-      };
-  
-      // Array of promises to convert each background image to data URL
-      const promises = [
-        convertBackgroundImageToDataURL("#imageOutput1"),
-        convertBackgroundImageToDataURL("#imageOutput2"),
-        convertBackgroundImageToDataURL("#imageOutput3"),
-        convertBackgroundImageToDataURL("#imageOutput4")
-      ];
-  
-      // Resolve all promises
-      Promise.all(promises)
-        .then((dataURLs) => {
-          // Create temporary anchor elements and trigger downloads
-          dataURLs.forEach((dataURL, index) => {
-            if (dataURL) {
-              const link = document.createElement("a");
-              link.href = dataURL;
-              link.download = `imageOutput${index + 1}.png`;
-              document.body.appendChild(link);
-              link.click();
-              document.body.removeChild(link);
-            }
-          });
-        })
-        .catch((error) => {
-          console.error("Error converting background image to data URL:", error);
-        });
-    } catch (error) {
-      console.error("Error downloading images:", error);
-    }
+      })
+      .catch((error) => {
+        console.error("Error converting background image to data URL:", error);
+      });
   };
-  
 
   const moveButtonClick = () => {
     window.location.href = "/board/new";
@@ -139,7 +109,11 @@ const DraftAI = () => {
           ></textarea>
         </div>
         <div className="group-model">
-          <button id="modelselect1" className="cartoon-model" onClick={modelButtonClick}>
+          <button
+            id="modelselect1"
+            className="cartoon-model"
+            onClick={modelButtonClick}
+          >
             <h2>Cartoon</h2>
           </button>
           <button id="modelselect2" className="fairytale-model">

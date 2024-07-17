@@ -21,7 +21,9 @@ const BoardList = () => {
   // 게시물 데이터를 API로부터 가져오는 함수
   const fetchBoards = async () => {
     try {
+      console.log("tlqkf");
       const response = await api.get("/post");
+      console.log(response);
       setBoards(response.data);
     } catch (error) {
       console.error("Failed to fetch boards:", error);
