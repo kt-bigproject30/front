@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../css/summary.css";
+import api from "../api";
 import { useNavigate } from "react-router-dom";
 
 const Summary = () => {
@@ -8,20 +9,35 @@ const Summary = () => {
   const [textOutput, setTextOutput] = useState("");
   const [summaryOutput, setSummaryOutput] = useState("");
 
-  useEffect(() => {
-    // JSON 파일에서 데이터를 가져오는 함수
-    const fetchSummaryOutput = async () => {
-      try {
-        const response = await fetch("/summaryData.json");
-        const data = await response.json();
-        setSummaryOutput(data.summaryOutput);
-      } catch (error) {
-        console.error("Error fetching summary output:", error);
-      }
-    };
+  // useEffect(() => {
+  //   // JSON 파일에서 데이터를 가져오는 함수
+  //   const fetchSummaryOutput = async () => {
+  //     try {
+  //       // const response = await api.get("/api/text_summarize",{
+  //       //   summaryOutput,
+  //       // });
+  //       const token = localStorage.getItem("authToken");
+  //       const response = await api.get("/api/text_summarize", 
+      
+  //         {
+  //           headers: {
+  //             Authorization: `Bearer ${token}`,
+  //           },
+  //           body:{
+  //             "contents":summaryOutput,
+  //           }
+  //         }
+  //       );
+        
+  //       const data = await response.json();
+  //       setSummaryOutput(data.summaryOutput);
+  //     } catch (error) {
+  //       console.error("Error fetching summary output:", error);
+  //     }
+  //   };
 
-    fetchSummaryOutput();
-  }, []);
+  //   fetchSummaryOutput();
+  // }, []);
 
   const handleFileSelect = (event) => {
     const file = event.target.files[0];
@@ -35,7 +51,27 @@ const Summary = () => {
     reader.readAsText(file); // 파일을 텍스트로 읽어옴
   };
 
-  const sendButtonClick = () => {
+  const sendButtonClick = async(e) => {
+    e.preventDefault();
+
+    try {
+      // const response = await api.get("/api/text_summarize",{
+      //   summaryOutput,
+      // });
+      const token = localStorage.getItem("authToken");
+      const response = await api.get("/api/text_summarize", {
+        "contents":summaryOutput,
+      });
+
+      console.log(response);
+      const data = await response;
+      console.log(data);
+      setSummaryOutput(data.summaryOutput);
+    } catch (error) {
+      console.error("Error fetching summary output:", error);
+    }
+
+    // fetchSummaryOutput();
     setTextOutput(summaryOutput);
   };
 

@@ -136,7 +136,7 @@ const BoardWrite = ({ boards, setBoards }) => {
             id="title"
             className="input-title"
             // value={title}
-            // value={isEdit ? title : titleOutput}
+            value={isEdit ? title : titleOutput}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="제목"
           />
@@ -145,7 +145,8 @@ const BoardWrite = ({ boards, setBoards }) => {
           <textarea
             id="summary"
             className="input-summary"
-            // value={isEdit ? summary : summaryOutput}
+            rows="10"
+            value={isEdit ? summary : summaryOutput}
             onChange={(e) => setSummary(e.target.value)}
             placeholder="요약문을 입력하세요"
           ></textarea>
@@ -156,7 +157,7 @@ const BoardWrite = ({ boards, setBoards }) => {
             id="tags"
             className="input-tags"
             // value={tags}
-            // value={isEdit ? tags : tagOutput}
+            value={isEdit ? tags : tagOutput}
             onChange={(e) => setTags(e.target.value)}
             placeholder="태그 (콤마로 구분)"
           />
