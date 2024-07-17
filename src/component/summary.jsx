@@ -1,12 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../css/summary.css";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  useNavigate,
-} from "react-router-dom";
-import DraftAI from "./draftai"; // draftai.jsx 파일을 임포트합니다.
+import { useNavigate } from "react-router-dom";
 
 const Summary = () => {
   const navigate = useNavigate();
@@ -46,22 +40,17 @@ const Summary = () => {
   };
 
   const moveButtonClick = () => {
-    // summary-text 클래스의 내용을 가져옵니다.
     const summaryText = document.querySelector(".summary-text").innerText;
-
-    // 세션 스토리지에 내용을 저장합니다.
     sessionStorage.setItem("summaryText", summaryText);
-    window.location.href = "./draftai";
+    navigate("/draftai"); // useNavigate를 사용하여 경로 이동
   };
 
   return (
     <div className="container">
       <div className="left-column">
-        <h2>text input</h2>
+        <h2>Text Input</h2>
         <div className="title-text">
           <textarea
-            // value={textInput}
-            // onChange={(e) => setTextInput(e.target.value)}
             rows="1"
             placeholder="제목을 입력하세요"
             required
@@ -69,7 +58,6 @@ const Summary = () => {
         </div>
         <div className="tag-text">
           <textarea
-            
             rows="1"
             placeholder="태그를 입력하세요"
             required
@@ -102,7 +90,7 @@ const Summary = () => {
         </button>
       </div>
       <div className="right-column">
-        <h2>text output</h2>
+        <h2>Text Output</h2>
         <div id="summary-summary" className="summary-text">
           <textarea
             value={textOutput}

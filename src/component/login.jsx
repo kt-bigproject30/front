@@ -25,7 +25,13 @@ const Login = () => {
       });
       console.log("Response received:", response); // 디버깅용 로그
       if (response.status === 200) {
-        // 로그인 성공 시 홈으로 이동
+        const token = response.data.token; // 응답에서 토큰 추출
+        console.log("Token received:", token); // 디버깅용 로그
+
+        // 토큰을 다른 API 요청 시 사용할 수 있도록 설정
+        api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
+        // 홈 페이지로 이동
         navigate("/home");
       } else {
         // 로그인 실패 시 에러 메시지 표시
