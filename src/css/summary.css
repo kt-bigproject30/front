@@ -17,7 +17,7 @@ a {
   flex-wrap: wrap; /* 화면 크기에 따라 줄 바꿈 가능하도록 설정 */
   justify-content: center;
   max-width: 2000px;
-  margin: 80px auto 20px; /* 네비게이션 바 아래 공간 설정 */
+  margin: 20px auto 20px; /* 네비게이션 바 아래 공간 설정 */
   padding: 20px;
   border: 1px solid #ddd; /* 컨테이너를 감싸는 선 */
   background-color: #ffeb60;
