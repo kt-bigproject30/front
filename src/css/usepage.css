@@ -2,3 +2,81 @@
   text-align: center;
   padding: 70px;
 }
+
+.howToUse {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Two columns */
+  gap: 10px;
+}
+
+
+.use-image {
+  background-color: lightgray;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  min-height: 700px; /* Adjust the height to match your design */
+  background-size: 105% 105%; /* Ensure the background image covers the entire element */
+  background-position: center; /* Center the background image */
+  background-repeat: no-repeat; /* Prevent the background image from repeating */
+  margin-bottom: 130px;
+}
+
+#use1 {
+  background-image: url("../img/use1.png");
+  justify-items: right;
+}
+
+#use2 {
+  background-image: url("../img/use2.png");
+  justify-items: left;
+
+}
+
+#use3 {
+  background-image: url("../img/use3.png");
+}
+
+#use4 {
+  background-image: url("../img/use4.png");
+}
+
+#use5 {
+  background-image: url("../img/use5.png");
+}
+
+#use6 {
+  background-image: url("../img/use6.png");
+}
+
+.use-image h2 {
+  border-radius: 10px;
+  text-align: center;
+  width: 100%;
+  position: absolute;
+  bottom: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1; /* Ensure it is above the background image */
+  background: lightblue; /* Optional: Add a background for better readability */
+  padding: 5px 10px; /* Optional: Add padding for better readability */
+}
+
+
+/* Adjust layout for smaller screens */
+@media (max-width: 1000px) {
+  .howToUse {
+    grid-template-columns: 1fr; /* Single column */
+  }
+
+  .use-image {
+    min-height: 500px; /* Adjust the height for smaller screens */
+  }
+}
+
+
+
