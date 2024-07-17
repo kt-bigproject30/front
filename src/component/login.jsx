@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Signup from "../component/signup.jsx";
 import api from "../api"; // API 모듈 가져오기
 import "../css/login.css";
@@ -24,15 +24,18 @@ const Login = () => {
         password,
       });
       console.log("Response received:", response); // 디버깅용 로그
+
       if (response.status === 200) {
-        const token = response.data.token; // 응답에서 토큰 추출
-        console.log("Token received:", token); // 디버깅용 로그
+        const token = response; // 응답에서 토큰 추출
+        console.log("Response data:", response); // 디버깅용 로그
 
-        // 토큰을 다른 API 요청 시 사용할 수 있도록 설정
-        api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+        if (token) {
+          console.log("Token received:", token); // 디버깅용 로그
 
-        // 홈 페이지로 이동
-        navigate("/home");
+          navigate("/home");
+        } else {
+          setError("토큰을 받지 못했습니다. 서버 응답을 확인하세요.");
+        }
       } else {
         // 로그인 실패 시 에러 메시지 표시
         setError(response.data.message || "로그인에 실패했습니다.");
@@ -56,7 +59,7 @@ const Login = () => {
               <input
                 type="text"
                 placeholder="ID"
-                name="username" // name을 "username"으로 설정
+                name="username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
               />
@@ -80,6 +83,9 @@ const Login = () => {
                 </button>
               </p>
             </form>
+          </div>
+          <div>
+            <Link to="/home">Go to Home</Link>
           </div>
         </div>
       ) : (

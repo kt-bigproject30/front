@@ -8,8 +8,6 @@ const Signup = ({ toggleForm }) => {
     password: "",
     passwordCheck: "",
     name: "",
-    // birthdate: "",
-    // phone: "",
   });
 
   const [errors, setErrors] = useState({

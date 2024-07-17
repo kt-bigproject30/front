@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "../css/summary.css";
 import api from "../api";
 import { useNavigate } from "react-router-dom";
@@ -7,37 +7,7 @@ const Summary = () => {
   const navigate = useNavigate();
   const [textInput, setTextInput] = useState("");
   const [textOutput, setTextOutput] = useState("");
-  const [summaryOutput, setSummaryOutput] = useState("");
-
-  // useEffect(() => {
-  //   // JSON 파일에서 데이터를 가져오는 함수
-  //   const fetchSummaryOutput = async () => {
-  //     try {
-  //       // const response = await api.get("/api/text_summarize",{
-  //       //   summaryOutput,
-  //       // });
-  //       const token = localStorage.getItem("authToken");
-  //       const response = await api.get("/api/text_summarize", 
-      
-  //         {
-  //           headers: {
-  //             Authorization: `Bearer ${token}`,
-  //           },
-  //           body:{
-  //             "contents":summaryOutput,
-  //           }
-  //         }
-  //       );
-        
-  //       const data = await response.json();
-  //       setSummaryOutput(data.summaryOutput);
-  //     } catch (error) {
-  //       console.error("Error fetching summary output:", error);
-  //     }
-  //   };
-
-  //   fetchSummaryOutput();
-  // }, []);
+  const [, setSummaryOutput] = useState("");
 
   const handleFileSelect = (event) => {
     const file = event.target.files[0];
@@ -45,40 +15,39 @@ const Summary = () => {
 
     reader.onload = function (e) {
       const fileContent = e.target.result;
-      setTextInput(fileContent); // 파일 내용을 텍스트 입력란에 설정
+      setTextInput(fileContent);
     };
 
-    reader.readAsText(file); // 파일을 텍스트로 읽어옴
+    reader.readAsText(file);
   };
 
-  const sendButtonClick = async(e) => {
+  const sendButtonClick = async (e) => {
     e.preventDefault();
 
     try {
-      // const response = await api.get("/api/text_summarize",{
-      //   summaryOutput,
-      // });
       const token = localStorage.getItem("authToken");
-      const response = await api.get("/api/text_summarize", {
-        "contents":summaryOutput,
-      });
+      const response = await api.post(
+        "/api/text_summarize",
+        { contents: textInput },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
-      console.log(response);
-      const data = await response;
-      console.log(data);
+      const data = response.data;
       setSummaryOutput(data.summaryOutput);
+      setTextOutput(data.summaryOutput);
     } catch (error) {
       console.error("Error fetching summary output:", error);
     }
-
-    // fetchSummaryOutput();
-    setTextOutput(summaryOutput);
   };
 
   const moveButtonClick = () => {
     const summaryText = document.querySelector(".summary-text").innerText;
     sessionStorage.setItem("summaryText", summaryText);
-    navigate("/draftai"); // useNavigate를 사용하여 경로 이동
+    navigate("/draftai");
   };
 
   return (
