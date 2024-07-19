@@ -53,6 +53,22 @@
   background-image: url("../img/use6.png");
 }
 
+
+.tip-box {
+  background-color: lightgray;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  min-height: 700px; /* Adjust the height to match your design */
+  background-size: 105% 105%; /* Ensure the background image covers the entire element */
+  background-position: center; /* Center the background image */
+  background-repeat: no-repeat; /* Prevent the background image from repeating */
+}
+
 .use-image h2 {
   border-radius: 10px;
   text-align: center;

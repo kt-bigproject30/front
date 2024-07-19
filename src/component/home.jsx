@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import "../css/home.css";
 import mainImage from "../img/main.png";
 import useImage from "../img/use.jpg";
@@ -16,11 +16,11 @@ const Home = () => {
   const [currentImage, setCurrentImage] = useState(images[0]); // 초기 이미지를 설정
   const [direction, setDirection] = useState("next");
 
-  const updateImageHeight = () => {
+  const updateImageHeight = useCallback(() => {
     if (imageRef.current) {
       setImageHeight(imageRef.current.clientHeight);
     }
-  };
+  }, []);
 
   useEffect(() => {
     updateImageHeight(); // 컴포넌트가 마운트될 때 초기 업데이트
@@ -57,6 +57,14 @@ const Home = () => {
       window.location.href = "./board";
     }
   };
+  
+  useEffect(() => {
+    const interval = setInterval(() => {
+      handleArrowClick("next");
+    }, 5000); // Change image every 5 seconds
+
+    return () => clearInterval(interval); // Clear interval on component unmount
+  }, [activeButton]);
 
   return (
     <div className="home-container">
