@@ -11,20 +11,22 @@ const Mypage = () => {
 
   const fetchUserPosts = async () => {
     try {
-      const token = localStorage.getItem("authToken"); // 로컬 스토리지에서 토큰 가져오기
+      const token = localStorage.getItem("authToken");
       if (!token) {
         throw new Error("No auth token found");
       }
 
-      const response = await api.get("/user/post", {
+      const response = await api.get("/mypost", {
         headers: {
-          Authorization: `Bearer ${token}`, // Authorization 헤더에 토큰 포함
+          Authorization: `Bearer ${token}`,
         },
       });
 
-      setUserPosts(response.data); // 상태 변수에 게시물 데이터 설정
+      console.log("Fetched user posts:", response.data); // 응답 데이터 로그
+      setUserPosts(response.data);
     } catch (error) {
-      console.error("Failed to fetch user posts:", error); // 에러 로그 출력
+      console.error("Failed to fetch user posts:", error); // 에러 로그
+      alert("Failed to fetch user posts: " + error.message); // 사용자에게 에러 알림
     }
   };
 
@@ -40,10 +42,7 @@ const Mypage = () => {
               <img src={post.image} alt={post.title} className="post-image" />
               <p>{post.summary}</p>
               <p>
-                <strong>작성자:</strong> {post.username}
-              </p>
-              <p>
-                <strong>작성일:</strong> {post.create_dt}
+                <strong>작성일:</strong> {post.createdAt}
               </p>
               <p>
                 <strong>카테고리:</strong> {post.category}

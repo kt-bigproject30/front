@@ -9,7 +9,7 @@ const BoardList = () => {
   const [boards, setBoards] = useState([]); // 게시물 목록 상태 변수
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 상태 변수
   const [searchTerm, setSearchTerm] = useState(""); // 검색어 상태 변수
-  const [searchBy, setSearchBy] = useState("title"); // 검색 기준 상태 변수 (제목 또는 태그)
+  const [searchBy, setSearchBy] = useState("title"); // 검색 기준 상태 변수 (제목 또는 카테고리)
   const postsPerPage = 10; // 페이지당 게시물 수
   const navigate = useNavigate(); // 페이지 이동을 위한 훅
 
@@ -22,14 +22,21 @@ const BoardList = () => {
   const fetchBoards = async () => {
     try {
       const token = localStorage.getItem("authToken");
+      if (!token) {
+        throw new Error("No auth token found");
+      }
+
       const response = await api.get("/post", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
+
+      console.log("Fetched boards data:", response.data); // 응답 데이터 로그
       setBoards(response.data);
     } catch (error) {
-      console.error("Failed to fetch boards:", error);
+      console.error("Failed to fetch boards:", error); // 에러 로그
+      alert("Failed to fetch boards: " + error.message); // 사용자에게 에러 알림
     }
   };
 
@@ -39,10 +46,8 @@ const BoardList = () => {
       return post.title.toLowerCase().includes(searchTerm.toLowerCase());
     } else if (searchBy === "category") {
       return (
-        post.categorys &&
-        post.categorys.some((category) =>
-          category.toLowerCase().includes(searchTerm.toLowerCase())
-        )
+        post.category &&
+        post.category.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
     return true;
@@ -58,10 +63,10 @@ const BoardList = () => {
     setCurrentPage(pageNumber);
   };
 
-  // 태그 클릭 시 해당 태그로 검색 설정하는 함수
-  const handleTagClick = (category) => {
+  // 카테고리 클릭 시 해당 카테고리로 검색 설정하는 함수
+  const handleCategoryClick = (category) => {
     setSearchTerm(category);
-    setSearchBy("tag");
+    setSearchBy("category");
     setCurrentPage(1);
   };
 
@@ -83,7 +88,7 @@ const BoardList = () => {
           onChange={(e) => setSearchBy(e.target.value)}
         >
           <option value="title">제목</option>
-          <option value="tag">태그</option>
+          <option value="category">카테고리</option>
           <option value="notice">공지</option>
         </select>
         <input
@@ -91,7 +96,7 @@ const BoardList = () => {
           className="search-input"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          placeholder={`검색: ${searchBy === "title" ? "제목" : "태그"}`}
+          placeholder={`검색: ${searchBy === "title" ? "제목" : "카테고리"}`}
         />
       </div>
       {currentPosts.map((post) => (
@@ -101,23 +106,20 @@ const BoardList = () => {
               <Link to={`/board/${post.id}`}>{post.title}</Link>
             </h2>
             <div className="post-info">
-              {/* <span className="post-author">
-                {post.user_uuid.username || "Unknown"}
-              </span> */}
               <span className="post-date">{post.createdAt || "No date"}</span>
             </div>
           </div>
           <div className="post-tags">
-            {post.categorys &&
-              post.categorys.map((category) => (
-                <span
-                  key={category}
-                  className="tag"
-                  onClick={() => handleTagClick(category)}
-                >
-                  {category}
-                </span>
-              ))}
+            {post.category ? (
+              <span
+                className="category"
+                onClick={() => handleCategoryClick(post.category)}
+              >
+                {post.category}
+              </span>
+            ) : (
+              <span>카테고리 없음</span>
+            )}
           </div>
           {post.summary && <div className="post-summary">{post.summary}</div>}
           {post.imageUrl && (

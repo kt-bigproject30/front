@@ -8,6 +8,8 @@ const Summary = () => {
   const [textInput, setTextInput] = useState("");
   const [textOutput, setTextOutput] = useState("");
   const [, setSummaryOutput] = useState("");
+  const [title, setTitle] = useState("");
+  const [tags, setTags] = useState("");
 
   useEffect(() => {
     const token = localStorage.getItem("authToken");
@@ -50,10 +52,28 @@ const Summary = () => {
     }
   };
 
-  const moveButtonClick = () => {
-    const summaryText = document.querySelector(".summary-text").innerText;
-    localStorage.setItem("summaryText", summaryText);
-    navigate("/draftai");
+  const moveButtonClick = async () => {
+    const summaryText = textOutput;
+    const titleText = title;
+    const tagsText = tags;
+    const contents = textInput;
+    const category = "example-category"; // 필요한 경우 카테고리를 설정
+
+    try {
+      const token = localStorage.getItem("authToken");
+      await api.post(
+        "/api/save_summary",
+        { summaryText, titleText, tagsText, contents, category },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      navigate("/draftai");
+    } catch (error) {
+      console.error("Error saving summary:", error);
+    }
   };
 
   return (
@@ -64,6 +84,8 @@ const Summary = () => {
           <textarea
             rows="1"
             placeholder="제목을 입력하세요"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
             required
           ></textarea>
         </div>
@@ -71,6 +93,8 @@ const Summary = () => {
           <textarea
             rows="1"
             placeholder="태그를 입력하세요"
+            value={tags}
+            onChange={(e) => setTags(e.target.value)}
             required
           ></textarea>
         </div>
