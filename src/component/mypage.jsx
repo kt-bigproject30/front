@@ -11,19 +11,20 @@ const Mypage = () => {
 
   const fetchUserPosts = async () => {
     try {
-      const response = await api.get("/user/post");
-      const posts = response.data.map((post) => ({
-        id: post.id,
-        title: post.title,
-        summary: post.contents, // contents를 summary로 변경
-        image: post.image,
-        username: post.username,
-        create_dt: post.create_dt,
-        category: post.category,
-      }));
-      setUserPosts(posts);
+      const token = localStorage.getItem("authToken"); // 로컬 스토리지에서 토큰 가져오기
+      if (!token) {
+        throw new Error("No auth token found");
+      }
+
+      const response = await api.get("/user/post", {
+        headers: {
+          Authorization: `Bearer ${token}`, // Authorization 헤더에 토큰 포함
+        },
+      });
+
+      setUserPosts(response.data); // 상태 변수에 게시물 데이터 설정
     } catch (error) {
-      console.error("Failed to fetch user posts:", error);
+      console.error("Failed to fetch user posts:", error); // 에러 로그 출력
     }
   };
 

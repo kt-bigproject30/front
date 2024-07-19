@@ -21,9 +21,12 @@ const BoardList = () => {
   // 게시물 데이터를 API로부터 가져오는 함수
   const fetchBoards = async () => {
     try {
-      console.log("tlqkf");
-      const response = await api.get("/post");
-      console.log(response);
+      const token = localStorage.getItem("authToken");
+      const response = await api.get("/post", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setBoards(response.data);
     } catch (error) {
       console.error("Failed to fetch boards:", error);
@@ -34,11 +37,11 @@ const BoardList = () => {
   const filteredBoards = boards.filter((post) => {
     if (searchBy === "title") {
       return post.title.toLowerCase().includes(searchTerm.toLowerCase());
-    } else if (searchBy === "tag") {
+    } else if (searchBy === "category") {
       return (
-        post.tags &&
-        post.tags.some((tag) =>
-          tag.toLowerCase().includes(searchTerm.toLowerCase())
+        post.categorys &&
+        post.categorys.some((category) =>
+          category.toLowerCase().includes(searchTerm.toLowerCase())
         )
       );
     }
@@ -56,8 +59,8 @@ const BoardList = () => {
   };
 
   // 태그 클릭 시 해당 태그로 검색 설정하는 함수
-  const handleTagClick = (tag) => {
-    setSearchTerm(tag);
+  const handleTagClick = (category) => {
+    setSearchTerm(category);
     setSearchBy("tag");
     setCurrentPage(1);
   };
@@ -98,19 +101,21 @@ const BoardList = () => {
               <Link to={`/board/${post.id}`}>{post.title}</Link>
             </h2>
             <div className="post-info">
-              <span className="post-author">{post.userName || "Unknown"}</span>
-              <span className="post-date">{post.date || "No date"}</span>
+              {/* <span className="post-author">
+                {post.user_uuid.username || "Unknown"}
+              </span> */}
+              <span className="post-date">{post.createdAt || "No date"}</span>
             </div>
           </div>
           <div className="post-tags">
-            {post.tags &&
-              post.tags.map((tag) => (
+            {post.categorys &&
+              post.categorys.map((category) => (
                 <span
-                  key={tag}
+                  key={category}
                   className="tag"
-                  onClick={() => handleTagClick(tag)}
+                  onClick={() => handleTagClick(category)}
                 >
-                  {tag}
+                  {category}
                 </span>
               ))}
           </div>

@@ -12,7 +12,12 @@ const BoardDetail = ({ setBoards }) => {
   // 게시물 데이터를 가져오는 함수
   const fetchPost = useCallback(async () => {
     try {
-      const response = await api.get(`/post/${id}`);
+      const token = localStorage.getItem("authToken");
+      const response = await api.get(`/post/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setPost(response.data);
     } catch (error) {
       console.error("Failed to fetch post:", error);
@@ -53,7 +58,7 @@ const BoardDetail = ({ setBoards }) => {
       <h2 className="post-title">{post.title}</h2>
       <div className="post-info">
         <span className="post-author">{post.userName || "Unknown"}</span>
-        <span className="post-date">{post.date || "No date"}</span>
+        <span className="post-date">{post.createdAt || "No date"}</span>
       </div>
       <div className="post-tags">
         {post.tags &&
