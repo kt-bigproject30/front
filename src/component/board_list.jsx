@@ -76,10 +76,7 @@ const BoardList = () => {
   return (
     <div className="board-list">
       <div className="board-header">
-        <h1 onClick={() => navigate("/board")}>게시판 목록</h1>
-        <Link to="/board/new" className="btn btn-primary">
-          글쓰기
-        </Link>
+        <h1 onClick={() => navigate("/board")}>게시글 목록</h1>
       </div>
       <div className="search-container">
         <select

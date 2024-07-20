@@ -39,7 +39,11 @@ const Mypage = () => {
           userPosts.map((post) => (
             <div key={post.id} className="post">
               <h3>{post.title}</h3>
-              <img src={post.image} alt={post.title} className="post-image" />
+              <img
+                src={post.imageUrl}
+                alt={post.title}
+                className="post-image"
+              />
               <p>{post.summary}</p>
               <p>
                 <strong>작성일:</strong> {post.createdAt}

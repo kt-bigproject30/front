@@ -7,9 +7,9 @@ const Summary = () => {
   const navigate = useNavigate();
   const [textInput, setTextInput] = useState("");
   const [textOutput, setTextOutput] = useState("");
-  const [, setSummaryOutput] = useState("");
+  const [summaryOutput, setSummaryOutput] = useState("");
   const [title, setTitle] = useState("");
-  const [tags, setTags] = useState("");
+  const [category, setCategory] = useState("");
 
   useEffect(() => {
     const token = localStorage.getItem("authToken");
@@ -33,6 +33,7 @@ const Summary = () => {
 
     try {
       const token = localStorage.getItem("authToken");
+      console.log("Sending text for summarization...");
       const response = await api.post(
         "/api/text_summarize",
         { contents: textInput },
@@ -44,7 +45,7 @@ const Summary = () => {
       );
 
       const data = response.data.summary; // 응답 데이터에서 summaryOutput을 추출
-      console.log(data);
+      console.log("Summary received:", data);
       setSummaryOutput(data);
       setTextOutput(data);
     } catch (error) {
@@ -53,23 +54,23 @@ const Summary = () => {
   };
 
   const moveButtonClick = async () => {
-    const summaryText = textOutput;
-    const titleText = title;
-    const tagsText = tags;
+    const summary = summaryOutput;
     const contents = textInput;
-    const category = "example-category"; // 필요한 경우 카테고리를 설정
 
     try {
       const token = localStorage.getItem("authToken");
-      await api.post(
-        "/api/save_summary",
-        { summaryText, titleText, tagsText, contents, category },
+      console.log("Saving summary...");
+      const response = await api.post(
+        "/post",
+        { title, contents, summary },
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
       );
+
+      console.log("Summary saved successfully:", response.data);
       navigate("/draftai");
     } catch (error) {
       console.error("Error saving summary:", error);
@@ -93,8 +94,8 @@ const Summary = () => {
           <textarea
             rows="1"
             placeholder="태그를 입력하세요"
-            value={tags}
-            onChange={(e) => setTags(e.target.value)}
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
             required
           ></textarea>
         </div>

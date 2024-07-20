@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import "../css/home.css";
 import mainImage from "../img/main.png";
 import useImage from "../img/use.jpg";
@@ -10,6 +11,7 @@ import { CSSTransition, TransitionGroup } from "react-transition-group";
 const images = [mainImage, useImage, noticeImage, event1Image, event2Image];
 
 const Home = () => {
+  const navigate = useNavigate();
   const imageRef = useRef(null);
   const [, setImageHeight] = useState(0);
   const [activeButton, setActiveButton] = useState(1); // 기본 활성 버튼을 1로 설정
@@ -29,42 +31,48 @@ const Home = () => {
     return () => {
       window.removeEventListener("resize", updateImageHeight);
     };
-  }, []);
+  }, [updateImageHeight]);
 
-  const handleButtonClick = (index) => {
-    if (index !== activeButton) {
-      setDirection(index > activeButton ? "next" : "prev");
-      setActiveButton(index);
-      setCurrentImage(images[index - 1]);
-    }
-  };
+  const handleButtonClick = useCallback(
+    (index) => {
+      if (index !== activeButton) {
+        setDirection(index > activeButton ? "next" : "prev");
+        setActiveButton(index);
+        setCurrentImage(images[index - 1]);
+      }
+    },
+    [activeButton]
+  );
 
-  const handleArrowClick = (direction) => {
-    let newIndex = activeButton;
-    if (direction === "prev") {
-      newIndex = activeButton > 1 ? activeButton - 1 : images.length;
-    } else if (direction === "next") {
-      newIndex = activeButton < images.length ? activeButton + 1 : 1;
-    }
-    handleButtonClick(newIndex);
-  };
+  const handleArrowClick = useCallback(
+    (direction) => {
+      let newIndex = activeButton;
+      if (direction === "prev") {
+        newIndex = activeButton > 1 ? activeButton - 1 : images.length;
+      } else if (direction === "next") {
+        newIndex = activeButton < images.length ? activeButton + 1 : 1;
+      }
+      handleButtonClick(newIndex);
+    },
+    [activeButton, handleButtonClick]
+  );
 
-  const handlePageClick = () => {
+  const handlePageClick = useCallback(() => {
     if (activeButton === 2) {
-      window.location.href = "./usepage";
+      navigate("/usepage");
     }
     if (activeButton === 3) {
-      window.location.href = "./board";
+      navigate("/board");
     }
-  };
-  
+  }, [activeButton, navigate]);
+
   useEffect(() => {
     const interval = setInterval(() => {
       handleArrowClick("next");
     }, 5000); // Change image every 5 seconds
 
     return () => clearInterval(interval); // Clear interval on component unmount
-  }, [activeButton]);
+  }, [handleArrowClick]);
 
   return (
     <div className="home-container">
