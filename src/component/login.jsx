@@ -9,8 +9,8 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [usernameErrorVisible, setUsernameErrorVisible] = useState(false); // 추가된 상태 변수
-  const [passwordErrorVisible, setPasswordErrorVisible] = useState(false); // 추가된 상태 변수
+  const [usernameErrorVisible, setUsernameErrorVisible] = useState(false);
+  const [passwordErrorVisible, setPasswordErrorVisible] = useState(false);
   const navigate = useNavigate();
 
   const toggleForm = () => {

@@ -4,14 +4,24 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "../css/navbar.css";
 import logo from "../img/mille_logo.png";
+import logout from "./logout"; // 로그아웃 함수 가져오기
 
 const Navbar = () => {
   const navigate = useNavigate();
   const [isSidebarOpen, setSidebarOpen] = useState(false);
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     if (window.confirm("정말 로그아웃 하시겠습니까?")) {
-      navigate("/login");
+      try {
+        // 로그아웃 함수 호출
+        await logout();
+
+        // 로그아웃 후 로그인 페이지로 리다이렉트
+        navigate("/login");
+      } catch (error) {
+        console.error("로그아웃 실패:", error);
+        alert("로그아웃에 실패했습니다. 다시 시도해주세요.");
+      }
     }
   };
 

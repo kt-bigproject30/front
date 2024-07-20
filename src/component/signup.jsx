@@ -14,12 +14,14 @@ const Signup = ({ toggleForm }) => {
     username: false,
     password: false,
     passwordCheck: false,
+    form: false,
   }); // 에러 메시지 상태
 
   const [errorMessages, setErrorMessages] = useState({
     username: "",
     password: "",
     passwordCheck: "",
+    form: "",
   });
 
   const handleChange = (e) => {
@@ -70,6 +72,25 @@ const Signup = ({ toggleForm }) => {
     return hasError;
   };
 
+  const checkUsernameAvailability = async (username) => {
+    try {
+      const response = await api.post("/jwt-login/check-username", {
+        username,
+      });
+      return response.data.available;
+    } catch (error) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        username: true,
+      }));
+      setErrorMessages((prevErrorMessages) => ({
+        ...prevErrorMessages,
+        username: "아이디 중복확인에 실패했습니다.",
+      }));
+      return false;
+    }
+  };
+
   const handleSignup = async () => {
     // 모든 필드에 대해 유효성 검사 실행
     const fields = ["username", "password", "passwordCheck"];
@@ -87,6 +108,22 @@ const Signup = ({ toggleForm }) => {
       return;
     }
 
+    // 아이디 중복 확인
+    const isUsernameAvailable = await checkUsernameAvailability(
+      formData.username
+    );
+    if (!isUsernameAvailable) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        username: true,
+      }));
+      setErrorMessages((prevErrorMessages) => ({
+        ...prevErrorMessages,
+        username: "이미 사용중인 아이디입니다. 다른 아이디를 입력해주세요.",
+      }));
+      return;
+    }
+
     try {
       const response = await api.post("/jwt-login/join", {
         ...formData,
@@ -96,34 +133,46 @@ const Signup = ({ toggleForm }) => {
         alert("회원가입이 완료되었습니다!");
         toggleForm(); // 회원가입 후 로그인 폼으로 돌아가기
       } else {
-        setErrors({ ...errors, form: true });
-        setErrorMessages({
-          ...errorMessages,
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          form: true,
+        }));
+        setErrorMessages((prevErrorMessages) => ({
+          ...prevErrorMessages,
           form: response.data.message || "회원가입에 실패했습니다.",
-        });
+        }));
       }
     } catch (error) {
       if (error.response) {
         // 서버에서 응답을 받았으나 상태 코드가 2xx 범위를 벗어나는 경우
-        setErrors({ ...errors, form: true });
-        setErrorMessages({
-          ...errorMessages,
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          form: true,
+        }));
+        setErrorMessages((prevErrorMessages) => ({
+          ...prevErrorMessages,
           form: error.response.data.message || "회원가입에 실패했습니다.",
-        });
+        }));
       } else if (error.request) {
         // 요청이 만들어졌으나 서버로부터 응답을 받지 못한 경우
-        setErrors({ ...errors, form: true });
-        setErrorMessages({
-          ...errorMessages,
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          form: true,
+        }));
+        setErrorMessages((prevErrorMessages) => ({
+          ...prevErrorMessages,
           form: "서버와의 연결에 실패했습니다.",
-        });
+        }));
       } else {
         // 오류를 발생시킨 요청 설정 문제
-        setErrors({ ...errors, form: true });
-        setErrorMessages({
-          ...errorMessages,
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          form: true,
+        }));
+        setErrorMessages((prevErrorMessages) => ({
+          ...prevErrorMessages,
           form: "회원가입 과정에서 오류가 발생했습니다.",
-        });
+        }));
       }
     }
   };
@@ -141,6 +190,7 @@ const Signup = ({ toggleForm }) => {
               name="username"
               value={formData.username}
               onChange={handleChange}
+              onBlur={() => validateField("username", formData.username)}
             />
             <div
               className={`error-message ${errors.username ? "visible" : ""}`}
@@ -154,6 +204,7 @@ const Signup = ({ toggleForm }) => {
             placeholder="비밀번호"
             value={formData.password}
             onChange={handleChange}
+            onBlur={() => validateField("password", formData.password)}
           />
           <div className={`error-message ${errors.password ? "visible" : ""}`}>
             {errorMessages.password}
@@ -164,6 +215,9 @@ const Signup = ({ toggleForm }) => {
             placeholder="비밀번호 확인"
             value={formData.passwordCheck}
             onChange={handleChange}
+            onBlur={() =>
+              validateField("passwordCheck", formData.passwordCheck)
+            }
           />
           <div
             className={`error-message ${errors.passwordCheck ? "visible" : ""}`}
