@@ -1,42 +1,73 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+
 import "../css/draftai.css";
+import api from "../api";
 
 const DraftAI = () => {
-  const [imageOutputs] = useState(["", "", "", ""]);
+  const [imageOutputs, setImageOutputs] = useState(["1", "2", "3", "4"]);
+  
   const [summaryOutput, setSummaryOutput] = useState("");
+  const [textInput, setTextInput] = useState("");
+  const [textOutput, setTextOutput] = useState("");
+  const { id } = useParams(); // URL에서 id 파라미터를 가져옴
+  
+
+  const {state} = useLocation();    // 2번 라인
+  const {summary} = state;
+
 
   useEffect(() => {
-    const fetchSummaryOutput = async () => {
+    const token = localStorage.getItem("authToken");
+    console.log("Token from localStorage:", token); // 전체 토큰을 콘솔에 출력
+  }, []);
+
+  useEffect(() =>{
+    const sendButtonClick = async (e) => {
+      e.preventDefault();
+  
       try {
-        const response = await fetch("/summaryData.json");
-        const data = await response.json();
-        setSummaryOutput(data.summaryOutput);
+        const token = localStorage.getItem("authToken");
+        const response = await api.post(
+          "/api/text_summarize",
+          { contents: textInput },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+  
+        const data = response.data.summary; // 응답 데이터에서 summaryOutput을 추출
+        console.log(data);
+        setSummaryOutput(data);
+        setTextOutput(data);
       } catch (error) {
         console.error("Error fetching summary output:", error);
       }
     };
+  },[]);
 
-    fetchSummaryOutput();
-  }, []);
 
-  const modelButtonClick = () => {
-    const imageOutput1 = document.querySelector("#imageOutput1");
-    const imageOutput2 = document.querySelector("#imageOutput2");
-    const imageOutput3 = document.querySelector("#imageOutput3");
-    const imageOutput4 = document.querySelector("#imageOutput4");
 
-    if (imageOutput1) {
-      imageOutput1.style.backgroundImage = "url('imgai/result1.png')";
+  const modelButtonClick = async (model) => {
+    try {
+      const token = localStorage.getItem("authToken");
+      const response = await api.post(
+        "/generate",
+        { summary, user_select_model: model },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const { img1, img2, img3, img4 } = response.data;
+      setImageOutputs([img1, img2, img3, img4]);
+    } catch (error) {
+      console.error("Error fetching image outputs:", error);
     }
-    if (imageOutput2) {
-      imageOutput2.style.backgroundImage = "url('imgai/result2.png')";
-    }
-    if (imageOutput3) {
-      imageOutput3.style.backgroundImage = "url('imgai/result3.png')";
-    }
-    if (imageOutput4) {
-      imageOutput4.style.backgroundImage = "url('imgai/result4.png')";
-    }
+    console.log(model);
   };
 
   const handleDownloadClick = () => {
@@ -100,7 +131,7 @@ const DraftAI = () => {
         <h2>Model Select</h2>
         <div id="draft-summary" className="summary-text">
           <textarea
-            value={summaryOutput}
+            value = {summary}
             name="message"
             id="message"
             rows="5"
@@ -112,17 +143,30 @@ const DraftAI = () => {
           <button
             id="modelselect1"
             className="cartoon-model"
-            onClick={modelButtonClick}
+            onClick={() => modelButtonClick("1")}
+  
           >
             <h2>Cartoon</h2>
           </button>
-          <button id="modelselect2" className="fairytale-model">
+
+          <button id="modelselect2" 
+          className="fairytale-model"
+          onClick={() => modelButtonClick("2")}
+          >
             <h2>Fairytale</h2>
           </button>
-          <button id="modelselect3" className="anime-model">
+          
+          <button id="modelselect3" 
+          className="anime-model"
+          onClick={() => modelButtonClick("3")}
+          >
             <h2>Anime</h2>
           </button>
-          <button id="modelselect4" className="pixel-model">
+          
+          <button id="modelselect4"
+           className="pixel-model"
+           onClick={() => modelButtonClick("4")}
+           >
             <h2>Pixel</h2>
           </button>
         </div>
@@ -131,20 +175,19 @@ const DraftAI = () => {
       <div className="right-column">
         <h2>Image Output</h2>
         <div className="output-group">
-          <div id="imageOutput1" className="output-image">
-            {imageOutputs[0] && <img src={imageOutputs[0]} alt="Output 1" />}
-          </div>
-          <div id="imageOutput2" className="output-image">
-            {imageOutputs[1] && <img src={imageOutputs[1]} alt="Output 2" />}
-          </div>
-          <div id="imageOutput3" className="output-image">
-            {imageOutputs[2] && <img src={imageOutputs[2]} alt="Output 3" />}
-          </div>
-          <div id="imageOutput4" className="output-image">
-            {imageOutputs[3] && <img src={imageOutputs[3]} alt="Output 4" />}
-          </div>
+          
+
+          {imageOutputs.map((src, index) => (
+            <div
+              key={index}
+              id={`imageOutput${index + 1}`}
+              className="output-image"
+              style={{ backgroundImage: `url(${src})` }}
+            ></div>
+          ))}
         </div>
 
+      
         <button id="downloadButton" onClick={handleDownloadClick}>
           이미지 다운로드
         </button>
