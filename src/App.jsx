@@ -30,15 +30,21 @@ const AppContent = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(
     !!localStorage.getItem("authToken")
   ); // 로그인 상태 추가
-  const token = localStorage.getItem("authToken");
 
   const toggleSidebar = () => {
     setSidebarOpen(!isSidebarOpen);
   };
 
   useEffect(() => {
-    setIsLoggedIn(!!localStorage.getItem("authToken"));
-  }, [token]);
+    const handleStorageChange = () => {
+      setIsLoggedIn(!!localStorage.getItem("authToken"));
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
+  }, []);
 
   return (
     <div className="App">
