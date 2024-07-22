@@ -34,3 +34,7 @@
 .post h3 {
   margin: 0;
 }
+
+.summary-text {
+  text-align: left;
+}

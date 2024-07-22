@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../css/mypage.css";
 import api from "../api"; // API 모듈
 
+
 const Mypage = () => {
   const [userPosts, setUserPosts] = useState([]);
 
@@ -81,8 +82,8 @@ const Mypage = () => {
                 alt={post.title}
                 className="post-image"
               />
-              <p>{post.summary}</p>
-              <p>
+               <p className="summary-text">{post.summary}</p>
+              <p> 
                 <strong>작성일:</strong> {convertToKST(post.createdAt)}
               </p>
               <p>
