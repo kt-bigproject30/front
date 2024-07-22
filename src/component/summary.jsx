@@ -131,14 +131,16 @@ const Summary = () => {
         >
           파일 업로드
         </button>
-        <button id="sendButton" onClick={sendButtonClick} disabled={isLoading}>
-        {isLoading ? <div className="spinner"></div> : "텍스트 요약"}
+        <button id="sendButton" onClick={sendButtonClick} >
+          텍스트 요약
         </button>
       </div>
-      <div className="right-column">
+      {/* <div className="right-column">
         <h2>Text Output</h2>
         <div id="summary-summary" className="summary-text">
+        {isLoading ? <div className="spinner"></div> : ""}
           <textarea
+    
             value={textOutput}
             onChange={(e) => setTextOutput(e.target.value)}
             name="message"
@@ -146,12 +148,46 @@ const Summary = () => {
             rows="25"
             placeholder="요약된 내용"
             required
-          ></textarea>
+            disabled={isLoading}
+          >
+          
+          </textarea>
+        </div>
+        <button id="moveButton" onClick={moveButtonClick}>
+          DraftAI
+        </button>
+      </div> */}
+      <div className="right-column">
+        <h2>Text Output</h2>
+        <div id="summary-summary" className="summary-text">
+          {isLoading ? (
+            <div className="spinner-container">
+              <div className="spinner"></div>
+            </div>
+          ) : (
+            <textarea
+             value={textOutput}
+              onChange={(e) => setTextOutput(e.target.value)}
+              name="message"
+              id="message"
+              rows="25"
+              placeholder="요약된 내용"
+              required
+              disabled={isLoading}
+            />
+          )}
         </div>
         <button id="moveButton" onClick={moveButtonClick}>
           DraftAI
         </button>
       </div>
+
+
+
+
+
+
+
     </div>
   );
 };
