@@ -53,12 +53,7 @@ const AppContent = () => {
       )}
       <div className={`main-content ${isSidebarOpen ? "content-shift" : ""}`}>
         <Routes>
-          <Route
-            path="/"
-            element={
-              isLoggedIn ? <Navigate to="/home" /> : <Navigate to="/login" />
-            }
-          />
+          <Route path="/" element={<Navigate to="/login" />} />
           <Route
             path="/login"
             element={<Login setIsLoggedIn={setIsLoggedIn} />}
