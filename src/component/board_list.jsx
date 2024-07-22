@@ -73,6 +73,15 @@ const BoardList = () => {
   // 전체 페이지 수 계산
   const totalPages = Math.ceil(filteredBoards.length / postsPerPage);
 
+  const convertToKST = (utcDate) => {
+    const date = new Date(utcDate);
+    const utcTime = date.getTime();
+    const kstTime = new Date(utcTime + 9 * 60 * 60 * 1000); // 9시간 추가
+    console.log("???????", kstTime);
+    return kstTime.toLocaleString("ko-KR", { timeZone: "Asia/Seoul" });
+    //return date.toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' });
+  };
+
   return (
     <div className="board-list">
       <div className="board-header">
@@ -103,7 +112,10 @@ const BoardList = () => {
               <Link to={`/board/${post.id}`}>{post.title}</Link>
             </h2>
             <div className="post-info">
-              <span className="post-date">{post.createdAt || "No date"}</span>
+              <span className="post-author">{post.username || "Unknown"}</span>
+              <span className="post-date">
+                {convertToKST(post.createdAt) || "No date"}
+              </span>
             </div>
           </div>
           <div className="post-tags">
@@ -118,10 +130,10 @@ const BoardList = () => {
               <span>카테고리 없음</span>
             )}
           </div>
-          {post.summary && <div className="post-summary">{post.summary}</div>}
+          {/* {post.summary && <div className="post-summary">{post.summary}</div>}
           {post.imageUrl && (
             <img src={post.imageUrl} alt="Post" className="post-image" />
-          )}
+          )} */}
         </div>
       ))}
       <Pagination

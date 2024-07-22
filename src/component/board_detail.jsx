@@ -56,13 +56,22 @@ const BoardDetail = ({ setBoards }) => {
     return <div>Loading...</div>;
   }
 
-  // 게시물 상세보기 UI 렌더링
+  const convertToKST = (utcDate) => {
+    const date = new Date(utcDate);
+    const utcTime = date.getTime();
+    const kstTime = new Date(utcTime + 9 * 60 * 60 * 1000); // 9시간 추가
+    console.log("???????", kstTime);
+    return kstTime.toLocaleString("ko-KR", { timeZone: "Asia/Seoul" });
+  };
+
   return (
     <div className="board-detail">
       <h2 className="post-title">{post.title}</h2>
       <div className="post-info">
         <span className="post-author">{post.username || "Unknown"}</span>
-        <span className="post-date">{post.createdAt || "No date"}</span>
+        <span className="post-date">
+          {convertToKST(post.createdAt) || "No date"}
+        </span>
       </div>
       <div className="post-tags">
         {post.tags &&

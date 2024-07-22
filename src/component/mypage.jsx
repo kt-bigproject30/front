@@ -58,6 +58,15 @@ const Mypage = () => {
     }
   };
 
+  const convertToKST = (utcDate) => {
+    const date = new Date(utcDate);
+    const utcTime = date.getTime();
+    const kstTime = new Date(utcTime + 9 * 60 * 60 * 1000); // 9시간 추가
+    console.log("???????", kstTime);
+    return kstTime.toLocaleString("ko-KR", { timeZone: "Asia/Seoul" });
+    //return date.toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' });
+  };
+
   return (
     <div className="mypage-container">
       <h1>마이 페이지</h1>
@@ -74,7 +83,7 @@ const Mypage = () => {
               />
               <p>{post.summary}</p>
               <p>
-                <strong>작성일:</strong> {post.createdAt}
+                <strong>작성일:</strong> {convertToKST(post.createdAt)}
               </p>
               <p>
                 <strong>카테고리:</strong> {post.category}
