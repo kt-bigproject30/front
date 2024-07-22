@@ -112,7 +112,9 @@ const BoardList = () => {
               <Link to={`/board/${post.id}`}>{post.title}</Link>
             </h2>
             <div className="post-info">
-              <span className="post-author">{post.username || "Unknown"}</span>
+              <span className="post-author">
+                {post.userEntity.name || "Unknown"}
+              </span>
               <span className="post-date">
                 {convertToKST(post.createdAt) || "No date"}
               </span>

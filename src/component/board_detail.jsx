@@ -68,7 +68,7 @@ const BoardDetail = ({ setBoards }) => {
     <div className="board-detail">
       <h2 className="post-title">{post.title}</h2>
       <div className="post-info">
-        <span className="post-author">{post.username || "Unknown"}</span>
+        <span className="post-author">{post.userEntity.name || "Unknown"}</span>
         <span className="post-date">
           {convertToKST(post.createdAt) || "No date"}
         </span>
