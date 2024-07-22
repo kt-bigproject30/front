@@ -76,8 +76,7 @@ const Summary = () => {
       );
 
       console.log("Summary saved successfully:", response.data);
-      // navigate("/draftai");
-      navigate( '/draftai', { state: { summary: summaryOutput} } )
+      navigate("/draftai");
     } catch (error) {
       console.error("Error saving summary:", error);
     }

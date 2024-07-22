@@ -36,13 +36,17 @@ const BoardDetail = ({ setBoards }) => {
     );
     if (confirmDelete) {
       try {
-        await api.delete(`/post/${id}`); // 삭제 엔드포인트도 /post로 설정
-        setBoards((prevBoards) =>
-          prevBoards.filter((post) => post.id !== parseInt(id))
-        );
+        const token = localStorage.getItem("authToken");
+        await api.delete(`/delete/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }); // 삭제 엔드포인트도 /post로 설정
+        console.log(`Post with ID ${id} has been deleted successfully.`);
         navigate("/board"); // 게시판 페이지로 이동
       } catch (error) {
         console.error("Failed to delete post:", error);
+        alert("Failed to delete post: " + error.message);
       }
     }
   };

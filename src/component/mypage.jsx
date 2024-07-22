@@ -30,6 +30,34 @@ const Mypage = () => {
     }
   };
 
+  const deletePost = async (id) => {
+    const confirmDelete = window.confirm(
+      "정말로 이 게시글을 삭제하시겠습니까?"
+    );
+    if (confirmDelete) {
+      try {
+        const token = localStorage.getItem("authToken");
+        await api.delete(`/delete/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        console.log(`Post with ID ${id} has been deleted successfully.`);
+        // 삭제 후 게시물 목록을 다시 불러옴
+        fetchUserPosts();
+      } catch (error) {
+        console.error("Failed to delete post:", error); // 에러 로그
+        if (error.response) {
+          console.error("Response data:", error.response.data);
+          console.error("Response status:", error.response.status);
+          console.error("Response headers:", error.response.headers);
+        }
+        alert("Failed to delete post: " + error.message); // 사용자에게 에러 알림
+      }
+    }
+  };
+
   return (
     <div className="mypage-container">
       <h1>마이 페이지</h1>
@@ -51,6 +79,7 @@ const Mypage = () => {
               <p>
                 <strong>카테고리:</strong> {post.category}
               </p>
+              <button onClick={() => deletePost(post.id)}>삭제</button>
             </div>
           ))
         ) : (
