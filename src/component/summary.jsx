@@ -11,6 +11,8 @@ const Summary = () => {
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
 
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
     const token = localStorage.getItem("authToken");
     console.log("Token from localStorage:", token); // 전체 토큰을 콘솔에 출력
@@ -30,6 +32,7 @@ const Summary = () => {
 
   const sendButtonClick = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
     try {
       const token = localStorage.getItem("authToken");
@@ -50,6 +53,8 @@ const Summary = () => {
       setTextOutput(data);
     } catch (error) {
       console.error("Error fetching summary output:", error);
+    } finally {
+      setIsLoading(false); // Stop loading spinner
     }
   };
 
@@ -122,8 +127,8 @@ const Summary = () => {
         >
           파일 업로드
         </button>
-        <button id="sendButton" onClick={sendButtonClick}>
-          텍스트 요약
+        <button id="sendButton" onClick={sendButtonClick} disabled={isLoading}>
+        {isLoading ? <div className="spinner"></div> : "텍스트 요약"}
         </button>
       </div>
       <div className="right-column">

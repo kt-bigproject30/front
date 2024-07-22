@@ -16,6 +16,8 @@ const DraftAI = () => {
   const {state} = useLocation();    // 2번 라인
   const {summary} = state;
 
+  const [isLoading, setIsLoading] = useState(false);
+
 
   useEffect(() => {
     const token = localStorage.getItem("authToken");
@@ -51,6 +53,8 @@ const DraftAI = () => {
 
 
   const modelButtonClick = async (model) => {
+    setIsLoading(true);
+    setImageOutputs([null, null, null, null]);
     try {
       const token = localStorage.getItem("authToken");
       const response = await api.post(
@@ -66,6 +70,8 @@ const DraftAI = () => {
       setImageOutputs([img1, img2, img3, img4]);
     } catch (error) {
       console.error("Error fetching image outputs:", error);
+    } finally {
+      setIsLoading(false); // Stop loading spinner
     }
     console.log(model);
   };
@@ -183,7 +189,10 @@ const DraftAI = () => {
               id={`imageOutput${index + 1}`}
               className="output-image"
               style={{ backgroundImage: `url(${src})` }}
-            ></div>
+              disabled={isLoading}
+            >
+              {isLoading ? <div className="spinner"></div> : ""}
+            </div>
           ))}
         </div>
 
