@@ -34,3 +34,11 @@
 .post h3 {
   margin: 0;
 }
+
+.summary-text {
+  text-align: left;
+}
+.post button {
+  float: right; /* 버튼을 우측으로 배치 */
+  cursor: pointer;
+}

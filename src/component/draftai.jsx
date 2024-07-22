@@ -13,7 +13,6 @@ const DraftAI = () => {
   const [textInput, setTextInput] = useState("");
   const [textOutput, setTextOutput] = useState("");
 
-
   const { state } = useLocation(); // 2번 라인
   const {summary} = state == null ?"": state;
   const {titleName} = state == null ?"": state;

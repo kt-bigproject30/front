@@ -76,18 +76,18 @@ const Mypage = () => {
           userPosts.map((post) => (
             <div key={post.id} className="post">
               <h3>{post.title}</h3>
-              <img
-                src={post.imageUrl}
-                alt={post.title}
-                className="post-image"
-              />
-              <p>{post.summary}</p>
               <p>
                 <strong>작성일:</strong> {convertToKST(post.createdAt)}
               </p>
               <p>
                 <strong>카테고리:</strong> {post.category}
               </p>
+              <p>{post.summary}</p>
+              <img
+                src={post.imageUrl}
+                alt={post.title}
+                className="post-image"
+              />
               <button onClick={() => deletePost(post.id)}>삭제</button>
             </div>
           ))
