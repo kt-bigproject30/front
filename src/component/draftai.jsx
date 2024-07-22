@@ -6,28 +6,26 @@ import api from "../api";
 
 const DraftAI = () => {
   const [imageOutputs, setImageOutputs] = useState(["1", "2", "3", "4"]);
-  
+
   const [summaryOutput, setSummaryOutput] = useState("");
   const [textInput, setTextInput] = useState("");
   const [textOutput, setTextOutput] = useState("");
   const { id } = useParams(); // URL에서 id 파라미터를 가져옴
-  
 
-  const {state} = useLocation();    // 2번 라인
-  const {summary} = state;
+  const { state } = useLocation(); // 2번 라인
+  const { summary } = state;
 
   const [isLoading, setIsLoading] = useState(false);
-
 
   useEffect(() => {
     const token = localStorage.getItem("authToken");
     console.log("Token from localStorage:", token); // 전체 토큰을 콘솔에 출력
   }, []);
 
-  useEffect(() =>{
+  useEffect(() => {
     const sendButtonClick = async (e) => {
       e.preventDefault();
-  
+
       try {
         const token = localStorage.getItem("authToken");
         const response = await api.post(
@@ -39,7 +37,7 @@ const DraftAI = () => {
             },
           }
         );
-  
+
         const data = response.data.summary; // 응답 데이터에서 summaryOutput을 추출
         console.log(data);
         setSummaryOutput(data);
@@ -48,9 +46,7 @@ const DraftAI = () => {
         console.error("Error fetching summary output:", error);
       }
     };
-  },[]);
-
-
+  }, []);
 
   const modelButtonClick = async (model) => {
     setIsLoading(true);
@@ -137,7 +133,7 @@ const DraftAI = () => {
         <h2>Model Select</h2>
         <div id="draft-summary" className="summary-text">
           <textarea
-            value = {summary}
+            value={summary}
             name="message"
             id="message"
             rows="5"
@@ -150,29 +146,31 @@ const DraftAI = () => {
             id="modelselect1"
             className="cartoon-model"
             onClick={() => modelButtonClick("1")}
-  
           >
             <h2>Cartoon</h2>
           </button>
 
-          <button id="modelselect2" 
-          className="fairytale-model"
-          onClick={() => modelButtonClick("2")}
+          <button
+            id="modelselect2"
+            className="fairytale-model"
+            onClick={() => modelButtonClick("2")}
           >
             <h2>Fairytale</h2>
           </button>
-          
-          <button id="modelselect3" 
-          className="anime-model"
-          onClick={() => modelButtonClick("3")}
+
+          <button
+            id="modelselect3"
+            className="anime-model"
+            onClick={() => modelButtonClick("3")}
           >
             <h2>Anime</h2>
           </button>
-          
-          <button id="modelselect4"
-           className="pixel-model"
-           onClick={() => modelButtonClick("4")}
-           >
+
+          <button
+            id="modelselect4"
+            className="pixel-model"
+            onClick={() => modelButtonClick("4")}
+          >
             <h2>Pixel</h2>
           </button>
         </div>
@@ -181,8 +179,6 @@ const DraftAI = () => {
       <div className="right-column">
         <h2>Image Output</h2>
         <div className="output-group">
-          
-
           {imageOutputs.map((src, index) => (
             <div
               key={index}
@@ -196,7 +192,6 @@ const DraftAI = () => {
           ))}
         </div>
 
-      
         <button id="downloadButton" onClick={handleDownloadClick}>
           이미지 다운로드
         </button>
