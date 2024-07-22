@@ -11,9 +11,8 @@ const DraftAI = () => {
   const [textInput, setTextInput] = useState("");
   const [textOutput, setTextOutput] = useState("");
 
-
   const { state } = useLocation(); // 2번 라인
-  const {summary} = state == null ?"": state;
+  const { summary } = state == null ? "" : state;
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -99,10 +98,8 @@ const DraftAI = () => {
 
   const moveButtonClick = () => {
     window.location.href = "/board/new";
-    navigate("/board/new", { state: { summary, tag, titleName } });
+    navigate("/board/new", { state: { summary: summary } });
     console.log("1번", summary);
-    console.log("2번", tag);
-    console.log("3번", titleName);
   };
 
   return (

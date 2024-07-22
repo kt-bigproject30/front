@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import api from "../api";
 import "../css/board_detail.css";
 
@@ -86,9 +86,6 @@ const BoardDetail = ({ setBoards }) => {
         <img src={post.imageUrl} alt="Post" className="post-image" />
       )}
       <div className="buttons">
-        <Link to={`/board/edit/${post.id}`} className="btn btn-primary">
-          수정
-        </Link>
         <button
           onClick={() => navigate("/board")}
           className="btn btn-secondary"
