@@ -10,47 +10,22 @@ const DraftAI = () => {
   const [summaryOutput, setSummaryOutput] = useState("");
   const [textInput, setTextInput] = useState("");
   const [textOutput, setTextOutput] = useState("");
-  const { id } = useParams(); // URL에서 id 파라미터를 가져옴
   
 
   const {state} = useLocation();    // 2번 라인
-  const {summary} = state;
+  const {summary} = state == null?"":state
+  const {tag} = state == null?"":state
+  const {titleName} = state == null?"":state
 
   const [isLoading, setIsLoading] = useState(false);
-
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem("authToken");
     console.log("Token from localStorage:", token); // 전체 토큰을 콘솔에 출력
   }, []);
 
-  useEffect(() =>{
-    const sendButtonClick = async (e) => {
-      e.preventDefault();
   
-      try {
-        const token = localStorage.getItem("authToken");
-        const response = await api.post(
-          "/api/text_summarize",
-          { contents: textInput },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-  
-        const data = response.data.summary; // 응답 데이터에서 summaryOutput을 추출
-        console.log(data);
-        setSummaryOutput(data);
-        setTextOutput(data);
-      } catch (error) {
-        console.error("Error fetching summary output:", error);
-      }
-    };
-  },[]);
-
-
 
   const modelButtonClick = async (model) => {
     setIsLoading(true);
@@ -129,6 +104,10 @@ const DraftAI = () => {
 
   const moveButtonClick = () => {
     window.location.href = "/board/new";
+    navigate( '/board/new', { state: { summary, tag, titleName} } )
+    console.log("1번",summary);
+    console.log("2번",tag);
+    console.log("3번",titleName);
   };
 
   return (

@@ -61,6 +61,8 @@ const Summary = () => {
   const moveButtonClick = async () => {
     const summary = summaryOutput;
     const contents = textInput;
+    const titleName = title;
+    const tag = category;
 
     try {
       const token = localStorage.getItem("authToken");
@@ -76,10 +78,13 @@ const Summary = () => {
       );
 
       console.log("Summary saved successfully:", response.data);
-      navigate( '/draftai', { state: { summary: summaryOutput} } )
+      navigate( '/draftai', { state: { summary: summaryOutput, tag:category, titleName:title} } )
     } catch (error) {
       console.error("Error saving summary:", error);
     }
+    console.log("1번",summary);
+    console.log("2번",tag);
+    console.log("3번",titleName);
   };
 
   return (
