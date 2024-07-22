@@ -15,8 +15,6 @@ const DraftAI = () => {
   const { state } = useLocation(); // 2번 라인
   const { summary } = state;
 
-  const [isLoading, setIsLoading] = useState(false);
-
   useEffect(() => {
     const token = localStorage.getItem("authToken");
     console.log("Token from localStorage:", token); // 전체 토큰을 콘솔에 출력
