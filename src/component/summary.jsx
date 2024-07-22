@@ -46,7 +46,7 @@ const Summary = () => {
           },
         }
       );
-
+      console.log(response);
       const data = response.data.summary; // 응답 데이터에서 summaryOutput을 추출
       console.log("Summary received:", data);
       setSummaryOutput(data);
