@@ -5,6 +5,8 @@ import "../css/draftai.css";
 import api from "../api";
 
 const DraftAI = () => {
+  const navigate = useNavigate();
+
   const [imageOutputs, setImageOutputs] = useState(["1", "2", "3", "4"]);
 
   const [summaryOutput, setSummaryOutput] = useState("");
@@ -14,6 +16,10 @@ const DraftAI = () => {
 
   const { state } = useLocation(); // 2번 라인
   const {summary} = state == null ?"": state;
+  const {titleName} = state == null ?"": state;
+  const {tag} = state == null ?"": state;
+  const {idNumber} = state == null ?"": state;
+
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -98,11 +104,10 @@ const DraftAI = () => {
   };
 
   const moveButtonClick = () => {
-    window.location.href = "/board/new";
-    navigate("/board/new", { state: { summary, tag, titleName } });
-    console.log("1번", summary);
-    console.log("2번", tag);
-    console.log("3번", titleName);
+    // window.location.href = "/board/new";
+    // navigate("/mypage");
+  
+    navigate("/board/new", { state: { summary: summary, tag:tag, titleName:titleName, idNumber:idNumber} });
   };
 
   return (

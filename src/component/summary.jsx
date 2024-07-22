@@ -63,22 +63,24 @@ const Summary = () => {
     const contents = textInput;
     const titleName = title;
     const tag = category;
+    
 
     try {
       const token = localStorage.getItem("authToken");
       console.log("Saving summary...");
       const response = await api.post(
         "/post",
-        { title, contents, summary },
+        { title, contents, summary, tag },
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
       );
-
+      console.log("아이디",response.data.id);
       console.log("Summary saved successfully:", response.data);
-      navigate( '/draftai', { state: { summary: summaryOutput, tag:category, titleName:title} } )
+      const idNumber = response.data.id;
+      navigate( '/draftai', { state: { summary: summaryOutput, tag:category, titleName:title, idNumber:idNumber,} } )
     } catch (error) {
       console.error("Error saving summary:", error);
     }

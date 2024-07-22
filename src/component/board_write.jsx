@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import api from "../api";
 import "../css/board_write.css";
 
@@ -9,20 +9,35 @@ const BoardWrite = ({ boards, setBoards }) => {
   const navigate = useNavigate(); // 페이지 이동을 위한 훅
   const isEdit = Boolean(id); // id가 존재하면 수정 모드, 그렇지 않으면 작성 모드
   const [title, setTitle] = useState(""); // 제목 상태 변수
-  const [summary, setSummary] = useState(""); // 요약문 상태 변수
+  const [summary2, setSummary] = useState(""); // 요약문 상태 변수
   const [tags, setTags] = useState(""); // 태그 상태 변수
   const [imageFile, setImageFile] = useState(null); // 이미지 파일 상태 변수
   const [imagePreview, setImagePreview] = useState(null); // 이미지 미리보기 상태 변수
   const [summaryOutput, setSummaryOutput] = useState(""); // 요약문 데이터를 위한 상태 변수
   const [titleOutput, setTitleOutput] = useState(""); // 제목 데이터를 위한 상태 변수
   const [tagOutput, setTagOutput] = useState(""); // 태그 데이터를 위한 상태 변수
+  
+
+  const { state } = useLocation(); // 2번 라인
+  const {summary} = state == null ?"": state;
+  const {titleName} = state == null ?"": state;
+  const {tag} = state == null ?"": state;
+  const {idNumber} = state == null ?"": state;
+
+
+  console.log("1번",summary);
+  console.log("2번",tag);
+  console.log("3번",titleName);
+  console.log("4번",idNumber);
+
+
   // 게시물 데이터를 가져오는 함수
   const fetchPost = useCallback(async () => {
     try {
       const response = await api.get(`/post/${id}`);
       const post = response.data;
       setTitle(post.title);
-      setSummary(post.summary);
+      setSummary(post.summary2);
       setTags(post.tags ? post.tags.join(", ") : "");
       setImagePreview(post.imageUrl); // 이미지 URL을 미리보기로 설정
     } catch (error) {
@@ -30,64 +45,45 @@ const BoardWrite = ({ boards, setBoards }) => {
     }
   }, [id]);
 
-  // 컴포넌트가 마운트되거나 isEdit 또는 id가 변경될 때 실행되는 useEffect
-  useEffect(() => {
-    if (isEdit) {
-      fetchPost(); // 게시물 데이터를 가져옴
-      const foundPost = boards.find((post) => post.id === parseInt(id));
-      if (foundPost) {
-        setTitle(foundPost.title);
-        setSummary(foundPost.summary);
-        setTags(foundPost.tags.join(", "));
-        setImagePreview(foundPost.image); // 이미지 미리보기로 설정
-      }
+
+
+  const moveButtonClick = async () => {
+    
+    
+
+    try {
+  
+      const url = `/updatePost/${idNumber}`;
+      const token = localStorage.getItem("authToken");
+      console.log("Saving summary...");
+      const imageUrl = "https://d22e4sjbrjllgi.cloudfront.net/generated_images/4model_zxqwas9510_1.png";
+      const response = await api.put(
+        url,
+        { imageUrl},
+  
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log("Summary saved successfully:", response.data);
+      
+    } catch (error) {
+      console.error("Error saving summary:", error);
     }
-  }, [fetchPost, isEdit, id, boards]);
+    navigate("/board")
 
-  // 요약문 데이터를 가져오는 useEffect
-  useEffect(() => {
-    const fetchSummaryOutput = async () => {
-      try {
-        const response = await fetch("/summaryData.json");
-        const data = await response.json();
-        setSummaryOutput(data.summaryOutput);
-      } catch (error) {
-        console.error("Error fetching summary output:", error);
-      }
-    };
+    
+    
+  };
 
-    fetchSummaryOutput();
-  }, []);
 
-  // 제목 데이터를 가져오는 useEffect
-  useEffect(() => {
-    const fetchTitleOutput = async () => {
-      try {
-        const response = await fetch("/summaryData.json");
-        const data = await response.json();
-        setTitleOutput(data.titleOutput);
-      } catch (error) {
-        console.error("Error fetching title output:", error);
-      }
-    };
 
-    fetchTitleOutput();
-  }, []);
 
-  // 태그 데이터를 가져오는 useEffect
-  useEffect(() => {
-    const fetchTagOutput = async () => {
-      try {
-        const response = await fetch("/summaryData.json");
-        const data = await response.json();
-        setTagOutput(data.tagOutput);
-      } catch (error) {
-        console.error("Error fetching tag output:", error);
-      }
-    };
 
-    fetchTagOutput();
-  }, []);
+
+
 
   // 이미지 파일이 변경되었을 때 호출되는 함수
   const handleImageChange = (e) => {
@@ -101,30 +97,13 @@ const BoardWrite = ({ boards, setBoards }) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("title", title);
-    formData.append("summary", summary);
+    formData.append("summary", summary2);
     formData.append("tags", tags);
     if (imageFile) {
       formData.append("image", imageFile); // 파일 객체를 FormData에 추가
     }
 
-    try {
-      if (isEdit) {
-        await api.put(`/post/${id}`, formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        });
-      } else {
-        await api.post("/post", formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        });
-      }
-      navigate("/board"); // 게시판 페이지로 이동
-    } catch (error) {
-      console.error("Failed to save post:", error);
-    }
+    
   };
 
   return (
@@ -135,8 +114,8 @@ const BoardWrite = ({ boards, setBoards }) => {
             type="text"
             id="title"
             className="input-title"
-            // value={title}
-            value={isEdit ? title : titleOutput}
+            value={titleName}
+            // value={isEdit ? title : titleOutput}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="제목"
           />
@@ -146,7 +125,9 @@ const BoardWrite = ({ boards, setBoards }) => {
             id="summary"
             className="input-summary"
             rows="10"
-            value={isEdit ? summary : summaryOutput}
+            value={summary}
+
+            // value={isEdit ? summary2 : summaryOutput}
             onChange={(e) => setSummary(e.target.value)}
             placeholder="요약문을 입력하세요"
           ></textarea>
@@ -156,8 +137,8 @@ const BoardWrite = ({ boards, setBoards }) => {
             type="text"
             id="tags"
             className="input-tags"
-            // value={tags}
-            value={isEdit ? tags : tagOutput}
+            value={tag}
+            // value={isEdit ? tags : tagOutput}
             onChange={(e) => setTags(e.target.value)}
             placeholder="태그 (콤마로 구분)"
           />
@@ -177,9 +158,14 @@ const BoardWrite = ({ boards, setBoards }) => {
           )}
         </div>
         <div className="form-group">
-          <button type="submit" className="btn-submit">
+          {/* <button type="submit" className="btn-submit">
             {isEdit ? "수정" : "발행"}
+          </button> */}
+
+          <button id="moveButton" className="btn-submit" onClick={moveButtonClick} type="submit">
+            등록
           </button>
+
         </div>
       </form>
     </div>
