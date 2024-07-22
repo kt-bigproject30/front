@@ -11,7 +11,6 @@ const DraftAI = () => {
   const [textInput, setTextInput] = useState("");
   const [textOutput, setTextOutput] = useState("");
 
-  const { id } = useParams(); // URL에서 id 파라미터를 가져옴
 
   const { state } = useLocation(); // 2번 라인
   const {summary} = state == null ?"": state;
