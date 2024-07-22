@@ -40,13 +40,5 @@
 }
 .post button {
   float: right; /* 버튼을 우측으로 배치 */
-  background-color: #8826b6; /* 버튼 색상 */
-  color: white;
-  border: 5px;
-  /* padding: 0.1rem 0.1rem; */
   cursor: pointer;
-}
-
-.post button:hover {
-  background-color: #a151c6; /* 호버 시 버튼 색상 */
 }
