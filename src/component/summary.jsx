@@ -135,28 +135,7 @@ const Summary = () => {
           텍스트 요약
         </button>
       </div>
-      {/* <div className="right-column">
-        <h2>Text Output</h2>
-        <div id="summary-summary" className="summary-text">
-        {isLoading ? <div className="spinner"></div> : ""}
-          <textarea
-    
-            value={textOutput}
-            onChange={(e) => setTextOutput(e.target.value)}
-            name="message"
-            id="message"
-            rows="25"
-            placeholder="요약된 내용"
-            required
-            disabled={isLoading}
-          >
-          
-          </textarea>
-        </div>
-        <button id="moveButton" onClick={moveButtonClick}>
-          DraftAI
-        </button>
-      </div> */}
+      
       <div className="right-column">
         <h2>Text Output</h2>
         <div id="summary-summary" className="summary-text">
