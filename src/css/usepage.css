@@ -54,20 +54,7 @@
 }
 
 
-.tip-box {
-  background-color: lightgray;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  padding: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  min-height: 700px; /* Adjust the height to match your design */
-  background-size: 105% 105%; /* Ensure the background image covers the entire element */
-  background-position: center; /* Center the background image */
-  background-repeat: no-repeat; /* Prevent the background image from repeating */
-}
+
 
 .use-image h2 {
   border-radius: 10px;
@@ -80,6 +67,7 @@
   z-index: 1; /* Ensure it is above the background image */
   background: lightblue; /* Optional: Add a background for better readability */
   padding: 5px 10px; /* Optional: Add padding for better readability */
+  font-size: 1.5em;
 }
 
 
