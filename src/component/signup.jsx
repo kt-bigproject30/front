@@ -72,25 +72,6 @@ const Signup = ({ toggleForm }) => {
     return hasError;
   };
 
-  const checkUsernameAvailability = async (username) => {
-    try {
-      const response = await api.post("/jwt-login/check-username", {
-        username,
-      });
-      return response.data.available;
-    } catch (error) {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        username: true,
-      }));
-      setErrorMessages((prevErrorMessages) => ({
-        ...prevErrorMessages,
-        username: "아이디 중복확인에 실패했습니다.",
-      }));
-      return false;
-    }
-  };
-
   const handleSignup = async () => {
     // 모든 필드에 대해 유효성 검사 실행
     const fields = ["username", "password", "passwordCheck"];
@@ -105,22 +86,6 @@ const Signup = ({ toggleForm }) => {
 
     // 에러가 있는지 확인
     if (hasErrors) {
-      return;
-    }
-
-    // 아이디 중복 확인
-    const isUsernameAvailable = await checkUsernameAvailability(
-      formData.username
-    );
-    if (!isUsernameAvailable) {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        username: true,
-      }));
-      setErrorMessages((prevErrorMessages) => ({
-        ...prevErrorMessages,
-        username: "이미 사용중인 아이디입니다. 다른 아이디를 입력해주세요.",
-      }));
       return;
     }
 

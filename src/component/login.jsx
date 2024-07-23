@@ -32,18 +32,18 @@ const Login = () => {
         username,
         password,
       });
-      console.log("Response received:", response); // 디버깅용 로그
+      //console.log("Response received:", response); // 디버깅용 로그
 
       if (response.status === 200) {
         const token = response.data; // 응답에서 토큰 추출
-        console.log("Response data:", response.data); // 디버깅용 로그
+        //console.log("Response data:", response.data); // 디버깅용 로그
 
-        console.log("Token received:", token); // 디버깅용 로그
+        //console.log("Token received:", token); // 디버깅용 로그
         localStorage.setItem("authToken", token); // 토큰을 세션 스토리지에 저장
-        console.log(
-          "Token stored in localStorage:",
-          localStorage.getItem("authToken")
-        ); // 저장된 토큰 확인 로그
+        // console.log(
+        //   "Token stored in localStorage:",
+        //   localStorage.getItem("authToken")
+        // ); // 저장된 토큰 확인 로그
         navigate("/home");
       } else {
         // 로그인 실패 시 에러 메시지 표시
