@@ -56,11 +56,6 @@ const Navbar = () => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/draftai">
-                DraftAI
-              </Link>
-            </li>
-            <li className="nav-item">
               <Link className="nav-link" to="/board">
                 Board
               </Link>
@@ -100,11 +95,6 @@ const Navbar = () => {
             <li className="nav-item">
               <Link className="nav-link" to="/summary" onClick={toggleSidebar}>
                 Summary
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/draftai" onClick={toggleSidebar}>
-                DraftAI
               </Link>
             </li>
             <li className="nav-item">
