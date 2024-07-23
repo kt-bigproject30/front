@@ -22,7 +22,7 @@ const Mypage = () => {
         },
       });
 
-      console.log("Fetched user posts:", response.data); // 응답 데이터 로그
+      // console.log("Fetched user posts:", response.data); // 응답 데이터 로그
       setUserPosts(response.data);
     } catch (error) {
       console.error("Failed to fetch user posts:", error); // 에러 로그
@@ -43,7 +43,7 @@ const Mypage = () => {
           },
         });
 
-        console.log(`Post with ID ${id} has been deleted successfully.`);
+        // console.log(`Post with ID ${id} has been deleted successfully.`);
         // 삭제 후 게시물 목록을 다시 불러옴
         fetchUserPosts();
       } catch (error) {
@@ -62,7 +62,6 @@ const Mypage = () => {
     const date = new Date(utcDate);
     const utcTime = date.getTime();
     const kstTime = new Date(utcTime + 9 * 60 * 60 * 1000); // 9시간 추가
-    console.log("???????", kstTime);
     return kstTime.toLocaleString("ko-KR", { timeZone: "Asia/Seoul" });
     //return date.toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' });
   };

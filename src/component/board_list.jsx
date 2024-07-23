@@ -95,7 +95,6 @@ const BoardList = () => {
         >
           <option value="title">제목</option>
           <option value="category">카테고리</option>
-          <option value="notice">공지</option>
         </select>
         <input
           type="text"
@@ -112,7 +111,9 @@ const BoardList = () => {
               <Link to={`/board/${post.id}`}>{post.title}</Link>
             </h2>
             <div className="post-info">
-              <span className="post-author">{post.userEntity.name || "Unknown"}</span>
+              <span className="post-author">
+                {post.userEntity.name || "Unknown"}
+              </span>
               <span className="post-date">
                 {convertToKST(post.createdAt) || "No date"}
               </span>
@@ -130,10 +131,6 @@ const BoardList = () => {
               <span>카테고리 없음</span>
             )}
           </div>
-          {/* {post.summary && <div className="post-summary">{post.summary}</div>}
-          {post.imageUrl && (
-            <img src={post.imageUrl} alt="Post" className="post-image" />
-          )} */}
         </div>
       ))}
       <Pagination

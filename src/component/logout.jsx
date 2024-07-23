@@ -22,16 +22,16 @@ const logout = async () => {
       }
     );
     console.log("로그아웃 API 호출 성공");
-    console.log(
-      "Token stored in localStorage:",
-      localStorage.getItem("authToken")
-    );
+    // console.log(
+    //   "Token stored in localStorage:",
+    //   localStorage.getItem("authToken")
+    // );
     localStorage.removeItem("authToken");
     console.log("토큰 삭제 성공");
-    console.log(
-      "Token removed in localStorage:",
-      localStorage.getItem("authToken")
-    );
+    // console.log(
+    //   "Token removed in localStorage:",
+    //   localStorage.getItem("authToken")
+    // );
     // console.log(localStorage.getItem());
   } catch (error) {
     console.error("로그아웃 실패:", error);

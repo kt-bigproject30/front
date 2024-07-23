@@ -63,30 +63,36 @@ const Summary = () => {
     const contents = textInput;
     const titleName = title;
     const tag = category;
-    
 
     try {
       const token = localStorage.getItem("authToken");
       console.log("Saving summary...");
       const response = await api.post(
         "/post",
-        { title, contents, summary, tag },
+        { title, contents, summary, category },
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
       );
-      console.log("아이디",response.data.id);
+      console.log("아이디", response.data.id);
       console.log("Summary saved successfully:", response.data);
       const idNumber = response.data.id;
-      navigate( '/draftai', { state: { summary: summaryOutput, tag:category, titleName:title, idNumber:idNumber,} } )
+      navigate("/draftai", {
+        state: {
+          summary: summaryOutput,
+          tag: category,
+          titleName: title,
+          idNumber: idNumber,
+        },
+      });
     } catch (error) {
       console.error("Error saving summary:", error);
     }
-    console.log("1번",summary);
-    console.log("2번",tag);
-    console.log("3번",titleName);
+    console.log("1번", summary);
+    console.log("2번", tag);
+    console.log("3번", titleName);
   };
 
   return (
@@ -133,11 +139,11 @@ const Summary = () => {
         >
           파일 업로드
         </button>
-        <button id="sendButton" onClick={sendButtonClick} >
+        <button id="sendButton" onClick={sendButtonClick}>
           텍스트 요약
         </button>
       </div>
-      
+
       <div className="right-column">
         <h2>Text Output</h2>
         <div id="summary-summary" className="summary-text">
@@ -147,7 +153,7 @@ const Summary = () => {
             </div>
           ) : (
             <textarea
-             value={textOutput}
+              value={textOutput}
               onChange={(e) => setTextOutput(e.target.value)}
               name="message"
               id="message"
@@ -162,13 +168,6 @@ const Summary = () => {
           DraftAI
         </button>
       </div>
-
-
-
-
-
-
-
     </div>
   );
 };
