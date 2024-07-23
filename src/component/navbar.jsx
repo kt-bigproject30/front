@@ -52,14 +52,14 @@ const Navbar = () => {
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/summary">
-                Summary
+                Draft AI
               </Link>
             </li>
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <Link className="nav-link" to="/draftai">
                 DraftAI
               </Link>
-            </li>
+            </li> */}
             <li className="nav-item">
               <Link className="nav-link" to="/board">
                 Board
@@ -99,14 +99,14 @@ const Navbar = () => {
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/summary" onClick={toggleSidebar}>
-                Summary
+                Draft AI
               </Link>
             </li>
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <Link className="nav-link" to="/draftai" onClick={toggleSidebar}>
                 DraftAI
               </Link>
-            </li>
+            </li> */}
             <li className="nav-item">
               <Link className="nav-link" to="/board" onClick={toggleSidebar}>
                 Board

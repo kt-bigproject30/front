@@ -52,3 +52,13 @@
 .btn-submit:hover {
   background-color: #0056b3;
 }
+
+.preview-image{
+  color: lightgray;
+  width: 70%;
+  height: 70%;
+  background-image: none;
+  background-size: 100% 100%; /* Scale the background image to fit the container */
+  background-position: center; /* Center the background image */
+  background-repeat: no-repeat;
+}
