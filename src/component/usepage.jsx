@@ -24,33 +24,28 @@ const Usepage = () => {
       </p>
       <div className="howToUse">
         <div id="use1" className="use-image">
-          <h2>텍스트 입력 및 파일 업로드를 통해 요약할 내용을 입력</h2>
+          <h2>1. 텍스트 입력 및 파일 업로드를 통해 요약할 내용을 입력</h2>
         </div>
 
         <div id="use2" className="use-image">
-          <h2>텍스트 요약 버튼을 클릭하여 내용을 요약</h2>
+          <h2>2. 텍스트 요약 버튼을 클릭하여 내용을 요약</h2>
         </div>
         
         <div id="use3" className="use-image">
-          <h2>DraftAI 버튼을 클릭하여 이미지 생성페이지로 이동</h2>
+          <h2>3. 요약문을 수정하고, DraftAI 버튼을 클릭하여 이미지 생성페이지로 이동</h2>
         </div>
 
         <div id="use4" className="use-image">
-          <h2>모델을 선택하여 이미지 생성</h2>
+          <h2>4. 모델을 선택하여 이미지 생성</h2>
         </div>
 
         <div id="use5" className="use-image">
-          <h2>다운로드 버튼을 통해 생성 이미지 다운로드</h2>
+          <h2>5. 다운로드 버튼을 통해 생성 이미지 다운로드</h2>
         </div>
 
         <div id="use6" className="use-image">
-          <h2>게시판 등록 버튼을 통해 내용과 이미지를 등록</h2>
+          <h2>6. 게시판 등록 버튼을 통해 내용과 이미지를 등록</h2>
         </div>  
-      </div>
-      <div>
-        <div className="tip-box">
-          <h3>이미지 생성 팁</h3>
-        </div>
       </div>
     </div>
   );
