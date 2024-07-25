@@ -15,7 +15,7 @@ const Summary = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("authToken");
-    console.log("Token from localStorage:", token); // 전체 토큰을 콘솔에 출력
+    
   }, []);
 
   const handleFileSelect = (event) => {
