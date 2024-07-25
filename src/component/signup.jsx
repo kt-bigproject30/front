@@ -38,14 +38,15 @@ const Signup = ({ toggleForm }) => {
 
     switch (name) {
       case "username":
-        if (!/^[a-zA-Z0-9]{6,20}$/.test(value)) {
-          error = "아이디는 6자 이상 20자 이하, 영문자와 숫자만 가능합니다.";
+        if (!/^[a-zA-Z0-9]{4,20}$/.test(value)) {
+          error = "아이디는 4자 이상 20자 이하, 영문자와 숫자만 가능합니다.";
           hasError = true;
         }
         break;
       case "password":
-        if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{10,}$/.test(value)) {
-          error = "비밀번호는 10자 이상, 영문자와 숫자를 포함해야 합니다.";
+        if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@_$!%*?&]{8,}$/.test(value)) {
+          error =
+            "비밀번호는 8자 이상, 영문자와 숫자를 포함해야 하며 특수문자를 허용합니다.";
           hasError = true;
         }
         break;

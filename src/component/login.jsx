@@ -6,8 +6,8 @@ import "../css/login.css";
 
 const Login = ({ setIsLoggedIn }) => {
   const [isLogin, setIsLogin] = useState(true);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("test"); // 디폴트값 설정
+  const [password, setPassword] = useState("new1234!"); // 디폴트값 설정
   const [error, setError] = useState("");
   const [usernameErrorVisible, setUsernameErrorVisible] = useState(false);
   const [passwordErrorVisible, setPasswordErrorVisible] = useState(false);
