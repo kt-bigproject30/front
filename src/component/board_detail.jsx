@@ -29,28 +29,6 @@ const BoardDetail = ({ setBoards }) => {
     fetchPost();
   }, [fetchPost]);
 
-  // 게시물을 삭제하는 함수
-  const handleDelete = async () => {
-    const confirmDelete = window.confirm(
-      "정말로 이 게시글을 삭제하시겠습니까?"
-    );
-    if (confirmDelete) {
-      try {
-        const token = localStorage.getItem("authToken");
-        await api.delete(`/delete/${id}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }); // 삭제 엔드포인트도 /post로 설정
-        console.log(`Post with ID ${id} has been deleted successfully.`);
-        navigate("/board"); // 게시판 페이지로 이동
-      } catch (error) {
-        console.error("Failed to delete post:", error);
-        alert("Failed to delete post: " + error.message);
-      }
-    }
-  };
-
   // 게시물 데이터를 아직 가져오지 못한 경우 로딩 메시지 표시
   if (!post) {
     return <div>Loading...</div>;
@@ -60,7 +38,6 @@ const BoardDetail = ({ setBoards }) => {
     const date = new Date(utcDate);
     const utcTime = date.getTime();
     const kstTime = new Date(utcTime + 9 * 60 * 60 * 1000); // 9시간 추가
-    console.log("???????", kstTime);
     return kstTime.toLocaleString("ko-KR", { timeZone: "Asia/Seoul" });
   };
 
@@ -91,9 +68,6 @@ const BoardDetail = ({ setBoards }) => {
           className="btn btn-secondary"
         >
           목록
-        </button>
-        <button onClick={handleDelete} className="btn btn-danger">
-          삭제
         </button>
       </div>
     </div>

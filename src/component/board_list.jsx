@@ -32,7 +32,6 @@ const BoardList = () => {
         },
       });
 
-      console.log("Fetched boards data:", response.data); // 응답 데이터 로그
       setBoards(response.data);
     } catch (error) {
       console.error("Failed to fetch boards:", error); // 에러 로그
@@ -73,13 +72,12 @@ const BoardList = () => {
   // 전체 페이지 수 계산
   const totalPages = Math.ceil(filteredBoards.length / postsPerPage);
 
+  // UTC 시간을 KST로 변환하는 함수
   const convertToKST = (utcDate) => {
     const date = new Date(utcDate);
     const utcTime = date.getTime();
     const kstTime = new Date(utcTime + 9 * 60 * 60 * 1000); // 9시간 추가
-    console.log("???????", kstTime);
     return kstTime.toLocaleString("ko-KR", { timeZone: "Asia/Seoul" });
-    //return date.toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' });
   };
 
   return (

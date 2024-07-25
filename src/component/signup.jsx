@@ -151,7 +151,7 @@ const Signup = ({ toggleForm }) => {
             <label htmlFor="username">회원가입</label>
             <input
               type="text"
-              placeholder="6자~20자"
+              placeholder="4자~20자"
               id="username"
               name="username"
               value={formData.username}

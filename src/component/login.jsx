@@ -27,7 +27,6 @@ const Login = ({ setIsLoggedIn }) => {
     setPasswordErrorVisible(false); // 로그인 시도 전 비밀번호 오류 메시지 숨기기
 
     try {
-      console.log("Sending login request with:", { username, password }); // 디버깅용 로그
       const response = await api.post("/jwt-login/login", {
         username,
         password,

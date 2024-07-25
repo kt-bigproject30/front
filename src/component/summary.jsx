@@ -13,10 +13,7 @@ const Summary = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    const token = localStorage.getItem("authToken");
-    
-  }, []);
+  useEffect(() => {}, []);
 
   const handleFileSelect = (event) => {
     const file = event.target.files[0];
@@ -36,7 +33,6 @@ const Summary = () => {
 
     try {
       const token = localStorage.getItem("authToken");
-      console.log("Sending text for summarization...");
       const response = await api.post(
         "/api/text_summarize",
         { contents: textInput },
@@ -46,9 +42,7 @@ const Summary = () => {
           },
         }
       );
-      console.log(response);
       const data = response.data.summary; // 응답 데이터에서 summaryOutput을 추출
-      console.log("Summary received:", data);
       setSummaryOutput(data);
       setTextOutput(data);
     } catch (error) {
@@ -61,12 +55,9 @@ const Summary = () => {
   const moveButtonClick = async () => {
     const summary = summaryOutput;
     const contents = textInput;
-    const titleName = title;
-    const tag = category;
 
     try {
       const token = localStorage.getItem("authToken");
-      console.log("Saving summary...");
       const response = await api.post(
         "/post",
         { title, contents, summary, category },
@@ -76,8 +67,6 @@ const Summary = () => {
           },
         }
       );
-      console.log("아이디", response.data.id);
-      console.log("Summary saved successfully:", response.data);
       const idNumber = response.data.id;
       navigate("/draftai", {
         state: {
@@ -90,9 +79,6 @@ const Summary = () => {
     } catch (error) {
       console.error("Error saving summary:", error);
     }
-    console.log("1번", summary);
-    console.log("2번", tag);
-    console.log("3번", titleName);
   };
 
   return (

@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import "../css/draftai.css";
 import api from "../api";
@@ -9,23 +9,15 @@ const DraftAI = () => {
 
   const [imageOutputs, setImageOutputs] = useState(["1", "2", "3", "4"]);
 
-  const [summaryOutput, setSummaryOutput] = useState("");
-  const [textInput, setTextInput] = useState("");
-  const [textOutput, setTextOutput] = useState("");
-
   const { state } = useLocation(); // 2번 라인
-  const {summary} = state == null ?"": state;
-  const {titleName} = state == null ?"": state;
-  const {tag} = state == null ?"": state;
-  const {idNumber} = state == null ?"": state;
-
+  const { summary } = state == null ? "" : state;
+  const { titleName } = state == null ? "" : state;
+  const { tag } = state == null ? "" : state;
+  const { idNumber } = state == null ? "" : state;
 
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    const token = localStorage.getItem("authToken");
-    console.log("Token from localStorage:", token); // 전체 토큰을 콘솔에 출력
-  }, []);
+  useEffect(() => {}, []);
 
   const modelButtonClick = async (model) => {
     setIsLoading(true);
@@ -48,7 +40,6 @@ const DraftAI = () => {
     } finally {
       setIsLoading(false); // Stop loading spinner
     }
-    console.log(model);
   };
 
   const handleDownloadClick = () => {
@@ -105,8 +96,15 @@ const DraftAI = () => {
   const moveButtonClick = () => {
     // window.location.href = "/board/new";
     // navigate("/mypage");
-  
-    navigate("/board/new", { state: { summary: summary, tag:tag, titleName:titleName, idNumber:idNumber} });
+
+    navigate("/board/new", {
+      state: {
+        summary: summary,
+        tag: tag,
+        titleName: titleName,
+        idNumber: idNumber,
+      },
+    });
   };
 
   return (
